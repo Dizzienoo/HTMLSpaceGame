@@ -111,8 +111,6 @@ function renderHint(hintLocation) {
 }
 
 
-
-
 function introScreen(globalState, ctx) {
 	document.addEventListener("keyup", (e) => {if (e.key === " ") {globalState.gameState = "GAME"}})
 	ctx.fillStyle = "white";
