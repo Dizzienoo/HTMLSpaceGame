@@ -5,15 +5,14 @@
  * @param {*} settings The player settings object
  * @param {*} ctx The canvas function
  */
-export function drawMagnet(settings, ctx) {
+export function drawMagnet(globalState, ctx) {
 	ctx.fillStyle = "crimson";
-	// ctx.fillRect(, , , );
 	ctx.drawImage(
 		document.getElementById("rover"), 
-		settings.x - (canvas.width)/20, 
-		settings.y, 
-		canvas.width/7, 
-		canvas.height/7);
+		globalState.playerSettings.x - (globalState.canvasWidth)/20, 
+		globalState.playerSettings.y, 
+		globalState.canvasWidth/7, 
+		globalState.canvasHeight/7);
 }
 
 /**
@@ -22,22 +21,36 @@ export function drawMagnet(settings, ctx) {
  * @param {*} settings The player settings object
  * @param {*} ctx The canvas function
  */
-export function drawBeam(settings, ctx, beamColor) {
+export function drawBeam(globalState, ctx) {
 	ctx.beginPath();
 	// Set Start Point
-	ctx.moveTo(settings.x-settings.power,canvas.height/5); // Top Left
+	ctx.moveTo(globalState.playerSettings.x-globalState.playerSettings.power,globalState.canvasHeight/5); // Top Left
 	// Draw a straight line
-	ctx.lineTo(settings.x+settings.power, canvas.height/5); // Top Right
+	ctx.lineTo(globalState.playerSettings.x+globalState.playerSettings.power, globalState.canvasHeight/5); // Top Right
 
-	ctx.lineTo(settings.x+settings.power, (canvas.height/5)*2.5); // Middle Right
+	ctx.lineTo(globalState.playerSettings.x+globalState.playerSettings.power, (globalState.canvasHeight/5)*2.5); // Middle Right
 	
-	ctx.lineTo(settings.x, settings.y); // Bottom
+	ctx.lineTo(globalState.playerSettings.x, globalState.playerSettings.y); // Bottom
 	
-	ctx.lineTo(settings.x-settings.power, (canvas.height/5)*2.5); // Middle Left
+	ctx.lineTo(globalState.playerSettings.x-globalState.playerSettings.power, (globalState.canvasHeight/5)*2.5); // Middle Left
 	ctx.globalAlpha = 0.3;
-	ctx.fillStyle = beamColor
+	ctx.fillStyle = globalState.playerSettings.beamColor
 	ctx.fill();
 	ctx.globalAlpha = 1.0;
+}
+
+export function drawArrows(globalState, ctx) {
+	ctx.drawImage(document.getElementById("arrowLeft"), globalState.canvasWidth/10, (globalState.canvasHeight/10)*9, 100, 100)
+}
+
+export function drawHint(globalState, ctx) {
+	ctx.drawImage(
+		document.getElementById("junk"), 
+		globalState.hintAnimation.x, 
+		globalState.hintAnimation.y, 
+		100, 
+		100
+		);
 }
 
 /**
@@ -47,6 +60,6 @@ export function drawBeam(settings, ctx, beamColor) {
  * @param {*} canvas The Canvas to Display it on
  * @param {*} ctx The Canvas Function
  */
-export function renderBackground (image, canvas, ctx) {
-	ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+export function renderBackground (globalState, ctx) {
+	ctx.drawImage(document.getElementById("background"), 0, 0, globalState.canvasWidth, globalState.canvasHeight);
 }

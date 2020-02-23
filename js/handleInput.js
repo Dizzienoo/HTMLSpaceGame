@@ -1,25 +1,25 @@
 import {movers} from "./handleMovement.js"
 
 export const keyBoardInputs = {
-	keyDown: (e, settings, globalSettings) => {
+	keyDown: (e, globalState) => {
 		// console.log(e.key)
 		if (e.key === "ArrowRight" || e.key === "d" || e.key === "Right") {
-			movers.moveRight(settings);
+			movers.moveRight(globalState.playerSettings);
 		}
 		else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "Left") {
-			movers.moveLeft(settings);
+			movers.moveLeft(globalState.playerSettings);
 		}
 		else if (e.key === "ArrowUp" || e.key === "w" || e.key === "Up") {
-			movers.moveUp(settings);
+			movers.moveUp(globalState.playerSettings);
 		}
 		else if (e.key === "ArrowDown" || e.key === "s" || e.key === "Down") {
-			movers.moveDown(settings);
+			movers.moveDown(globalState.playerSettings);
 		}
 		// else if (e.key === " ") {
-		// 	nextTrial(globalSettings)
+		// 	nextTrial(globalState)
 		// }
 	},
-	keyUp: (e, settings, globalSettings) => {
+	keyUp: (e, globalState) => {
 			if(e.key === 'Right' ||
 			e.key === 'ArrowRight' ||
 			e.key === 'Left' ||
@@ -32,16 +32,16 @@ export const keyBoardInputs = {
 			e.key === "a" ||
 			e.key === "s" ||
 			e.key === "d") {
-				stopMovement(settings)
+				stopMovement(globalState.playerSettings)
 			}		
 			else if (e.key ===" ") {
-				nextTrial(globalSettings)
+				nextTrial(globalState)
 			} 
 	}	
 }
 
-function nextTrial(globalSettings) {
-	globalSettings.trialState =	"FINISHED";
+function nextTrial(globalState) {
+	globalState.trialState =	"FINISHED";
 }
 
 function stopMovement(settings) {
