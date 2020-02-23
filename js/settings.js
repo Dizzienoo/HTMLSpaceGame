@@ -4,7 +4,7 @@ export const globalState = new function () {
 		this.gameState = "INTRO",
 		this.trialState = "INTRO",
 		this.trial = 0,
-		this.readyForNext = false,
+		this.readyForNext = false,	
 		this.finishedTrial = false,
 		this.level2 = 10,
 		this.level3 = 20,
@@ -19,7 +19,6 @@ export const globalState = new function () {
 			dy: 0,
 			powerSpeed: 2,
 			power: 50,
-			level: 0,
 			beamColor: "green"
 		},
 		this.hintAnimation = {

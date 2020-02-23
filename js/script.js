@@ -3,7 +3,7 @@ const canvas = document.getElementById("canvas");
 // Creates the Drawing Hook in 2d
 const ctx = canvas.getContext("2d");
 
-import {initialSettings, testData, globalState, gameIntroduction} from "./settings.js"
+import {testData, globalState, gameIntroduction} from "./settings.js"
 import {handleMovement} from "./handleMovement.js"
 import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint} from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
@@ -20,12 +20,24 @@ globalState.canvasHeight = screen.height
  * Clears the Canvas for Re-animation
  */
 function clearCanvas() {
-	ctx.clearRect(0,0,globalState.canvasWidth, globalState.canvasHeight);
+	ctx.clearRect(0, 0, globalState.canvasWidth, globalState.canvasHeight);
 }
 
-
-export function resetPlayer() {
-	settings = Object.assign({}, initialSettings);
+/**
+ * Resets the Player back to starting position and settings
+ * @param {*} globalState The Global State Object
+ */
+export function resetPlayer(globalState) {
+	globalState.playerSettings.w = (globalState.canvasWidth)/10;
+	globalState.playerSettings.h = (globalState.canvasHeight)/10;
+	globalState.playerSettings.x = globalState.canvasWidth/2;
+	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.5;
+	globalState.playerSettings.speed = 5;
+	globalState.playerSettings.dx = 0;
+	globalState.playerSettings.dy = 0;
+	globalState.playerSettings.powerSpeed = 2;
+	globalState.playerSettings.power = 50;
+	globalState.playerSettings.beamColor = "green";
 }
 
 
@@ -47,9 +59,6 @@ function updateTally () {
 
 
 function runGame() {
-	// Update the Settings
-	globalState.canvasHeight = canvas.height;
-	globalState.playerSettings.y = (canvas.height/5)*3.25
 	// Clears the Canvas (re-sets each frame)
 	clearCanvas();
 	// Render the Background
@@ -129,6 +138,8 @@ function mainGame(globalState, ctx) {
 				if (e.key === " ") {
 					globalState.trialState = "TRIAL"}
 			});
+			// Reset the Settings
+			resetPlayer(globalState);
 		break;
 
 		case "TRIAL": 
