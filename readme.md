@@ -18,6 +18,12 @@ ToDO:
 	// Reset
 	// If 
 
+Need Func for if player rotates screen that would check each update if the current screenX is different to the old screenX and Ys
+Perhaps make some more landscpae friendly images
+
+The wrap text function also can take in max height (or canvasHeight) and use that to calculate how many lines are allowed based on (canvas height - starting position)/lineHeight
+
+
 // TODO: MAKE SURE WALLS WITH RIGHT WITH MAGNET SIZING 
 
 

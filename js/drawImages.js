@@ -24,15 +24,31 @@ export function drawMagnet(globalState, ctx) {
 export function drawBeam(globalState, ctx) {
 	ctx.beginPath();
 	// Set Start Point
-	ctx.moveTo(globalState.playerSettings.x - ((globalState.canvasWidth/300) * (globalState.playerSettings.power)),globalState.canvasHeight/5); // Top Left
+	ctx.moveTo(
+		(globalState.playerSettings.power > 10)? 
+		globalState.playerSettings.x - ((globalState.canvasWidth/300) * (globalState.playerSettings.power)): 
+		globalState.playerSettings.x - 50, 
+		globalState.canvasHeight/5); // Top Left
 	// Draw a straight line
-	ctx.lineTo(globalState.playerSettings.x + ((globalState.canvasWidth/300) * (globalState.playerSettings.power)), globalState.canvasHeight/5); // Top Right
+	ctx.lineTo(
+		(globalState.playerSettings.power > 10)? 
+		globalState.playerSettings.x + ((globalState.canvasWidth/300) * (globalState.playerSettings.power)): 
+		globalState.playerSettings.x + 50, 
+		globalState.canvasHeight/5); // Top Right
 
-	ctx.lineTo(globalState.playerSettings.x + ((globalState.canvasWidth/300) * (globalState.playerSettings.power)), (globalState.canvasHeight/5)*2.5); // Middle Right
+	ctx.lineTo(
+		(globalState.playerSettings.power > 10)? 
+		globalState.playerSettings.x + ((globalState.canvasWidth/300) * (globalState.playerSettings.power)): 
+		globalState.playerSettings.x + 50, 
+		(globalState.canvasHeight/5)*2.5); // Middle Right
 	
 	ctx.lineTo(globalState.playerSettings.x, globalState.playerSettings.y); // Bottom
 	
-	ctx.lineTo(globalState.playerSettings.x - ((globalState.canvasWidth/300) * (globalState.playerSettings.power)), (globalState.canvasHeight/5)*2.5); // Middle Left
+	ctx.lineTo(
+		(globalState.playerSettings.power > 10)? 
+		globalState.playerSettings.x - ((globalState.canvasWidth/300) * (globalState.playerSettings.power)): 
+		globalState.playerSettings.x - 50, 
+		(globalState.canvasHeight/5)*2.5); // Middle Left
 	ctx.globalAlpha = 0.3;
 	ctx.fillStyle = globalState.playerSettings.beamColor
 	ctx.fill();
