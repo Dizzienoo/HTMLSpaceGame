@@ -7,13 +7,13 @@ import {testData, globalState, gameIntroduction} from "./settings.js"
 import {handleMovement} from "./handleMovement.js"
 import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint} from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
-import { wrapText } from "./wrapText.js";
+import { introScreen } from "./renderScreen.js";
 
 
-canvas.width = screen.width
-canvas.height = screen.height
-globalState.canvasWidth = screen.width
-globalState.canvasHeight = screen.height
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+globalState.canvasWidth = window.innerWidth
+globalState.canvasHeight = window.innerHeight
 
 
 /**
@@ -42,9 +42,6 @@ export function resetPlayer(globalState) {
 
 
 
-
-
-
 function levelAlert (number) {
 	
 }
@@ -56,7 +53,6 @@ function calculatePoints () {
 function updateTally () {
 	
 }
-
 
 function runGame() {
 	// Clears the Canvas (re-sets each frame)
@@ -73,9 +69,6 @@ function runGame() {
 		break;
 
 	}
-	// if (globalState.playerSettings.level < 10) {
-	// 	//Runs the Main Game
-	// }
 	requestAnimationFrame(runGame);
 }
 
@@ -111,21 +104,6 @@ function renderHint(hintLocation) {
 }
 
 
-function introScreen(globalState, ctx) {
-	document.addEventListener("keyup", (e) => {if (e.key === " ") {globalState.gameState = "GAME"}})
-	ctx.fillStyle = "white";
-	ctx.font = "30px Arial";
-	wrapText(
-		ctx,
-		gameIntroduction,
-		10,
-		globalState.canvasHeight - (globalState.canvasHeight/10)*9,
-		globalState.canvasWidth,
-		globalState.canvasHeight/15,
-		"Arial",
-		"white"
-	);
-}
 
 function mainGame(globalState, ctx) {
 	let i = globalState.trial;
