@@ -15,7 +15,7 @@ export function introScreen(globalState, ctx) {
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Create a function that splits text up into "Lines" based on input variables
-	let lines = createLines(gameIntroduction, textSize, globalState.textFont, maxWidth, ctx);
+	let lines = createLines(gameIntroduction[globalState.currentIntoLine], textSize, globalState.textFont, maxWidth, ctx);
 	// Create a function that splits lines into pages based on input variables
 	let pages = createPages(lines, maxLines)
 	console.log(pages.length)
@@ -38,9 +38,12 @@ export function introScreen(globalState, ctx) {
 			console.log(globalState.currentPage);
 			y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 		}
+		else if (globalState.currentIntoLine < gameIntroduction.length -1) {
+			globalState.currentIntoLine++
+		}
 		else {
-			console.log(globalState.currentPage)
 			globalState.gameState = "GAME";
+
 		}
 	}}, {once: true});
 	firstPress = true;
