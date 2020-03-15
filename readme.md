@@ -2,6 +2,8 @@ HTML Version of Sapce Game that will be ported over to gorilla
 
 ToDO:
 
+Split Game intro and Tutorial into different pieces, create image feedback for tutorial
+
 //Introduction Screen that explains the game- Started
 
 //Tutorial Runthrough

@@ -22,12 +22,13 @@ export function introScreen(globalState, ctx) {
 	// Set the Font and Color
 	ctx.font = `${textSize}px ${globalState.textFont}`;
 	ctx.fillStyle = "white";
+	ctx.textAlign = "center"
 	// Render pages, while pages space will page++ else move to next area
 	let currentPage = pages[globalState.currentPage];
 	console.log(globalState.currentPage)
 	console.log(currentPage.length);
 	for (let i = 0; i < currentPage.length; i++) {
-		ctx.fillText(currentPage[i], 10, y);
+		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
 		y += (globalState.canvasHeight/15)
 	}
 	// Add a controller to handle the inputs
