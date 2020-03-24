@@ -1,3 +1,6 @@
+/**
+ * The Global State of the Game
+ */
 export const globalState = new function () {
 		this.currentPage = 0;
 		this.currentLine = 0;
