@@ -7,14 +7,13 @@ import {testData, globalState, gameIntroduction} from "./settings.js"
 import {handleMovement} from "./handleMovement.js"
 import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint} from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
-import { introScreen } from "./renderScreen.js";
+import { introScreen, tutorialScreen } from "./renderScreen.js";
 
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 globalState.canvasWidth = window.innerWidth
 globalState.canvasHeight = window.innerHeight
-
 
 /**
  * Clears the Canvas for Re-animation
@@ -62,6 +61,10 @@ function runGame() {
 	switch(globalState.gameState) {
 		case "INTRO":
 			introScreen(globalState, ctx);
+		break;
+
+		case "TUTORIAL":
+			tutorialScreen(globalState, ctx);
 		break;
 
 		case "GAME":
