@@ -7,7 +7,7 @@ import {testData, globalState, gameIntroduction} from "./settings.js"
 import {handleMovement} from "./handleMovement.js"
 import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint} from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
-import { introScreen, tutorialScreen } from "./renderScreen.js";
+import { introScreen, tutorialScreen, gameOver } from "./renderScreen.js";
 
 
 canvas.width = window.innerWidth
@@ -69,6 +69,10 @@ function runGame() {
 
 		case "GAME":
 			mainGame(globalState, ctx);
+		break;
+
+		case "GAME_OVER":
+			gameOver(globalState, ctx);
 		break;
 
 	}
@@ -146,7 +150,7 @@ function mainGame(globalState, ctx) {
 		break;
 
 		case "GAME_OVER":
-			console.warn("GAME_OVER");
+			globalState.gameState = "GAME_OVER";
 			break;
 	}
 // }

@@ -132,3 +132,21 @@ export function tutorialScreen(globalState, ctx) {
 	}}, {once: true});
 	firstPress = true;
 }
+
+/**
+ * Render the Game Over screen
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function gameOver(globalState, ctx) {
+	// Set the Size and Font of the Text
+	ctx.font = `${(globalState.canvasHeight/7.5)}px ${globalState.textFont}`
+	// Set the Text Color
+	ctx.fillStyle = "white";
+	// Center the Text
+	ctx.textAlign = "center";
+	// Draw the "Game Over" Text
+	ctx.fillText("Game Over", (globalState.canvasWidth)/2, globalState.canvasHeight/2);
+	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);	
+}

@@ -6,6 +6,7 @@ export const globalState = new function () {
 		this.canvasHeight = 0,
 		this.gameState = "INTRO",
 		this.trialState = "INTRO",
+		this.totalScore = 0,
 		this.trial = 0,
 		this.readyForNext = false,	
 		this.finishedTrial = false,
