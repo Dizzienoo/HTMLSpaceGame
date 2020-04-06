@@ -2,45 +2,53 @@
  * The Global State of the Game
  */
 export const globalState = new function () {
-		this.currentPage = 0;
-		this.currentLine = 0;
-		this.textFont = "Arial"
-		this.canvasWidth = 0,
-		this.canvasHeight = 0,
-		this.gameState = "INTRO",
-		this.trialState = "INTRO",
-		this.totalScore = 0,
-		this.trial = 0,
-		this.readyForNext = false,	
-		this.finishedTrial = false,
-		this.level2 = 10,
-		this.level3 = 20,
-		this.level4 = 30,
-		this.maxWidth = (this.canvasWidth/10)*9,
-		this.constants = {
-			maxLines: Math.floor((this.canvasHeight - (this.canvasHeight - (this.canvasHeight/10)*9))/ (this.canvasHeight/15)),
-			textSize: (this.canvasHeight/15) - ((this.canvasHeight/15)/2.5),
-		},
-		this.playerSettings = {
-			w: 50,
-			h: 70,
-			x: 200,
-			y: (this.canvasHeight/5)*3.25,
-			speed: 5,
-			dx: 0,
-			dy: 0,
-			powerSpeed: 2,
-			power: 50,
-			beamColor: "green"
-		},
-		this.hintAnimation = {
-			x: 100,
-			y: 100,
-			size: 30,
-			dx: 0,
-			dy: 2
-		}
+	// Beam Left and Right are used to show what the current beams x positions are and are calculated in drawImages, calculateBeamandPower
+	this.beamLeft = 0;
+	this.beamRight = 0;
+	// Current Power is used to show the actual power of the beam once all side calculations are accounted for, it is set in drawImages, calculateBeamandPower and reset in resetPlayer
+	this.currentPower = 50;
+	// Current Page and Line are used by the intro and tutorial screens to page through the introduction texts
+	this.currentPage = 0;
+	this.currentLine = 0;
+	this.textFont = "Arial"
+	this.canvasWidth = 0,
+	this.canvasHeight = 0,
+	this.gameState = "GAME",
+	this.trialState = "INTRO",
+	this.totalScore = 0,
+	this.trial = 0,
+	this.readyForNext = false,	
+	this.finishedTrial = false,
+	this.level2 = 10,
+	this.level3 = 20,
+	this.level4 = 30,
+	this.maxWidth = (this.canvasWidth/20)*19,
+	this.minWidth = this.canvasWidth/20
+	this.constants = {
+		maxLines: Math.floor((this.canvasHeight - (this.canvasHeight - (this.canvasHeight/10)*9))/ (this.canvasHeight/15)),
+		textSize: (this.canvasHeight/15) - ((this.canvasHeight/15)/2.5),
+	},
+	this.playerSettings = {
+		w: 50,
+		h: 70,
+		x: 200,
+		y: (this.canvasHeight/5)*3.25,
+		speed: 5,
+		dx: 0,
+		dy: 0,
+		powerSpeed: 2,
+		power: 50,
+		adaptedPower: 100,
+		beamColor: "green"
+	},
+	this.hintAnimation = {
+		x: 100,
+		y: 100,
+		size: 30,
+		dx: 0,
+		dy: 2
 	}
+}
 
 /**
  * The Constant Player Parameters, used for Reset

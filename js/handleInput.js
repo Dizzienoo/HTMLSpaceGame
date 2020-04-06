@@ -15,9 +15,6 @@ export const keyBoardInputs = {
 		else if (e.key === "ArrowDown" || e.key === "s" || e.key === "Down") {
 			movers.moveDown(globalState.playerSettings);
 		}
-		// else if (e.key === " ") {
-		// 	nextTrial(globalState)
-		// }
 	},
 	keyUp: (e, globalState) => {
 			if(e.key === 'Right' ||

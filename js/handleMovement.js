@@ -8,11 +8,11 @@
  */
 export function handleMovement(globalState) {
 	globalState.playerSettings.x += globalState.playerSettings.dx;
-	if (globalState.playerSettings.power >= 0 && globalState.playerSettings.power <= 100) {
+	if (globalState.playerSettings.power >= 10 && globalState.playerSettings.power <= 100) {
 		globalState.playerSettings.power += globalState.playerSettings.dy;
 	}
-	else if (globalState.playerSettings.power < 0) {
-		globalState.playerSettings.power = 0;
+	else if (globalState.playerSettings.power < 10) {
+		globalState.playerSettings.power = 10;
 	}
 	else if (globalState.playerSettings.power > 100) {
 		globalState.playerSettings.power = 100;
@@ -42,14 +42,14 @@ export const movers = {
  * Detects the Edges of the Game to stop the player going beyond them
  */
 function detectWalls(globalState) {
-  // Left wall
-  if (globalState.playerSettings.x < 0) {
-    globalState.playerSettings.x = 0;
+	// Stop Rover going further than minimum width plus minimum beam width
+  if (globalState.playerSettings.x < globalState.minWidth + ((globalState.canvasWidth/300) * 10)) {
+    globalState.playerSettings.x = globalState.minWidth + ((globalState.canvasWidth/300) * 10);
   }
 
-  // Right Wall
-  if (globalState.playerSettings.x + globalState.playerSettings.w > globalState.canvasWidth) {
-    globalState.playerSettings.x = globalState.canvasWidth - globalState.playerSettings.w;
+	// Stop Rover going further than maximum width minus minimum beam width
+  if (globalState.playerSettings.x > globalState.maxWidth - ((globalState.canvasWidth/300) * 10)) {
+    globalState.playerSettings.x = globalState.maxWidth - ((globalState.canvasWidth/300) * 10);
   }
 
   // Top wall

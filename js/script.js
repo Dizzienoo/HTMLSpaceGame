@@ -27,6 +27,9 @@ function clearCanvas() {
  * @param {*} globalState The Global State Object
  */
 export function resetPlayer(globalState) {
+	globalState.maxWidth = (globalState.canvasWidth/20)*19
+	globalState.minWidth = globalState.canvasWidth/20
+	globalState.currentPower = 50;
 	globalState.playerSettings.w = (globalState.canvasWidth)/10;
 	globalState.playerSettings.h = (globalState.canvasHeight)/10;
 	globalState.playerSettings.x = globalState.canvasWidth/2;
