@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 
 import {testData, globalState, gameIntroduction} from "./settings.js"
 import {handleMovement} from "./handleMovement.js"
-import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint} from "./drawImages.js"
+import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint, drawPower} from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
 import { introScreen, tutorialScreen, gameOver } from "./renderScreen.js";
 
@@ -138,6 +138,9 @@ function mainGame(globalState, ctx) {
 			drawBeam(globalState, ctx);
 			// Draw the Arrows
 			drawArrows(globalState, ctx);
+			// Draw the Power Bar
+			drawPower(globalState, ctx);
+			// Handle Moving the lander
 			handleMovement(globalState);
 		break;
 

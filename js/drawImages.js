@@ -69,8 +69,50 @@ export function drawBeam(globalState, ctx) {
 	ctx.globalAlpha = 1.0;
 }
 
+/**
+ * Handles Rendering the Power Bar
+ * @param {*} settings The player settings object
+ * @param {*} ctx The canvas function
+ */
+export function drawPower(globalState, ctx) {
+	// Draw Power box fill
+	ctx.beginPath();
+	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/15, -((globalState.canvasHeight/10)*5)*(globalState.currentPower/100));
+	ctx.fill();
+	// Draw Power box outline
+	ctx.beginPath();
+	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/15, -(globalState.canvasHeight/10)*5);
+	ctx.lineWidth = "4";
+	ctx.strokeStyle = "white";
+	ctx.stroke();
+	// Draw Power Text
+	// ctx.rotate(270 * Math.PI/180);
+	ctx.fillStyle = "red";
+	ctx.textAlign = "center";
+	ctx.font = "20px Comic Sans MS";
+	ctx.fillText("Power", (globalState.canvasWidth/40)+(globalState.canvasWidth/15/2), (globalState.canvasHeight/10)*2-(globalState.canvasHeight/40));
+	// ctx.rotate(90 * Math.PI/180);
+}
+
 export function drawArrows(globalState, ctx) {
-	ctx.drawImage(document.getElementById("arrowLeft"), globalState.canvasWidth/10, (globalState.canvasHeight/10)*9, 100, 100)
+	// Vertical Arrows
+	drawVerticalArrows(globalState, ctx);
+	// Horizontal Arrows
+	drawHorizontalArrows(globalState, ctx);
+}
+
+export function drawVerticalArrows(globalState, ctx) {
+	// Draw Up Arrow
+	ctx.drawImage(document.getElementById("arrowUp"), 0, (globalState.canvasHeight/10)*8, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Draw Down Arrow
+	ctx.drawImage(document.getElementById("arrowDown"), (globalState.canvasWidth/10)*9, (globalState.canvasHeight/10)*8, globalState.canvasWidth/10, globalState.canvasHeight/10);
+}
+
+export function drawHorizontalArrows(globalState, ctx) {
+	// Draw Left Arrow
+	ctx.drawImage(document.getElementById("arrowLeft"), 0, (globalState.canvasHeight/10)*9, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Draw Right Arrow
+	ctx.drawImage(document.getElementById("arrowRight"), (globalState.canvasWidth/10)*9, (globalState.canvasHeight/10)*9, globalState.canvasWidth/10, globalState.canvasHeight/10);
 }
 
 export function drawHint(globalState, ctx) {

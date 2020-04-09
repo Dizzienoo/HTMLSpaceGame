@@ -10,10 +10,13 @@ export const globalState = new function () {
 	// Current Page and Line are used by the intro and tutorial screens to page through the introduction texts
 	this.currentPage = 0;
 	this.currentLine = 0;
+	// Text font is used to set the fot the game uses
 	this.textFont = "Arial"
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
+	// The state that the overall game is in
 	this.gameState = "INTRO",
+	// The state that the individual Trial is in
 	this.trialState = "INTRO",
 	this.totalScore = 0,
 	this.trial = 0,
