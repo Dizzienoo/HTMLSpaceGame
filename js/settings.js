@@ -2,6 +2,38 @@
  * The Global State of the Game
  */
 export const globalState = new function () {
+	// For Mouse Inputs, Set in the reset player function
+	this.rect = 0;
+	// For Mouse Inputs so mouse up isn't always firing
+	this.mouseDown = false;
+	// The area of the left Arrow, set in draw images
+	this.leftArrowArea = {
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+	},
+	// The area of the right Arrow
+	this.rightArrowArea = {
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+	},
+	// The area of the up Arrow
+	this.upArrowArea = {
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+	},
+	// The area of the down Arrow
+	this.downArrowArea = {
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+	},
 	// Beam Left and Right are used to show what the current beams x positions are and are calculated in drawImages, calculateBeamandPower
 	this.beamLeft = 0;
 	this.beamRight = 0;
@@ -15,7 +47,7 @@ export const globalState = new function () {
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
 	// The state that the overall game is in
-	this.gameState = "INTRO",
+	this.gameState = "GAME",
 	// The state that the individual Trial is in
 	this.trialState = "INTRO",
 	this.totalScore = 0,

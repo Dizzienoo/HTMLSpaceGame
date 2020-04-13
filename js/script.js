@@ -40,6 +40,7 @@ export function resetPlayer(globalState) {
 	globalState.playerSettings.powerSpeed = 2;
 	globalState.playerSettings.power = 50;
 	globalState.playerSettings.beamColor = "green";
+	globalState.rect = canvas.getBoundingClientRect();
 }
 
 
@@ -114,6 +115,7 @@ function renderHint(hintLocation) {
 
 
 
+
 function mainGame(globalState, ctx) {
 	let i = globalState.trial;
 	switch(globalState.trialState) {
@@ -128,20 +130,21 @@ function mainGame(globalState, ctx) {
 		break;
 
 		case "TRIAL": 
-			document.addEventListener("mousedown", mouseInputs.mouseDown);
-			document.addEventListener("mouseup", mouseInputs.mouseUp);
-			document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
-			document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
-			// Draw the Magnet
-			drawMagnet(globalState, ctx);
-			// Draw the Beam coming from the Magnet
-			drawBeam(globalState, ctx);
-			// Draw the Arrows
-			drawArrows(globalState, ctx);
-			// Draw the Power Bar
-			drawPower(globalState, ctx);
-			// Handle Moving the lander
-			handleMovement(globalState);
+		document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
+		// document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
+		document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
+		document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
+		// Draw the Magnet
+		drawMagnet(globalState, ctx);
+		// Draw the Beam coming from the Magnet
+		drawBeam(globalState, ctx);
+		// Draw the Arrows
+		drawArrows(globalState, ctx);
+		// Draw the Power Bar
+		drawPower(globalState, ctx);
+		
+		// Handle Moving the lander
+		handleMovement(globalState);
 		break;
 
 		case "FINISHED":

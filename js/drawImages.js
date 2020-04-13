@@ -104,15 +104,43 @@ export function drawArrows(globalState, ctx) {
 export function drawVerticalArrows(globalState, ctx) {
 	// Draw Up Arrow
 	ctx.drawImage(document.getElementById("arrowUp"), 0, (globalState.canvasHeight/10)*8, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Set it's area for a button
+	globalState.upArrowArea = {
+		x: 0,
+		y: (globalState.canvasHeight/10)*8,
+		w: globalState.canvasWidth/10,
+		h: globalState.canvasHeight/10
+	}
 	// Draw Down Arrow
 	ctx.drawImage(document.getElementById("arrowDown"), (globalState.canvasWidth/10)*9, (globalState.canvasHeight/10)*8, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Set it's area for a button
+	globalState.downArrowArea = {
+		x: ((globalState.canvasWidth/10)*9),
+		y: (globalState.canvasHeight/10)*8,
+		w: globalState.canvasWidth/10,
+		h: globalState.canvasHeight/10
+	}
 }
 
 export function drawHorizontalArrows(globalState, ctx) {
 	// Draw Left Arrow
 	ctx.drawImage(document.getElementById("arrowLeft"), 0, (globalState.canvasHeight/10)*9, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Set it's area for a button
+	globalState.leftArrowArea = {
+		x: 0,
+		y: (globalState.canvasHeight/10)*9,
+		w: globalState.canvasWidth/10,
+		h: globalState.canvasHeight/10
+	}
 	// Draw Right Arrow
 	ctx.drawImage(document.getElementById("arrowRight"), (globalState.canvasWidth/10)*9, (globalState.canvasHeight/10)*9, globalState.canvasWidth/10, globalState.canvasHeight/10);
+	// Set it's area for a button
+	globalState.rightArrowArea = {
+		x: (globalState.canvasWidth/10)*9,
+		y: (globalState.canvasHeight/10)*9,
+		w: globalState.canvasWidth/10,
+		h: globalState.canvasHeight/10
+	}
 }
 
 export function drawHint(globalState, ctx) {

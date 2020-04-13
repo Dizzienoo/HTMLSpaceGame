@@ -47,14 +47,66 @@ function stopMovement(settings) {
 }
 
 export const mouseInputs = {
-	mouseDown: (e) => {
-		let X = e.screenX;
-		let Y = e.screenY;
-		// console.log(X, Y);
+	mouseDown: (e, globalState) => {
+		console.log("mouseDown")
+		globalState.mouseDown = true;
+		let X = e.clientX - globalState.rect.left;
+		let Y = e.clientY - globalState.rect.top;
+		// If the click is within the Up Arrow
+		if (
+			// If X is more than left of arrow x and less than its width
+			X > globalState.upArrowArea.x && X < (globalState.upArrowArea.w + globalState.upArrowArea.x) 
+			&&
+			// If Y is more than top of arrow base and less than its height
+			Y > globalState.upArrowArea.y && Y < (globalState.upArrowArea.h + globalState.upArrowArea.y)
+		) {
+			// Increase Power
+			console.log("UP")
+			movers.moveUp(globalState.playerSettings);
+		}
+		// If the click is within the Down Arrow
+		if (
+			// If X is more than left of arrow x and less than its width
+			X > globalState.downArrowArea.x && X < (globalState.downArrowArea.w + globalState.downArrowArea.x) 
+			&&
+			// If Y is more than top of arrow base and less than its height
+			Y > globalState.downArrowArea.y && Y < (globalState.downArrowArea.h + globalState.downArrowArea.y)
+		) {
+			// Increase Power
+			console.log("DOWN")
+			movers.moveDown(globalState.playerSettings);
+		}
+		// If the click is within the Left Arrow
+		if (
+			// If X is more than left of arrow x and less than its width
+			X > globalState.leftArrowArea.x && X < (globalState.leftArrowArea.w + globalState.leftArrowArea.x) 
+			&&
+			// If Y is more than top of arrow base and less than its height
+			Y > globalState.leftArrowArea.y && Y < (globalState.leftArrowArea.h + globalState.leftArrowArea.y)
+		) {
+			// Increase Power
+			console.log("LEFT")
+			movers.moveLeft(globalState.playerSettings);
+		}
+		// If the click is within the Right Arrow
+		if (
+			// If X is more than left of arrow x and less than its width
+			X > globalState.rightArrowArea.x && X < (globalState.rightArrowArea.w + globalState.rightArrowArea.x) 
+			&&
+			// If Y is more than top of arrow base and less than its height
+			Y > globalState.rightArrowArea.y && Y < (globalState.rightArrowArea.h + globalState.rightArrowArea.y)
+		) {
+			// Increase Power
+			console.log("RIGHT")
+			movers.moveRight(globalState.playerSettings);
+		}
 	},
-	mouseDown: (e) => {
-		let X = e.screenX;
-		let Y = e.screenY;
-		// console.log(X, Y);
+	mouseUp: (e, globalState) => {
+		if (globalState.mouseDown === true) {
+			console.log(`firing`);
+			// When they let go of the click, stop movement
+			globalState.mouseDown = false;
+			stopMovement(globalState.playerSettings);
+		}
 	}
 }
