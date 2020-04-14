@@ -2,7 +2,6 @@ import {movers} from "./handleMovement.js"
 
 export const keyBoardInputs = {
 	keyDown: (e, globalState) => {
-		// console.log(e.key)
 		if (e.key === "ArrowRight" || e.key === "d" || e.key === "Right") {
 			movers.moveRight(globalState.playerSettings);
 		}
@@ -48,7 +47,6 @@ function stopMovement(settings) {
 
 export const mouseInputs = {
 	mouseDown: (e, globalState) => {
-		console.log("mouseDown")
 		globalState.mouseDown = true;
 		let X = e.clientX - globalState.rect.left;
 		let Y = e.clientY - globalState.rect.top;
@@ -61,7 +59,6 @@ export const mouseInputs = {
 			Y > globalState.upArrowArea.y && Y < (globalState.upArrowArea.h + globalState.upArrowArea.y)
 		) {
 			// Increase Power
-			console.log("UP")
 			movers.moveUp(globalState.playerSettings);
 		}
 		// If the click is within the Down Arrow
@@ -72,8 +69,7 @@ export const mouseInputs = {
 			// If Y is more than top of arrow base and less than its height
 			Y > globalState.downArrowArea.y && Y < (globalState.downArrowArea.h + globalState.downArrowArea.y)
 		) {
-			// Increase Power
-			console.log("DOWN")
+			// Decrease Power
 			movers.moveDown(globalState.playerSettings);
 		}
 		// If the click is within the Left Arrow
@@ -84,8 +80,7 @@ export const mouseInputs = {
 			// If Y is more than top of arrow base and less than its height
 			Y > globalState.leftArrowArea.y && Y < (globalState.leftArrowArea.h + globalState.leftArrowArea.y)
 		) {
-			// Increase Power
-			console.log("LEFT")
+			// Move Left
 			movers.moveLeft(globalState.playerSettings);
 		}
 		// If the click is within the Right Arrow
@@ -96,15 +91,12 @@ export const mouseInputs = {
 			// If Y is more than top of arrow base and less than its height
 			Y > globalState.rightArrowArea.y && Y < (globalState.rightArrowArea.h + globalState.rightArrowArea.y)
 		) {
-			// Increase Power
-			console.log("RIGHT")
+			// Move Right
 			movers.moveRight(globalState.playerSettings);
 		}
 	},
 	mouseUp: (e, globalState) => {
 		if (globalState.mouseDown === true) {
-			console.log(`firing`);
-			// When they let go of the click, stop movement
 			globalState.mouseDown = false;
 			stopMovement(globalState.playerSettings);
 		}

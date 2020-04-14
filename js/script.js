@@ -131,7 +131,7 @@ function mainGame(globalState, ctx) {
 
 		case "TRIAL": 
 		document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
-		// document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
+		document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
 		document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
 		document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
 		// Draw the Magnet

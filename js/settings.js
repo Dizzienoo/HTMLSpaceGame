@@ -47,7 +47,7 @@ export const globalState = new function () {
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
 	// The state that the overall game is in
-	this.gameState = "GAME",
+	this.gameState = "INTRO",
 	// The state that the individual Trial is in
 	this.trialState = "INTRO",
 	this.totalScore = 0,
