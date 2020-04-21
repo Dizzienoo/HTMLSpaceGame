@@ -2,7 +2,7 @@
  * The Global State of the Game
  */
 export const globalState = new function () {
-	// For Mouse Inputs, Set in the reset player function
+	// For Mouse Inputs, Set in the reset player function and at beginning
 	this.rect = 0;
 	// For Mouse Inputs so mouse up isn't always firing
 	this.mouseDown = false;
@@ -34,6 +34,16 @@ export const globalState = new function () {
 		w: 0,
 		h: 0,
 	},
+	// The area of the progress box
+	this.progressButtonArea = {
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+	},
+	// The parsed into pages to be displayed, set in renderScreen, introScreen
+	this.introPages = []
+	this.tutorialPages = []
 	// Beam Left and Right are used to show what the current beams x positions are and are calculated in drawImages, calculateBeamandPower
 	this.beamLeft = 0;
 	this.beamRight = 0;
@@ -50,7 +60,11 @@ export const globalState = new function () {
 	this.gameState = "INTRO",
 	// The state that the individual Trial is in
 	this.trialState = "INTRO",
+	// Score of a single test
+	this.score = 0,
+	// Score of all trials combined
 	this.totalScore = 0,
+	// Which trial are we on?
 	this.trial = 0,
 	this.readyForNext = false,	
 	this.finishedTrial = false,

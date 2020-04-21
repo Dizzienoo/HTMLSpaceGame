@@ -17,7 +17,10 @@ ToDO:
 	// Display "Ship", Score and Conclusion, Need to Add Score Box
 	// Reset
 
+Adjust Text Size to Screen Size
+
 Need Func for if player rotates screen that would check each update if the current screenX is different to the old screenX and Ys
-Perhaps make some more landscpae friendly images
+Perhaps make some more landscape friendly images
+
 
 // Game Over Screen

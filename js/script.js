@@ -3,57 +3,28 @@ const canvas = document.getElementById("canvas");
 // Creates the Drawing Hook in 2d
 const ctx = canvas.getContext("2d");
 
-import {testData, globalState, gameIntroduction} from "./settings.js"
-import {handleMovement} from "./handleMovement.js"
-import {drawBeam, drawMagnet, renderBackground, drawArrows, drawHint, drawPower} from "./drawImages.js"
+import { globalState } from "./settings.js"
+import { renderBackground } from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
-import { introScreen, tutorialScreen, gameOver } from "./renderScreen.js";
+import { introScreen, tutorialScreen, mainGame, gameOver } from "./renderScreen.js";
 
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 globalState.canvasWidth = window.innerWidth
 globalState.canvasHeight = window.innerHeight
+globalState.rect = canvas.getBoundingClientRect();
+
+document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
+document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
+document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
+document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
 
 /**
  * Clears the Canvas for Re-animation
  */
 function clearCanvas() {
 	ctx.clearRect(0, 0, globalState.canvasWidth, globalState.canvasHeight);
-}
-
-/**
- * Resets the Player back to starting position and settings
- * @param {*} globalState The Global State Object
- */
-export function resetPlayer(globalState) {
-	globalState.maxWidth = (globalState.canvasWidth/20)*19
-	globalState.minWidth = globalState.canvasWidth/20
-	globalState.currentPower = 50;
-	globalState.playerSettings.w = (globalState.canvasWidth)/10;
-	globalState.playerSettings.h = (globalState.canvasHeight)/10;
-	globalState.playerSettings.x = globalState.canvasWidth/2;
-	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.5;
-	globalState.playerSettings.speed = 5;
-	globalState.playerSettings.dx = 0;
-	globalState.playerSettings.dy = 0;
-	globalState.playerSettings.powerSpeed = 2;
-	globalState.playerSettings.power = 50;
-	globalState.playerSettings.beamColor = "green";
-	globalState.rect = canvas.getBoundingClientRect();
-}
-
-
-function levelAlert (number) {
-	
-}
-
-function calculatePoints () {
-
-}
-
-function updateTally () {
-	
 }
 
 function runGame() {
@@ -83,89 +54,11 @@ function runGame() {
 }
 
 
-function renderReadyScreenAndHint(hint) {
-	// Draw Start Button
-	ctx.drawImage(
-		document.getElementById("start_button"), 
-		globalState.canvasWidth/2 - (globalState.canvasWidth/2)/2, 
-		(globalState.canvasHeight/4)*3 - (globalState.canvasHeight/4)/2, 
-		globalState.canvasWidth/2, 
-		globalState.canvasHeight/4
-	);
-	// Draw the Hint
-	renderHint(hint);
-}
+// Move all "Next" actions through to handle input progress function
+// at each stage have a "button" in the same place the progresses (start for intro, ready for game)
+// add in timer for 1 second so ready cant be hit at start of trial by accident
+// 
 
-let stop = false
-
-function renderHint(hintLocation) {
-	// Draw the circle
-	globalState.hintAnimation.x = (globalState.canvasWidth/100 * hintLocation);
-	if (globalState.hintAnimation.y < (globalState.canvasHeight/5)*2.5 && globalState.hintAnimation.y > (globalState.canvasHeight/10) && stop === false) {
-		globalState.hintAnimation.x += globalState.hintAnimation.dx;
-		globalState.hintAnimation.y += globalState.hintAnimation.dy;
-		drawHint(globalState, ctx);
-	}
-	else {
-		stop = true;
-		globalState.hintAnimation.y = (globalState.canvasHeight/5)*2;
-		drawHint(globalState, ctx);
-	}
-}
-
-
-
-
-function mainGame(globalState, ctx) {
-	let i = globalState.trial;
-	switch(globalState.trialState) {
-		case "INTRO": 
-			renderReadyScreenAndHint(testData[i].hint);
-			document.addEventListener("keyup", (e) => {
-				if (e.key === " ") {
-					globalState.trialState = "TRIAL"}
-			});
-			// Reset the Settings
-			resetPlayer(globalState);
-		break;
-
-		case "TRIAL": 
-		document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
-		document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
-		document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
-		document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
-		// Draw the Magnet
-		drawMagnet(globalState, ctx);
-		// Draw the Beam coming from the Magnet
-		drawBeam(globalState, ctx);
-		// Draw the Arrows
-		drawArrows(globalState, ctx);
-		// Draw the Power Bar
-		drawPower(globalState, ctx);
-		
-		// Handle Moving the lander
-		handleMovement(globalState);
-		break;
-
-		case "FINISHED":
-			globalState.trial ++;
-			if(globalState.trial < testData.length) {
-				globalState.trialState = "INTRO";
-			}
-			else {
-				globalState.trialState = "GAME_OVER"
-			}
-		break;
-
-		case "GAME_OVER":
-			globalState.gameState = "GAME_OVER";
-			break;
-	}
-// }
-}
 
 // Runs the Game
 runGame();
-
-
-

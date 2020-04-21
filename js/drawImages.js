@@ -1,3 +1,4 @@
+import { scaleText } from "./scaleText.js";
 
 /**
  * Draws the magnet Image on the screen
@@ -71,6 +72,7 @@ export function drawBeam(globalState, ctx) {
 
 /**
  * Handles Rendering the Power Bar
+ * 
  * @param {*} settings The player settings object
  * @param {*} ctx The canvas function
  */
@@ -94,6 +96,12 @@ export function drawPower(globalState, ctx) {
 	// ctx.rotate(90 * Math.PI/180);
 }
 
+/**
+ * Parent function that calls all arrows to be drawn
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
 export function drawArrows(globalState, ctx) {
 	// Vertical Arrows
 	drawVerticalArrows(globalState, ctx);
@@ -101,6 +109,12 @@ export function drawArrows(globalState, ctx) {
 	drawHorizontalArrows(globalState, ctx);
 }
 
+/**
+ * Draws the Vertical Arrows that handle power
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
 export function drawVerticalArrows(globalState, ctx) {
 	// Draw Up Arrow
 	ctx.drawImage(document.getElementById("arrowUp"), 0, (globalState.canvasHeight/10)*8, globalState.canvasWidth/10, globalState.canvasHeight/10);
@@ -122,6 +136,12 @@ export function drawVerticalArrows(globalState, ctx) {
 	}
 }
 
+/**
+ * Draws the Horizontal Arrows that handle Position
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
 export function drawHorizontalArrows(globalState, ctx) {
 	// Draw Left Arrow
 	ctx.drawImage(document.getElementById("arrowLeft"), 0, (globalState.canvasHeight/10)*9, globalState.canvasWidth/10, globalState.canvasHeight/10);
@@ -143,6 +163,12 @@ export function drawHorizontalArrows(globalState, ctx) {
 	}
 }
 
+/**
+ * Draws the hint image (space junk)
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
 export function drawHint(globalState, ctx) {
 	ctx.drawImage(
 		document.getElementById("junk"), 
@@ -154,12 +180,142 @@ export function drawHint(globalState, ctx) {
 }
 
 /**
+ * Draw the Progress Button
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawButton(globalState, ctx) {
+	console.log(`DRAWING BUTTON ${globalState.gameState}`)
+	// Set the Progress Button area on global settings
+	globalState.progressButtonArea = {
+		x: globalState.canvasWidth/2 - (globalState.canvasWidth/2)/4, 
+		y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+		w: globalState.canvasWidth/4, 
+		h: globalState.canvasHeight/8
+	}
+	switch (globalState.gameState) {
+		case "INTRO":
+			// Draw Next Box
+			// ctx.beginPath();
+			// ctx.rect(
+			// 	globalState.canvasWidth/2 - (globalState.canvasWidth/2)/2, 
+			// 	(globalState.canvasHeight/4)*3 - (globalState.canvasHeight/4)/2, 
+			// 	globalState.canvasWidth/2, 
+			// 	globalState.canvasHeight/4
+			// );
+			// ctx.fill();
+			ctx.drawImage(
+				document.getElementById("start_button"), 
+				globalState.progressButtonArea.x, 
+				globalState.progressButtonArea.y, 
+				globalState.progressButtonArea.w, 
+				globalState.progressButtonArea.h
+			);
+
+			break;
+
+		case "TUTORIAL":
+			ctx.drawImage(
+				document.getElementById("start_button"), 
+				globalState.progressButtonArea.x, 
+				globalState.progressButtonArea.y, 
+				globalState.progressButtonArea.w, 
+				globalState.progressButtonArea.h
+			);
+			
+			break;
+		case "GAME":
+			switch (globalState.trialState) {
+				case "INTRO":
+					ctx.drawImage(
+						document.getElementById("start_button"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+					break;
+
+				case "TRIAL":
+					ctx.drawImage(
+						document.getElementById("start_button"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+					break;
+
+				case "RESULTS":
+					ctx.drawImage(
+						document.getElementById("start_button"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+					break;
+
+			}
+			break;
+	}
+}
+
+/**
  * Renders the background Image relative to the Canvas
  * 
- * @param {*} image The Image to Display
- * @param {*} canvas The Canvas to Display it on
- * @param {*} ctx The Canvas Function
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
  */
 export function renderBackground (globalState, ctx) {
 	ctx.drawImage(document.getElementById("background"), 0, 0, globalState.canvasWidth, globalState.canvasHeight);
+}
+
+/**
+ * Draws a simple "Caught" or "Missed" result
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawSimpleResult(globalState, ctx) {
+	// Create the word to display
+	let result = "Missed!"
+	let fillStyle = "red"
+	// If the Beam covers the hint
+	if (true) {
+		result = "Caught!"
+		fillStyle = "green"
+	}
+	// Display the text
+	ctx.fillStyle = fillStyle;
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(40, globalState)}px Arial`;
+	ctx.fillText(result, (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
+}
+
+/**
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawCurrentScore(globalState, ctx) {
+	// Display the text
+	ctx.fillStyle = "green";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px Arial`;
+	ctx.fillText(`Score: ${globalState.score}`, (globalState.canvasWidth/4)*1, (globalState.canvasHeight/10)*2);
+}
+
+/**
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawTotalScore(globalState, ctx) {
+	// Display the text
+	ctx.fillStyle = "green";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px Arial`;
+	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth/4)*3, (globalState.canvasHeight/10)*2);
 }

@@ -1,6 +1,8 @@
 import { createLines, createPages } from "./text.js";
-import { gameIntroduction, gameTutorial } from "./settings.js";
-import { drawMagnet, drawArrows, drawHint } from "./drawImages.js";
+import { gameIntroduction, gameTutorial, testData } from "./settings.js";
+import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore } from "./drawImages.js"
+import { handleMovement } from "./handleMovement.js"
+import { resetPlayer } from "./resetPlayer.js"
 
 // Boolean to stop the Press being continuously registered
 let firstPress = true
@@ -25,35 +27,19 @@ export function introScreen(globalState, ctx) {
 	// Create a function that splits text up into "Lines" based on input variables
 	let lines = createLines(gameIntroduction[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
 	// Create a function that splits lines into pages based on input variables
-	let pages = createPages(lines, maxLines)
+	globalState.introPages = createPages(lines, maxLines)
 	// Set the Font and Color
 	ctx.font = `${textSize}px ${globalState.textFont}`;
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center"
+	// Draw the continue button
+	drawButton(globalState, ctx);
 	// Render pages, while pages space will page++ else move to next area
-	let currentPage = pages[globalState.currentPage];
+	let currentPage = globalState.introPages[globalState.currentPage];
 	for (let i = 0; i < currentPage.length; i++) {
 		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
 		y += (globalState.canvasHeight/15)
 	}
-	// Add a controller to handle the inputs
-	document.addEventListener("keyup", (e) => {if (e.key === " " && firstPress) {
-		firstPress = false;
-		if (globalState.currentPage < pages.length -1) {
-			globalState.currentPage++;
-			y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9);
-		}
-		else if (globalState.currentLine < gameIntroduction.length -1) {
-			globalState.currentLine++
-		}
-		else {
-			globalState.currentPage = 0;
-			globalState.currentLine = 0;
-			globalState.gameState = "TUTORIAL";
-
-		}
-	}}, {once: true});
-	firstPress = true;
 }
 
 /**
@@ -74,13 +60,13 @@ export function tutorialScreen(globalState, ctx) {
 	// Create a function that splits text up into "Lines" based on input variables
 	let lines = createLines(gameTutorial[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
 	// Create a function that splits lines into pages based on input variables
-	let pages = createPages(lines, maxLines)
+	globalState.tutorialPages = createPages(lines, maxLines)
 	// Render pages, while pages space will page++ else move to next area
-	let currentPage = pages[globalState.currentPage];
-	
+	let currentPage = globalState.tutorialPages[globalState.currentPage];
 	globalState.playerSettings.x = globalState.canvasWidth/2;
 	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.5
-	console.log(globalState.currentLine);
+	
+	drawButton(globalState, ctx);
 	switch(globalState.currentLine) {
 		case 0:
 			// Draw the Magnet for the Tutorial
@@ -113,24 +99,77 @@ export function tutorialScreen(globalState, ctx) {
 		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
 		y += (globalState.canvasHeight/15)
 	}
-	// Add a controller to handle the inputs
-	document.addEventListener("keyup", (e) => {if (e.key === " " && firstPress) {
-		firstPress = false;
-		if (globalState.currentPage < pages.length -1) {
-			globalState.currentPage++
-			y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
-		}
-		else if (globalState.currentLine < gameTutorial.length -1) {
-			globalState.currentLine++
-		}
-		else {
-			globalState.currentPage = 0;
-			globalState.currentLine = 0;
-			globalState.gameState = "GAME";
+}
 
-		}
-	}}, {once: true});
-	firstPress = true;
+
+
+let stop = false
+
+function renderHint(hintLocation, globalState, ctx) {
+	// Draw the circle
+	globalState.hintAnimation.x = (globalState.canvasWidth/100 * hintLocation);
+	if (globalState.hintAnimation.y < (globalState.canvasHeight/5)*2.5 && globalState.hintAnimation.y > (globalState.canvasHeight/10) && stop === false) {
+		globalState.hintAnimation.x += globalState.hintAnimation.dx;
+		globalState.hintAnimation.y += globalState.hintAnimation.dy;
+		drawHint(globalState, ctx);
+	}
+	else {
+		stop = true;
+		globalState.hintAnimation.y = (globalState.canvasHeight/5)*2;
+		drawHint(globalState, ctx);
+	}
+}
+
+function renderReadyScreenAndHint(hint, globalState, ctx) {
+	// Draw Start Button
+	drawButton(globalState, ctx);
+	// Draw the Hint
+	renderHint(hint, globalState, ctx);
+}
+
+
+
+/**
+ * Renders the Main Trials of the Game
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function mainGame(globalState, ctx) {
+	let i = globalState.trial;
+	console.log(globalState.trialState)
+	drawButton(globalState, ctx);
+	switch(globalState.trialState) {
+		case "INTRO": 
+			console.log("INTRO")
+			renderReadyScreenAndHint(testData[i].hint, globalState, ctx);
+			// Reset the Settings
+			resetPlayer(globalState);
+			break;
+
+		case "TRIAL": 
+			// Draw the Magnet
+			drawMagnet(globalState, ctx);
+			// Draw the Beam coming from the Magnet
+			drawBeam(globalState, ctx);
+			// Draw the Arrows
+			drawArrows(globalState, ctx);
+			// Draw the Power Bar
+			drawPower(globalState, ctx);		
+			// Handle Moving the lander
+			handleMovement(globalState);
+			break;
+		
+		case "RESULTS":
+			// Draw Simple Result
+			drawSimpleResult(globalState, ctx);
+			// Draw their Current Score
+			drawCurrentScore(globalState, ctx);
+			// Draw their Total Score
+			drawTotalScore(globalState, ctx);
+			break;
+
+	}
 }
 
 /**
