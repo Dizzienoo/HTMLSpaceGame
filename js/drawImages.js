@@ -1,4 +1,5 @@
 import { scaleText } from "./scaleText.js";
+import { testData } from "./settings.js";
 
 /**
  * Draws the magnet Image on the screen
@@ -283,7 +284,7 @@ export function drawSimpleResult(globalState, ctx) {
 	let result = "Missed!"
 	let fillStyle = "red"
 	// If the Beam covers the hint
-	if (true) {
+	if (globalState.hintAnimation.x > globalState.beamLeft && globalState.hintAnimation.x < globalState.beamRight) {
 		result = "Caught!"
 		fillStyle = "green"
 	}

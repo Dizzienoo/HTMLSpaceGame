@@ -105,9 +105,9 @@ export function tutorialScreen(globalState, ctx) {
 
 let stop = false
 
-function renderHint(hintLocation, globalState, ctx) {
+function renderJunk(junkLocation, globalState, ctx) {
 	// Draw the circle
-	globalState.hintAnimation.x = (globalState.canvasWidth/100 * hintLocation);
+	globalState.hintAnimation.x = (globalState.canvasWidth/100 * junkLocation);
 	if (globalState.hintAnimation.y < (globalState.canvasHeight/5)*2.5 && globalState.hintAnimation.y > (globalState.canvasHeight/10) && stop === false) {
 		globalState.hintAnimation.x += globalState.hintAnimation.dx;
 		globalState.hintAnimation.y += globalState.hintAnimation.dy;
@@ -124,7 +124,7 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 	// Draw Start Button
 	drawButton(globalState, ctx);
 	// Draw the Hint
-	renderHint(hint, globalState, ctx);
+	renderJunk(hint, globalState, ctx);
 }
 
 
@@ -137,11 +137,9 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
  */
 export function mainGame(globalState, ctx) {
 	let i = globalState.trial;
-	console.log(globalState.trialState)
 	drawButton(globalState, ctx);
 	switch(globalState.trialState) {
 		case "INTRO": 
-			console.log("INTRO")
 			renderReadyScreenAndHint(testData[i].hint, globalState, ctx);
 			// Reset the Settings
 			resetPlayer(globalState);
@@ -161,6 +159,12 @@ export function mainGame(globalState, ctx) {
 			break;
 		
 		case "RESULTS":
+			// Draw the junks final location
+			renderJunk(testData[i].result, globalState, ctx);
+			// Draw the Magnet
+			drawMagnet(globalState, ctx);
+			// Draw the Beam coming from the Magnet
+			drawBeam(globalState, ctx);
 			// Draw Simple Result
 			drawSimpleResult(globalState, ctx);
 			// Draw their Current Score
