@@ -1,5 +1,6 @@
 import { movers } from "./handleMovement.js"
 import { gameIntroduction, gameTutorial, testData } from "./settings.js"
+import { resetPlayer } from "./resetPlayer.js";
 
 export const keyBoardInputs = {
 	keyDown: (e, globalState) => {
@@ -156,6 +157,8 @@ function Progress(globalState) {
 			switch(globalState.trialState) {
 				case "INTRO": 
 					globalState.trialState = "TRIAL"
+					// Reset the Player (mainly for the Reset the Hint y position)
+					resetPlayer(globalState);
 					break;
 
 				case "TRIAL":
@@ -167,6 +170,9 @@ function Progress(globalState) {
 					globalState.trial ++;
 					if(globalState.trial < testData.length) {
 						globalState.trialState = "INTRO";
+						// Reset the Player
+						// DEBUG: If scores and positions are failing it is probably this reset
+						resetPlayer(globalState);
 					}
 					else {
 						globalState.trialState = "GAME_OVER"

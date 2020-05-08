@@ -56,7 +56,7 @@ function runGame() {
 
 // Move all "Next" actions through to handle input progress function
 // at each stage have a "button" in the same place the progresses (start for intro, ready for game)
-// add in timer for 1 second so ready cant be hit at start of trial by accident
+
 // 
 
 

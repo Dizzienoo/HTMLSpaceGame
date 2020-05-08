@@ -154,8 +154,7 @@ export function mainGame(globalState, ctx) {
 	switch(globalState.trialState) {
 		case "INTRO": 
 			renderReadyScreenAndHint(testData[i].hint, globalState, ctx);
-			// Reset the Settings
-			resetPlayer(globalState);
+
 			break;
 
 		case "TRIAL": 
@@ -184,8 +183,7 @@ export function mainGame(globalState, ctx) {
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
 			drawTotalScore(globalState, ctx);
-			// Reset the Player
-			resetPlayer(globalState);
+
 			break;
 
 	}
