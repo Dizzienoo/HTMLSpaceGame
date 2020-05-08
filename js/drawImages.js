@@ -171,12 +171,14 @@ export function drawHorizontalArrows(globalState, ctx) {
  * @param {*} ctx The canvas object of the game
  */
 export function drawHint(globalState, ctx) {
+	let sizeX = globalState.canvasWidth/10
+	let sizeY = globalState.canvasHeight/10
 	ctx.drawImage(
 		document.getElementById("junk"), 
-		globalState.hintAnimation.x, 
-		globalState.hintAnimation.y, 
-		100, 
-		100
+		globalState.hintAnimation.x - sizeX/2, 
+		globalState.hintAnimation.y - sizeY/2, 
+		sizeX, 
+		sizeY
 		);
 }
 

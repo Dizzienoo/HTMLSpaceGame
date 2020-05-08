@@ -83,7 +83,7 @@ export function tutorialScreen(globalState, ctx) {
 			drawHint(globalState, ctx);
 		break;
 
-		case 3: 
+		case 3:
 			drawArrows(globalState, ctx);
 		break;
 
@@ -108,16 +108,29 @@ let stop = false
 function renderJunk(junkLocation, globalState, ctx) {
 	// Draw the circle
 	globalState.hintAnimation.x = (globalState.canvasWidth/100 * junkLocation);
-	if (globalState.hintAnimation.y < (globalState.canvasHeight/5)*2.5 && globalState.hintAnimation.y > (globalState.canvasHeight/10) && stop === false) {
-		globalState.hintAnimation.x += globalState.hintAnimation.dx;
+	if (globalState.hintAnimation.y > (globalState.canvasHeight/5)*4) {
+		globalState.hintAnimation.y = (globalState.canvasHeight/5)*4
+		stop = true
+	} 
+	if (!stop) {
+		console.log("Moving Down", globalState.hintAnimation.y, globalState.hintAnimation.dy);
 		globalState.hintAnimation.y += globalState.hintAnimation.dy;
-		drawHint(globalState, ctx);
+		console.log("Down", globalState.hintAnimation.y);
 	}
-	else {
-		stop = true;
-		globalState.hintAnimation.y = (globalState.canvasHeight/5)*2;
-		drawHint(globalState, ctx);
-	}
+	drawHint(globalState, ctx);
+
+	// // If the Hint animation is below half, higher than a 10th and hasn't hit stop
+	// if ( 
+	// 	globalState.hintAnimation.y < (globalState.canvasHeight/5)*3 
+	// 	&& stop === false
+	// ) {
+	// 	// globalState.hintAnimation.x += globalState.hintAnimation.dx;
+	// }
+	// else {
+	// 	stop = true;
+	// 	globalState.hintAnimation.y = (globalState.canvasHeight/5)*2;
+	// 	drawHint(globalState, ctx);
+	// }
 }
 
 function renderReadyScreenAndHint(hint, globalState, ctx) {
@@ -171,6 +184,8 @@ export function mainGame(globalState, ctx) {
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
 			drawTotalScore(globalState, ctx);
+			// Reset the Player
+			resetPlayer(globalState);
 			break;
 
 	}
