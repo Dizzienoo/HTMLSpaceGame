@@ -22,3 +22,8 @@ Need to create a function to handle checking if junk is caught that feeds data t
 Need Func for if player rotates screen that would check each update if the current screenX is different to the old screenX and Ys
 Perhaps make some more landscape friendly images
 
+
+// NEW TO DO
+Need to make sure hint is within rock + beam
+Need to align rock and rover properly
+?? Remove Rover "arm"??
