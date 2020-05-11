@@ -18,7 +18,7 @@ ToDO:
 	// Reset
 // Game Over Screen
 
-Need to create a function to handle checking if junk is caught that feedds data to results.  Also need to check junk is rendering from the middle of the image (as its ref for caught or not) and that it doesn't go over page edges
+Need to create a function to handle checking if junk is caught that feeds data to results.  Also need to check junk is rendering from the middle of the image (as its ref for caught or not) and that it doesn't go over page edges
 Need Func for if player rotates screen that would check each update if the current screenX is different to the old screenX and Ys
 Perhaps make some more landscape friendly images
 

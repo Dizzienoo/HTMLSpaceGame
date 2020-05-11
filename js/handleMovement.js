@@ -42,16 +42,24 @@ export const movers = {
  * Detects the Edges of the Game to stop the player going beyond them
  */
 function detectWalls(globalState) {
-	// Stop Rover going further than minimum width plus minimum beam width
-  if (globalState.playerSettings.x < globalState.minWidth + ((globalState.canvasWidth/300) * 10)) {
-    globalState.playerSettings.x = globalState.minWidth + ((globalState.canvasWidth/300) * 10);
-  }
+	// // Stop Rover going further than minimum width plus minimum beam width
+  // if (globalState.playerSettings.x < globalState.minWidth + ((globalState.canvasWidth/300) * 10)) {
+  //   globalState.playerSettings.x = globalState.minWidth + ((globalState.canvasWidth/300) * 10);
+  // }
 
-	// Stop Rover going further than maximum width minus minimum beam width
-  if (globalState.playerSettings.x > globalState.maxWidth - ((globalState.canvasWidth/300) * 10)) {
-    globalState.playerSettings.x = globalState.maxWidth - ((globalState.canvasWidth/300) * 10);
-  }
-
+	// // Stop Rover going further than maximum width minus minimum beam width
+  // if (globalState.playerSettings.x > globalState.maxWidth - ((globalState.canvasWidth/300) * 10)) {
+  //   globalState.playerSettings.x = globalState.maxWidth - ((globalState.canvasWidth/300) * 10);
+	// }
+	
+	// Stop the Rover going further than the Left Rock
+	if (globalState.playerSettings.x < ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) + globalState.canvasWidth/10) {
+		globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) + globalState.canvasWidth/10
+	}
+	// Stop the Rover going further than the Right Rock
+	if (globalState.playerSettings.x > ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10) {
+		globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10
+	}
   // Top wall
   if (globalState.playerSettings.y < 0) {
     globalState.playerSettings.y = 0;

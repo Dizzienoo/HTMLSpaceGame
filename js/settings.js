@@ -57,7 +57,7 @@ export const globalState = new function () {
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
 	// The state that the overall game is in
-	this.gameState = "INTRO",
+	this.gameState = "GAME",
 	// The state that the individual Trial is in
 	this.trialState = "INTRO",
 	// Score of a single test
@@ -96,7 +96,10 @@ export const globalState = new function () {
 		size: 30,
 		dx: 0,
 		dy: 2
-	}
+	},
+	// This variable is used to set the position of the rocks and the size of the power beam
+	// 4 would mean the power size is a quarter of the screen
+	this.powerSize = 8
 }
 
 /**

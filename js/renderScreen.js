@@ -1,6 +1,6 @@
 import { createLines, createPages } from "./text.js";
 import { gameIntroduction, gameTutorial, testData } from "./settings.js";
-import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { resetPlayer } from "./resetPlayer.js"
 
@@ -69,11 +69,13 @@ export function tutorialScreen(globalState, ctx) {
 	drawButton(globalState, ctx);
 	switch(globalState.currentLine) {
 		case 0:
-			// Draw the Magnet for the Tutorial
+			drawRocks(globalState, ctx);
+			// Draw the Magnet fnor the Tutorial
 			drawMagnet(globalState, ctx);
 		break;
 
 		case 1:
+			drawRocks(globalState, ctx);
 			drawMagnet(globalState, ctx);
 		break;
 
@@ -113,24 +115,9 @@ function renderJunk(junkLocation, globalState, ctx) {
 		stop = true
 	} 
 	if (!stop) {
-		console.log("Moving Down", globalState.hintAnimation.y, globalState.hintAnimation.dy);
 		globalState.hintAnimation.y += globalState.hintAnimation.dy;
-		console.log("Down", globalState.hintAnimation.y);
 	}
 	drawHint(globalState, ctx);
-
-	// // If the Hint animation is below half, higher than a 10th and hasn't hit stop
-	// if ( 
-	// 	globalState.hintAnimation.y < (globalState.canvasHeight/5)*3 
-	// 	&& stop === false
-	// ) {
-	// 	// globalState.hintAnimation.x += globalState.hintAnimation.dx;
-	// }
-	// else {
-	// 	stop = true;
-	// 	globalState.hintAnimation.y = (globalState.canvasHeight/5)*2;
-	// 	drawHint(globalState, ctx);
-	// }
 }
 
 function renderReadyScreenAndHint(hint, globalState, ctx) {
@@ -138,6 +125,7 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 	drawButton(globalState, ctx);
 	// Draw the Hint
 	renderJunk(hint, globalState, ctx);
+
 }
 
 
@@ -158,6 +146,8 @@ export function mainGame(globalState, ctx) {
 			break;
 
 		case "TRIAL": 
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
 			// Draw the Magnet
 			drawMagnet(globalState, ctx);
 			// Draw the Beam coming from the Magnet

@@ -18,32 +18,65 @@ export function drawMagnet(globalState, ctx) {
 }
 
 /**
+ * Draws the Rocks that determine the rage of motion of the rover
+ * 
+ * @param {*} globalState 
+ * @param {*} ctx 
+ */
+export function drawRocks(globalState, ctx) {
+	ctx.drawImage(
+		document.getElementById("rock"),
+		((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) - globalState.canvasWidth/20,
+		globalState.canvasHeight / 5*3.5,
+		globalState.canvasWidth / 10 ,
+		globalState.canvasHeight / 10);
+
+		ctx.drawImage(
+			document.getElementById("rock"),
+			((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
+			globalState.canvasHeight / 5*3.5,
+			globalState.canvasWidth / 10,
+			globalState.canvasHeight / 10);
+}
+
+/**
  * Function that handles beam power relative to screen space
  */
-function calculateBeamandPower (globalState) {
-	let power = globalState.playerSettings.power
-	// If the current beam will go further than the width of the page
-	if (globalState.minWidth > globalState.playerSettings.x - ((globalState.canvasWidth/300) * power)) {
-		// Then adpated power is set to, player position - 
-		globalState.playerSettings.adaptedPower = (globalState.playerSettings.x - globalState.minWidth)/((globalState.canvasWidth/300))
-	}
-	else if (globalState.maxWidth < globalState.playerSettings.x + ((globalState.canvasWidth/300) * power)) {
-		globalState.playerSettings.adaptedPower = (globalState.maxWidth - globalState.playerSettings.x)/((globalState.canvasWidth/300))
-	}
-	else {
-		globalState.playerSettings.adaptedPower = 100;
-	}
-	if (globalState.playerSettings.adaptedPower < globalState.playerSettings.power) {
-		power = globalState.playerSettings.adaptedPower;
-	}
-	// Calculate Left Width
-	let leftWidth = globalState.playerSettings.x - ((globalState.canvasWidth/300) * power)
-	// Calculate Right Width
-	let rightWidth = globalState.playerSettings.x + ((globalState.canvasWidth/300) * power)
-	// Set the global variables
-	globalState.beamLeft = leftWidth;
-	globalState.beamRight = rightWidth;
-	globalState.currentPower = power;
+// function calculateBeamandPower (globalState) {
+// 	let power = globalState.playerSettings.power
+// 	// If the current beam will go further than the width of the page
+// 	if (globalState.minWidth > globalState.playerSettings.x - ((globalState.canvasWidth/300) * power)) {
+// 		// Then adpated power is set to, player position - 
+// 		globalState.playerSettings.adaptedPower = (globalState.playerSettings.x - globalState.minWidth)/((globalState.canvasWidth/300))
+// 	}
+// 	else if (globalState.maxWidth < globalState.playerSettings.x + ((globalState.canvasWidth/300) * power)) {
+// 		globalState.playerSettings.adaptedPower = (globalState.maxWidth - globalState.playerSettings.x)/((globalState.canvasWidth/300))
+// 	}
+// 	else {
+// 		globalState.playerSettings.adaptedPower = 100;
+// 	}
+// 	if (globalState.playerSettings.adaptedPower < globalState.playerSettings.power) {
+// 		power = globalState.playerSettings.adaptedPower;
+// 	}
+// 	// Calculate Left Width
+// 	let leftWidth = globalState.playerSettings.x - ((globalState.canvasWidth/300) * power)
+// 	// Calculate Right Width
+// 	let rightWidth = globalState.playerSettings.x + ((globalState.canvasWidth/300) * power)
+// 	// Set the global variables
+// 	globalState.beamLeft = leftWidth;
+// 	globalState.beamRight = rightWidth;
+// 	globalState.currentPower = power;
+// }
+
+/**
+ * Simplified Calculate Beam Size after rework with Rocks
+ * 
+ * @param {*} globalState The Global State of the Game
+ */
+function calculateBeamandPower(globalState) {
+	globalState.beamLeft = globalState.playerSettings.x - ((globalState.canvasWidth/ (globalState.powerSize * 75)) * globalState.playerSettings.power);
+	globalState.beamRight = globalState.playerSettings.x + ((globalState.canvasWidth/ (globalState.powerSize * 75)) * globalState.playerSettings.power);
+	globalState.currentPower = globalState.playerSettings.power;
 }
 
 /**
@@ -189,7 +222,6 @@ export function drawHint(globalState, ctx) {
  * @param {*} ctx The canvas object of the game
  */
 export function drawButton(globalState, ctx) {
-	console.log(`DRAWING BUTTON ${globalState.gameState}`)
 	// Set the Progress Button area on global settings
 	globalState.progressButtonArea = {
 		x: globalState.canvasWidth/2 - (globalState.canvasWidth/2)/4, 
