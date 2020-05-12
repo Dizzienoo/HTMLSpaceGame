@@ -18,4 +18,6 @@ export function resetPlayer(globalState) {
 	globalState.playerSettings.beamColor = "green";
 	globalState.hintAnimation.y = (globalState.canvasHeight/4)*1
 	globalState.rect = canvas.getBoundingClientRect();
+	// Reset the "time left" timer
+	globalState.trialTimeLeft = globalState.trialTime / 1000;
 }

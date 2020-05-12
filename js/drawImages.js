@@ -17,6 +17,7 @@ export function drawMagnet(globalState, ctx) {
 		globalState.canvasHeight/7);
 }
 
+
 /**
  * Draws the Rocks that determine the rage of motion of the rover
  * 
@@ -107,8 +108,8 @@ export function drawBeam(globalState, ctx) {
 /**
  * Handles Rendering the Power Bar
  * 
- * @param {*} settings The player settings object
- * @param {*} ctx The canvas function
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
  */
 export function drawPower(globalState, ctx) {
 	// Draw Power box fill
@@ -128,6 +129,16 @@ export function drawPower(globalState, ctx) {
 	ctx.font = "20px Comic Sans MS";
 	ctx.fillText("Power", (globalState.canvasWidth/40)+(globalState.canvasWidth/15/2), (globalState.canvasHeight/10)*2-(globalState.canvasHeight/40));
 	// ctx.rotate(90 * Math.PI/180);
+}
+
+/**
+ * Draws a countdown timer of time left in the trial
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawCountdown(globalState, ctx) {
+	ctx.fillText(`Time Left: ${globalState.trialTimeLeft}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2-(globalState.canvasHeight/40));
 }
 
 /**

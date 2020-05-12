@@ -102,6 +102,8 @@ export const globalState = new function () {
 	this.powerSize = 8
 	// Time in ms before trial is moved along
 	this.trialTime = 10000;
+	// How long left before the trial auto completes (in seconds)
+	this.trialTimeLeft = 10;
 }
 
 /**

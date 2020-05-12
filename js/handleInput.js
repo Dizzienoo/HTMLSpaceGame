@@ -158,8 +158,14 @@ function Progress(globalState) {
 					globalState.trialState = "TRIAL"
 					// Reset the Player (mainly for the Reset the Hint y position)
 					resetPlayer(globalState);
-
-					setTimeout(() => {Progress(globalState)}, globalState.trialTime)
+					// Set a timeout so if the player takes longer than a certain time in the trial it will automatically progress
+					let interval = setInterval(() => {
+						globalState.trialTimeLeft--;
+						if (globalState.trialTimeLeft == 0 || globalState.trialTimeLeft < 0) {
+							Progress(globalState);
+							clearInterval(interval);
+						}
+					}, 1000);
 					break;
 
 				case "TRIAL":

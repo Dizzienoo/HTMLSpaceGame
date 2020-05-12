@@ -1,6 +1,6 @@
 import { createLines, createPages } from "./text.js";
 import { gameIntroduction, gameTutorial, testData } from "./settings.js";
-import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { resetPlayer } from "./resetPlayer.js"
 
@@ -146,6 +146,7 @@ export function mainGame(globalState, ctx) {
 			break;
 
 		case "TRIAL": 
+			drawCountdown(globalState, ctx);
 			// Draw the Edge Rocks
 			drawRocks(globalState, ctx);
 			// Draw the Magnet
