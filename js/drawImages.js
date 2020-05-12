@@ -26,17 +26,17 @@ export function drawMagnet(globalState, ctx) {
 export function drawRocks(globalState, ctx) {
 	ctx.drawImage(
 		document.getElementById("rock"),
-		((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) - globalState.canvasWidth/20,
+		((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
 		globalState.canvasHeight / 5*3.5,
 		globalState.canvasWidth / 10 ,
 		globalState.canvasHeight / 10);
 
-		ctx.drawImage(
-			document.getElementById("rock"),
-			((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
-			globalState.canvasHeight / 5*3.5,
-			globalState.canvasWidth / 10,
-			globalState.canvasHeight / 10);
+	ctx.drawImage(
+		document.getElementById("rock"),
+		((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
+		globalState.canvasHeight / 5*3.5,
+		globalState.canvasWidth / 10,
+		globalState.canvasHeight / 10);
 }
 
 /**
@@ -74,8 +74,8 @@ export function drawRocks(globalState, ctx) {
  * @param {*} globalState The Global State of the Game
  */
 function calculateBeamandPower(globalState) {
-	globalState.beamLeft = globalState.playerSettings.x - ((globalState.canvasWidth/ (globalState.powerSize * 75)) * globalState.playerSettings.power);
-	globalState.beamRight = globalState.playerSettings.x + ((globalState.canvasWidth/ (globalState.powerSize * 75)) * globalState.playerSettings.power);
+	globalState.beamLeft = globalState.playerSettings.x - ((globalState.canvasWidth/ (globalState.powerSize * 65)) * globalState.playerSettings.power);
+	globalState.beamRight = globalState.playerSettings.x + ((globalState.canvasWidth/ (globalState.powerSize * 65)) * globalState.playerSettings.power);
 	globalState.currentPower = globalState.playerSettings.power;
 }
 

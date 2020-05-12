@@ -153,12 +153,13 @@ function Progress(globalState) {
 			break;
 
 		case "GAME":
-			console.log(globalState.trialState);
 			switch(globalState.trialState) {
 				case "INTRO": 
 					globalState.trialState = "TRIAL"
 					// Reset the Player (mainly for the Reset the Hint y position)
 					resetPlayer(globalState);
+
+					setTimeout(() => {Progress(globalState)}, globalState.trialTime)
 					break;
 
 				case "TRIAL":

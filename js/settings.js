@@ -100,6 +100,8 @@ export const globalState = new function () {
 	// This variable is used to set the position of the rocks and the size of the power beam
 	// 4 would mean the power size is a quarter of the screen
 	this.powerSize = 8
+	// Time in ms before trial is moved along
+	this.trialTime = 10000;
 }
 
 /**
