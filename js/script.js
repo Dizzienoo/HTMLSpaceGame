@@ -1,37 +1,22 @@
-// Gets the Canvas from the HTML
-const canvas = document.getElementById("canvas");
-// Creates the Drawing Hook in 2d
-const ctx = canvas.getContext("2d");
 
-import { globalState } from "./settings.js"
+
+// import { globalState } from "./settings.js"
 import { renderBackground } from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
 import { introScreen, tutorialScreen, mainGame, gameOver } from "./renderScreen.js";
+import { clearCanvas } from "./utilities.js";
 
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-globalState.canvasWidth = window.innerWidth
-globalState.canvasHeight = window.innerHeight
-globalState.rect = canvas.getBoundingClientRect();
 
-document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
-document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
-document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
-document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
+export {mouseInputs, keyBoardInputs, clearCanvas}
 
-/**
- * Clears the Canvas for Re-animation
- */
-function clearCanvas() {
-	ctx.clearRect(0, 0, globalState.canvasWidth, globalState.canvasHeight);
-}
-
-function runGame() {
+export function runGame(globalState, ctx) {
 	// Clears the Canvas (re-sets each frame)
-	clearCanvas();
+	// clearCanvas(globalState, ctx);
 	// Render the Background
 	renderBackground(globalState, ctx);
+	console.log(globalState.gameState)
+	console.log(globalState.trialState)
 	switch(globalState.gameState) {
 		case "INTRO":
 			introScreen(globalState, ctx);
@@ -50,7 +35,8 @@ function runGame() {
 		break;
 
 	}
-	requestAnimationFrame(runGame);
+	// cancelAnimationFrame(this)
+	// requestAnimationFrame(runGame(globalState, ctx));
 }
 
 
@@ -60,5 +46,5 @@ function runGame() {
 // 
 
 
-// Runs the Game
-runGame();
+// // Runs the Game
+// runGame(globalState);

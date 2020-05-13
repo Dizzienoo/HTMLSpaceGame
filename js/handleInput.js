@@ -1,5 +1,5 @@
 import { movers } from "./handleMovement.js"
-import { gameIntroduction, gameTutorial, testData } from "./settings.js"
+import { testData } from "./settings.js"
 import { resetPlayer } from "./resetPlayer.js";
 
 export const keyBoardInputs = {
@@ -124,7 +124,7 @@ function Progress(globalState) {
 				globalState.currentPage++;
 				y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9);
 			}
-			else if (globalState.currentLine < gameIntroduction.length -1) {
+			else if (globalState.currentLine < globalState.gameIntroduction.length -1) {
 				globalState.currentLine++
 			}
 			else {
@@ -141,7 +141,7 @@ function Progress(globalState) {
 				globalState.currentPage++
 				y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 			}
-			else if (globalState.currentLine < gameTutorial.length -1) {
+			else if (globalState.currentLine < globalState.gameTutorial.length -1) {
 				globalState.currentLine++
 			}
 			else {

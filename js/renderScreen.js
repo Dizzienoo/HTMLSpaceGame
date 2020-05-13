@@ -1,8 +1,7 @@
 import { createLines, createPages } from "./text.js";
-import { gameIntroduction, gameTutorial, testData } from "./settings.js";
+import { testData } from "./settings.js";
 import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
-import { resetPlayer } from "./resetPlayer.js"
 
 // Boolean to stop the Press being continuously registered
 let firstPress = true
@@ -25,7 +24,7 @@ export function introScreen(globalState, ctx) {
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Create a function that splits text up into "Lines" based on input variables
-	let lines = createLines(gameIntroduction[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
+	let lines = createLines(globalState.gameIntroduction[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
 	// Create a function that splits lines into pages based on input variables
 	globalState.introPages = createPages(lines, maxLines)
 	// Set the Font and Color
@@ -58,7 +57,7 @@ export function tutorialScreen(globalState, ctx) {
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Create a function that splits text up into "Lines" based on input variables
-	let lines = createLines(gameTutorial[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
+	let lines = createLines(globalState.gameTutorial[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
 	// Create a function that splits lines into pages based on input variables
 	globalState.tutorialPages = createPages(lines, maxLines)
 	// Render pages, while pages space will page++ else move to next area

@@ -1,5 +1,3 @@
-// import {detectWalls} from "./detectWalls.js"
-
 /**
  * Handles the lateral movement of the magnet and
  * also handles the increase and decrease of power
