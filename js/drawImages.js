@@ -69,9 +69,25 @@ export function drawRocks(globalState, ctx) {
 // }
 
 /**
+ * Writes the current trial number on the screen so players know they are progressing
+ * 
+ * @param {object} globalState The global state of the game
+ * @param {object} ctx The canvas object of the game
+ */
+export function drawTrialHint(globalState, ctx) {
+	// Write out the level number
+		// Display the text
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+		ctx.fillText(`Level ${globalState.level.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2);
+		ctx.fillText(`Trial ${globalState.trialNumber.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*3); 
+}
+
+/**
  * Simplified Calculate Beam Size after rework with Rocks
  * 
- * @param {*} globalState The Global State of the Game
+ * @param {object} globalState The Global State of the Game
  */
 function calculateBeamandPower(globalState) {
 	globalState.beamLeft = globalState.playerSettings.x - ((globalState.canvasWidth/ (globalState.powerSize * 65)) * globalState.playerSettings.power);
@@ -82,17 +98,17 @@ function calculateBeamandPower(globalState) {
 /**
  * Draws the "Magnet" beam
  * 
- * @param {*} settings The player settings object
- * @param {*} ctx The canvas function
+ * @param {object} globalState The global state of the game
+ * @param {object} ctx The canvas object of the game
  */
 export function drawBeam(globalState, ctx) {
 	ctx.beginPath();
 
 	calculateBeamandPower(globalState);
 	// Set Start Point
-	ctx.moveTo(globalState.beamLeft, globalState.canvasHeight/5); // Top Left
+	ctx.moveTo(globalState.beamLeft, globalState.canvasHeight/10); // Top Left
 	// Draw a straight line
-	ctx.lineTo(globalState.beamRight, globalState.canvasHeight/5); // Top Right
+	ctx.lineTo(globalState.beamRight, globalState.canvasHeight/10); // Top Right
 	ctx.lineTo(globalState.beamRight, (globalState.canvasHeight/5)*2.5); // Middle Right
 	
 	ctx.lineTo(globalState.playerSettings.x, globalState.playerSettings.y); // Bottom
@@ -107,8 +123,8 @@ export function drawBeam(globalState, ctx) {
 /**
  * Handles Rendering the Power Bar
  * 
- * @param {*} globalState The global state of the game
- * @param {*} ctx The canvas object of the game
+ * @param {object} globalState The global state of the game
+ * @param {object} ctx The canvas object of the game
  */
 export function drawPower(globalState, ctx) {
 	// Draw Power box fill
@@ -211,19 +227,30 @@ export function drawHorizontalArrows(globalState, ctx) {
 /**
  * Draws the hint image (space junk)
  * 
- * @param {*} globalState The global state of the game
- * @param {*} ctx The canvas object of the game
+ * @param {object} globalState The global state of the game
+ * @param {object} ctx The canvas object of the game
+ * @param {boolean} hint Is the satellite a hint? Default no
  */
-export function drawHint(globalState, ctx) {
+export function drawSatellite(globalState, ctx, hint = false) {
+	// Set the Size of the Satellite
 	let sizeX = globalState.canvasWidth/10
 	let sizeY = globalState.canvasHeight/10
+	// If we are hinting
+	if (hint === true) {
+		// Save the Current Canvas Settings
+		ctx.save();
+		ctx.globalAlpha = 0.3;
+	}
 	ctx.drawImage(
-		document.getElementById("junk"), 
+		document.getElementById((hint)?"greenJunk": "junk"), 
 		globalState.hintAnimation.x - sizeX/2, 
 		globalState.hintAnimation.y - sizeY/2, 
 		sizeX, 
 		sizeY
 		);
+	if (hint === true) {
+		ctx.restore();
+	}
 }
 
 /**
@@ -282,7 +309,18 @@ export function drawButton(globalState, ctx) {
 						globalState.progressButtonArea.h
 					);
 					break;
+				
+				case "HINT":
+					ctx.drawImage(
+						document.getElementById("startButton"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
 
+					break;
+				
 				case "TRIAL":
 					ctx.drawImage(
 						document.getElementById("startButton"), 

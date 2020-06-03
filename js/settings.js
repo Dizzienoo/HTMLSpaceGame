@@ -66,6 +66,8 @@ export const globalState = new function () {
 	this.totalScore = 0,
 	// Highest Score the player got
 	this.highestScore = 0,
+	// What trial is this in the current level
+	this.trialNumber = 1,
 	// Which trial are we on?
 	this.trial = 0,
 	// Which level are we on?
@@ -82,8 +84,8 @@ export const globalState = new function () {
 		w: 50,
 		h: 70,
 		x: 200,
-		y: (this.canvasHeight/5)*3.25,
-		speed: 5,
+		y: (this.canvasHeight/5)*3,
+		speed: 8,
 		dx: 0,
 		dy: 0,
 		powerSpeed: 2,
@@ -96,7 +98,7 @@ export const globalState = new function () {
 		y: 100,
 		size: 30,
 		dx: 0,
-		dy: 4
+		dy: 5
 	},
 	// This variable is used to set the position of the rocks and the size of the power beam
 	// 4 would mean the power size is a quarter of the screen
@@ -141,23 +143,3 @@ export const initialSettings = {
 	power: 50,
 	level: 0
 }
-
-
-export const testData = [
-	{
-		hint: 60,
-		result: 20
-	},
-	{
-		hint: 40,
-		result: 20
-	},
-	{
-		hint: 30,
-		result: 20
-	},
-	{
-		hint: 15,
-		result: 20
-	}
-]

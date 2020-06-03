@@ -1,7 +1,8 @@
 import { createLines, createPages } from "./text.js";
-import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
+import { resetPlayer } from "./resetPlayer.js";
 
 
 // Boolean to stop the Press being continuously registered
@@ -15,13 +16,14 @@ let firstPress = true
  * @param {*} ctx The canvas object of the game
  */
 export function introScreen(globalState, ctx) {
+	resetPlayer(globalState);
 	// Define some Constants for the Intro
 	// Get the maxWidth of the page
 	let maxWidth = (globalState.canvasWidth/10)*9
 	// Get the max height of the page
 	let maxLines = Math.floor((globalState.canvasHeight - (globalState.canvasHeight - (globalState.canvasHeight/10)*9))/ (globalState.canvasHeight/15));
 	// Set the Text Size
-	let textSize = (globalState.canvasHeight/15) - ((globalState.canvasHeight/15)/2.5)
+	let textSize = scaleText(20, globalState)
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Create a function that splits text up into "Lines" based on input variables
@@ -54,7 +56,7 @@ export function tutorialScreen(globalState, ctx) {
 	// Get the max height of the page
 	let maxLines = Math.floor((globalState.canvasHeight - (globalState.canvasHeight - (globalState.canvasHeight/10)*9))/ (globalState.canvasHeight/15));
 	// Set the Text Size
-	let textSize = (globalState.canvasHeight/15) - ((globalState.canvasHeight/15)/2.5)
+	let textSize = scaleText(20, globalState);
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Create a function that splits text up into "Lines" based on input variables
@@ -63,8 +65,7 @@ export function tutorialScreen(globalState, ctx) {
 	globalState.tutorialPages = createPages(lines, maxLines)
 	// Render pages, while pages space will page++ else move to next area
 	let currentPage = globalState.tutorialPages[globalState.currentPage];
-	globalState.playerSettings.x = globalState.canvasWidth/2;
-	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.5
+	// globalState.playerSettings.x = globalState.canvasWidth/2;
 	
 	drawButton(globalState, ctx);
 	switch(globalState.currentLine) {
@@ -82,13 +83,13 @@ export function tutorialScreen(globalState, ctx) {
 		case 2:
 		    globalState.hintAnimation.x = globalState.canvasWidth/2
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
-			drawHint(globalState, ctx);
+			drawSatellite(globalState, ctx);
 		break;
 
 		case 3:
 	    	globalState.hintAnimation.x = globalState.canvasWidth/2
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
-			drawHint(globalState, ctx);
+			drawSatellite(globalState, ctx, true);
 		break;
 
 		case 4:
@@ -111,27 +112,32 @@ export function tutorialScreen(globalState, ctx) {
 }
 
 
-
-let stop = false
-
-function renderJunk(junkLocation, globalState, ctx) {
+/**
+ * Show the Junk (satellite) on the Screen
+ * 
+ * @param {*} junkLocation The location of the satellite on the screen
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object
+ * @param {boolean} hint Is this run showing the satelite as a hint or result (default as result)
+ */
+function renderJunk(junkLocation, globalState, ctx, hint= false) {
 	// Draw the circle
 	globalState.hintAnimation.x = (globalState.canvasWidth/100 * junkLocation);
-	if (globalState.hintAnimation.y > (globalState.canvasHeight/5)*4) {
-		globalState.hintAnimation.y = (globalState.canvasHeight/5)*4
-		stop = true
+	if (globalState.hintAnimation.y >= (globalState.canvasHeight/5)*3.5) {
+		globalState.hintAnimation.y = (globalState.canvasHeight/5)*3.5
+		drawSatellite(globalState, ctx, hint);
 	} 
-	if (!stop) {
+	else {
 		globalState.hintAnimation.y += globalState.hintAnimation.dy;
+		drawSatellite(globalState, ctx, hint);
 	}
-	drawHint(globalState, ctx);
 }
 
 function renderReadyScreenAndHint(hint, globalState, ctx) {
-	// Draw Start Button
-	drawButton(globalState, ctx);
+	// Draw the Trial Number
+	drawTrialHint(globalState, ctx);
 	// Draw the Hint
-	renderJunk(hint, globalState, ctx);
+	renderJunk(hint, globalState, ctx, true);
 
 }
 
@@ -167,17 +173,18 @@ export function mainGame(globalState, ctx) {
 	let i = globalState.trial;
 	drawButton(globalState, ctx);
 	switch(globalState.trialState) {
-	    case "INTRO":
-	        renderLevelIntro(globalState, ctx)
-	        
-	        break;
+    case "INTRO":
+			// Show the introduction to the level of trials
+      renderLevelIntro(globalState, ctx)
+      
+      break;
 	        
 		case "HINT": 
 			renderReadyScreenAndHint(globalState.testData[i].hint, globalState, ctx);
 
 			break;
 
-		case "TRIAL": 
+		case "TRIAL":
 			drawCountdown(globalState, ctx);
 			// Draw the Edge Rocks
 			drawRocks(globalState, ctx);
@@ -206,14 +213,13 @@ export function mainGame(globalState, ctx) {
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
 			drawTotalScore(globalState, ctx);
-			
 			break;
 			
-        case "LEVEL_COMPLETE":
-            // Show the level complete info
-            renderLevelComplete(globalState, ctx);
-            
-            break;
+    case "LEVEL_COMPLETE":
+      // Show the level complete info
+      renderLevelComplete(globalState, ctx);
+      
+      break;
 	}
 }
 

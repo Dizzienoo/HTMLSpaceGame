@@ -1,5 +1,4 @@
 import { movers } from "./handleMovement.js"
-import { testData } from "./settings.js"
 import { resetPlayer } from "./resetPlayer.js";
 
 export const keyBoardInputs = {
@@ -114,9 +113,8 @@ export const mouseInputs = {
 }
 
 let firstPress = true;
-
+let interval;
 function Progress(globalState) {
-	console.log("PROGRESS")
 	switch(globalState.gameState) {
 		case "INTRO":
 			firstPress = false;
@@ -148,7 +146,7 @@ function Progress(globalState) {
 				globalState.currentPage = 0;
 				globalState.currentLine = 0;
 				globalState.gameState = "GAME";
-
+				resetPlayer(globalState);
 			}
 			break;
 
@@ -164,7 +162,7 @@ function Progress(globalState) {
 					// Reset the Player (mainly for the Reset the Hint y position)
 					resetPlayer(globalState);
 					// Set a timeout so if the player takes longer than a certain time in the trial it will automatically progress
-					let interval = setInterval(() => {
+					interval = setInterval(() => {
 						globalState.trialTimeLeft--;
 						if (globalState.trialTimeLeft == 0 || globalState.trialTimeLeft < 0) {
 							Progress(globalState);
@@ -178,6 +176,7 @@ function Progress(globalState) {
 					break;
 					
 				case "RESULTS":
+					clearInterval(interval)
 					globalState.trial ++;
 					if(globalState.trial < globalState.testData.length) {
 					    // If the trial level is different to current level
@@ -185,6 +184,7 @@ function Progress(globalState) {
 						    globalState.trialState = "LEVEL_COMPLETE";
 					    }
 					    else {
+									globalState.trialNumber ++;
 					        globalState.trialState = "HINT";
 					    }
 						// Reset the Player
@@ -195,17 +195,19 @@ function Progress(globalState) {
 						globalState.trialState = "GAME_OVER"
 					}
 					break;
-                case "LEVEL_COMPLETE":
-                    // Set the Level to the new level
-    		        globalState.level = Number(globalState.testData[globalState.trial].level)
-    		        // Reset the Trial
-                    globalState.trialState = "INTRO";
-                    break;
-                    
+        case "LEVEL_COMPLETE":
+          // Set the Level to the new level
+	        globalState.level = Number(globalState.testData[globalState.trial].level)
+  	      // Reset the Trial
+          globalState.trialState = "INTRO";
+					// Set the Trial Number back to 1
+					globalState.trialNumber = 1;
+					break;
+            
 				case "GAME_OVER":
 					globalState.gameState = "GAME_OVER";
 
-				    break;
+			    break;
 			}
 
 		case "GAME_OVER":
