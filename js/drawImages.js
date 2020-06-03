@@ -1,5 +1,4 @@
 import { scaleText } from "./scaleText.js";
-import { testData } from "./settings.js";
 
 /**
  * Draws the magnet Image on the screen
@@ -126,7 +125,7 @@ export function drawPower(globalState, ctx) {
 	// ctx.rotate(270 * Math.PI/180);
 	ctx.fillStyle = "red";
 	ctx.textAlign = "center";
-	ctx.font = "20px Comic Sans MS";
+	ctx.font = `20px ${globalState.textFont}`;
 	ctx.fillText("Power", (globalState.canvasWidth/40)+(globalState.canvasWidth/15/2), (globalState.canvasHeight/10)*2-(globalState.canvasHeight/40));
 	// ctx.rotate(90 * Math.PI/180);
 }
@@ -336,7 +335,7 @@ export function drawSimpleResult(globalState, ctx) {
 	// Display the text
 	ctx.fillStyle = fillStyle;
 	ctx.textAlign = "center";
-	ctx.font = `${scaleText(40, globalState)}px Arial`;
+	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
 	ctx.fillText(result, (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
 }
 
@@ -349,7 +348,7 @@ export function drawCurrentScore(globalState, ctx) {
 	// Display the text
 	ctx.fillStyle = "green";
 	ctx.textAlign = "center";
-	ctx.font = `${scaleText(20, globalState)}px Arial`;
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
 	ctx.fillText(`Score: ${globalState.score}`, (globalState.canvasWidth/4)*1, (globalState.canvasHeight/10)*2);
 }
 
@@ -362,6 +361,6 @@ export function drawTotalScore(globalState, ctx) {
 	// Display the text
 	ctx.fillStyle = "green";
 	ctx.textAlign = "center";
-	ctx.font = `${scaleText(20, globalState)}px Arial`;
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
 	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth/4)*3, (globalState.canvasHeight/10)*2);
 }

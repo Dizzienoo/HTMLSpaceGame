@@ -3,6 +3,7 @@ import { testData } from "./settings.js";
 import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 
+
 // Boolean to stop the Press being continuously registered
 let firstPress = true
 
