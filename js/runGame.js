@@ -1,5 +1,6 @@
 import {runGame, mouseInputs, keyBoardInputs, clearCanvas} from "./script.js";
 import {globalState} from "./settings.js"
+import { getData } from "./getData.js";
 
 // Gets the Canvas from the HTML
 const canvas = document.getElementById("canvas");
@@ -19,10 +20,14 @@ document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)}
 
 function thisTry(globalState, ctx) {
 
-    clearCanvas(globalState, ctx)
-    runGame(globalState, ctx)
-    if (globalState.gameState !== "GAME_OVER")
-    {requestAnimationFrame(() => thisTry(globalState, ctx));}
+    const testDataURL = "../assets/trialdata_wallisorder.csv"
+    getData(testDataURL).then((testData) => {
+        globalState.testData = testData;
+        clearCanvas(globalState, ctx)
+        runGame(globalState, ctx)
+        if (globalState.gameState !== "GAME_OVER")
+        {requestAnimationFrame(() => thisTry(globalState, ctx));}
+    })
     
 }
 

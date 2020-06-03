@@ -137,6 +137,7 @@ export function drawPower(globalState, ctx) {
  * @param {*} ctx The canvas object of the game
  */
 export function drawCountdown(globalState, ctx) {
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
 	ctx.fillText(`Time Left: ${globalState.trialTimeLeft}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2-(globalState.canvasHeight/40));
 }
 
@@ -251,7 +252,7 @@ export function drawButton(globalState, ctx) {
 			// );
 			// ctx.fill();
 			ctx.drawImage(
-				document.getElementById("start_button"), 
+				document.getElementById("startButton"), 
 				globalState.progressButtonArea.x, 
 				globalState.progressButtonArea.y, 
 				globalState.progressButtonArea.w, 
@@ -262,7 +263,7 @@ export function drawButton(globalState, ctx) {
 
 		case "TUTORIAL":
 			ctx.drawImage(
-				document.getElementById("start_button"), 
+				document.getElementById("startButton"), 
 				globalState.progressButtonArea.x, 
 				globalState.progressButtonArea.y, 
 				globalState.progressButtonArea.w, 
@@ -274,7 +275,7 @@ export function drawButton(globalState, ctx) {
 			switch (globalState.trialState) {
 				case "INTRO":
 					ctx.drawImage(
-						document.getElementById("start_button"), 
+						document.getElementById("startButton"), 
 						globalState.progressButtonArea.x, 
 						globalState.progressButtonArea.y, 
 						globalState.progressButtonArea.w, 
@@ -284,7 +285,7 @@ export function drawButton(globalState, ctx) {
 
 				case "TRIAL":
 					ctx.drawImage(
-						document.getElementById("start_button"), 
+						document.getElementById("startButton"), 
 						globalState.progressButtonArea.x, 
 						globalState.progressButtonArea.y, 
 						globalState.progressButtonArea.w, 
@@ -294,7 +295,7 @@ export function drawButton(globalState, ctx) {
 
 				case "RESULTS":
 					ctx.drawImage(
-						document.getElementById("start_button"), 
+						document.getElementById("startButton"), 
 						globalState.progressButtonArea.x, 
 						globalState.progressButtonArea.y, 
 						globalState.progressButtonArea.w, 
@@ -306,6 +307,46 @@ export function drawButton(globalState, ctx) {
 			break;
 	}
 }
+
+/**
+ * Draw the Back Button
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function drawBackButton(globalState, ctx) {
+	// Set the Back Button area on global settings
+	globalState.backButtonArea = {
+		x: globalState.canvasWidth/2 - (globalState.canvasWidth/2)/4, 
+		y: (globalState.canvasHeight/8)*6 - (globalState.canvasHeight/4)/4, 
+		w: globalState.canvasWidth/4, 
+		h: globalState.canvasHeight/8
+	}
+	switch (globalState.gameState) {
+		case "INTRO":
+			ctx.drawImage(
+				document.getElementById("backButton"), 
+				globalState.progressButtonArea.x, 
+				globalState.progressButtonArea.y, 
+				globalState.progressButtonArea.w, 
+				globalState.progressButtonArea.h
+			);
+
+			break;
+
+		case "TUTORIAL":
+			ctx.drawImage(
+				document.getElementById("backButton"), 
+				globalState.progressButtonArea.x, 
+				globalState.progressButtonArea.y, 
+				globalState.progressButtonArea.w, 
+				globalState.progressButtonArea.h
+			);
+			
+		    break;
+	}
+}
+
 
 /**
  * Renders the background Image relative to the Canvas

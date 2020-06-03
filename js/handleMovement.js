@@ -55,7 +55,7 @@ function detectWalls(globalState) {
 		globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) + globalState.canvasWidth/10
 	}
 	// Stop the Rover going further than the Right Rock
-	if (globalState.playerSettings.x > ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10) {
+	if (globalState.playerSettings.x > (((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10)) {
 		globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10
 	}
   // Top wall

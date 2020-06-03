@@ -32,7 +32,7 @@ export const keyBoardInputs = {
 			e.key === "d") {
 				stopMovement(globalState.playerSettings)
 			}		
-			else if (e.key ===" ") {
+			else if (e.key ===" " || e.key === "Enter") {
 				Progress(globalState)
 			} 
 	}	
@@ -155,6 +155,11 @@ function Progress(globalState) {
 		case "GAME":
 			switch(globalState.trialState) {
 				case "INTRO": 
+				    globalState.trialState = "HINT"
+				
+				break;
+				
+				case "HINT":
 					globalState.trialState = "TRIAL"
 					// Reset the Player (mainly for the Reset the Hint y position)
 					resetPlayer(globalState);
@@ -173,10 +178,15 @@ function Progress(globalState) {
 					break;
 					
 				case "RESULTS":
-					console.log("RESULTS")
 					globalState.trial ++;
-					if(globalState.trial < testData.length) {
-						globalState.trialState = "INTRO";
+					if(globalState.trial < globalState.testData.length) {
+					    // If the trial level is different to current level
+					    if (Number(globalState.testData[globalState.trial].level) !== Number(globalState.level)) {
+						    globalState.trialState = "LEVEL_COMPLETE";
+					    }
+					    else {
+					        globalState.trialState = "HINT";
+					    }
 						// Reset the Player
 						// DEBUG: If scores and positions are failing it is probably this reset
 						resetPlayer(globalState);
@@ -185,11 +195,17 @@ function Progress(globalState) {
 						globalState.trialState = "GAME_OVER"
 					}
 					break;
-
+                case "LEVEL_COMPLETE":
+                    // Set the Level to the new level
+    		        globalState.level = Number(globalState.testData[globalState.trial].level)
+    		        // Reset the Trial
+                    globalState.trialState = "INTRO";
+                    break;
+                    
 				case "GAME_OVER":
 					globalState.gameState = "GAME_OVER";
 
-				break;
+				    break;
 			}
 
 		case "GAME_OVER":

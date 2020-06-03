@@ -1,7 +1,7 @@
 import { createLines, createPages } from "./text.js";
-import { testData } from "./settings.js";
 import { drawBeam, drawMagnet, drawArrows, drawHint, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
+import { scaleText } from "./scaleText.js"
 
 
 // Boolean to stop the Press being continuously registered
@@ -80,18 +80,25 @@ export function tutorialScreen(globalState, ctx) {
 		break;
 
 		case 2:
-		globalState.hintAnimation.x = globalState.canvasWidth/2
-		globalState.hintAnimation.y = globalState.canvasHeight/2
+		    globalState.hintAnimation.x = globalState.canvasWidth/2
+		    globalState.hintAnimation.y = globalState.canvasHeight/2
 			drawHint(globalState, ctx);
 		break;
 
 		case 3:
-			drawArrows(globalState, ctx);
+	    	globalState.hintAnimation.x = globalState.canvasWidth/2
+		    globalState.hintAnimation.y = globalState.canvasHeight/2
+			drawHint(globalState, ctx);
 		break;
 
 		case 4:
 			drawArrows(globalState, ctx);
 		break;
+		
+		case 5:
+			drawArrows(globalState, ctx);
+	    break;
+		    
 	}
 	// Set the Font and Color
 	ctx.font = `${textSize}px ${globalState.textFont}`;
@@ -129,6 +136,26 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 }
 
 
+function renderLevelIntro(globalState, ctx) {
+    	// Display the text
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(40, globalState)}px Arial`;
+	ctx.fillText(globalState.trialIntros[Number(globalState.level)], (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
+}
+
+function renderLevelComplete(globalState, ctx) {
+	// Set the Size and Font of the Text
+	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
+	// Set the Text Color
+	ctx.fillStyle = "white";
+	// Center the Text
+	ctx.textAlign = "center";
+	// Draw the "Level X Complete" Text
+	ctx.fillText(`Level ${globalState.level.toString()} Complete`, (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2);
+	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);    
+}
 
 /**
  * Renders the Main Trials of the Game
@@ -140,8 +167,13 @@ export function mainGame(globalState, ctx) {
 	let i = globalState.trial;
 	drawButton(globalState, ctx);
 	switch(globalState.trialState) {
-		case "INTRO": 
-			renderReadyScreenAndHint(testData[i].hint, globalState, ctx);
+	    case "INTRO":
+	        renderLevelIntro(globalState, ctx)
+	        
+	        break;
+	        
+		case "HINT": 
+			renderReadyScreenAndHint(globalState.testData[i].hint, globalState, ctx);
 
 			break;
 
@@ -163,7 +195,7 @@ export function mainGame(globalState, ctx) {
 		
 		case "RESULTS":
 			// Draw the junks final location
-			renderJunk(testData[i].result, globalState, ctx);
+			renderJunk(globalState.testData[i].result, globalState, ctx);
 			// Draw the Magnet
 			drawMagnet(globalState, ctx);
 			// Draw the Beam coming from the Magnet
@@ -174,9 +206,14 @@ export function mainGame(globalState, ctx) {
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
 			drawTotalScore(globalState, ctx);
-
+			
 			break;
-
+			
+        case "LEVEL_COMPLETE":
+            // Show the level complete info
+            renderLevelComplete(globalState, ctx);
+            
+            break;
 	}
 }
 
@@ -188,12 +225,13 @@ export function mainGame(globalState, ctx) {
  */
 export function gameOver(globalState, ctx) {
 	// Set the Size and Font of the Text
-	ctx.font = `${(globalState.canvasHeight/7.5)}px ${globalState.textFont}`
+	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
 	// Set the Text Color
 	ctx.fillStyle = "white";
 	// Center the Text
 	ctx.textAlign = "center";
 	// Draw the "Game Over" Text
-	ctx.fillText("Game Over", (globalState.canvasWidth)/2, globalState.canvasHeight/2);
-	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);	
+	ctx.fillText("Game Over", (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2);
+	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);
 }
