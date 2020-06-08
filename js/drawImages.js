@@ -271,13 +271,21 @@ export function drawSatellite(globalState, ctx, hint = false) {
 export function drawButton(globalState, ctx) {
 	// Set the Progress Button area on global settings
 	globalState.progressButtonArea = {
-		x: globalState.canvasWidth/2 - (globalState.canvasWidth/2)/4, 
+		x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/4, 
 		y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
 		w: globalState.canvasWidth/4, 
 		h: globalState.canvasHeight/8
 	}
 	switch (globalState.gameState) {
 		case "INTRO":
+			if (globalState.currentPage !== 0) {
+				globalState.progressButtonArea = {
+					x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
+					y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+					w: globalState.canvasWidth/4, 
+					h: globalState.canvasHeight/8
+				}
+			}
 			// Draw Next Box
 			// ctx.beginPath();
 			// ctx.rect(
@@ -298,6 +306,13 @@ export function drawButton(globalState, ctx) {
 			break;
 
 		case "TUTORIAL":
+			// Set the Go back button
+			globalState.progressButtonArea = {
+				x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
+				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+				w: globalState.canvasWidth/4, 
+				h: globalState.canvasHeight/8
+			}
 			ctx.drawImage(
 				document.getElementById("startButton"), 
 				globalState.progressButtonArea.x, 
@@ -308,6 +323,12 @@ export function drawButton(globalState, ctx) {
 			
 			break;
 		case "GAME":
+			globalState.progressButtonArea = {
+				x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/4, 
+				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+				w: globalState.canvasWidth/4, 
+				h: globalState.canvasHeight/8
+			}
 			switch (globalState.trialState) {
 				case "INTRO":
 					ctx.drawImage(
@@ -362,32 +383,45 @@ export function drawButton(globalState, ctx) {
  * @param {*} ctx The canvas object of the game
  */
 export function drawBackButton(globalState, ctx) {
-	// Set the Back Button area on global settings
 	globalState.backButtonArea = {
-		x: globalState.canvasWidth/2 - (globalState.canvasWidth/2)/4, 
-		y: (globalState.canvasHeight/8)*6 - (globalState.canvasHeight/4)/4, 
-		w: globalState.canvasWidth/4, 
-		h: globalState.canvasHeight/8
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
 	}
+	// Set the Back Button area on global settings
 	switch (globalState.gameState) {
 		case "INTRO":
-			ctx.drawImage(
-				document.getElementById("backButton"), 
-				globalState.progressButtonArea.x, 
-				globalState.progressButtonArea.y, 
-				globalState.progressButtonArea.w, 
-				globalState.progressButtonArea.h
-			);
-
+			if (globalState.currentPage !== 0) {
+				globalState.backButtonArea = {
+					x: (globalState.canvasWidth/8)*3 - (globalState.canvasWidth/2)/4,
+					y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+					w: globalState.canvasWidth/4, 
+					h: globalState.canvasHeight/8
+				}
+				ctx.drawImage(
+					document.getElementById("backButton"), 
+					globalState.backButtonArea.x, 
+					globalState.backButtonArea.y, 
+					globalState.backButtonArea.w, 
+					globalState.backButtonArea.h
+					);
+			}
 			break;
 
 		case "TUTORIAL":
+			globalState.backButtonArea = {
+				x: (globalState.canvasWidth/8)*3 - (globalState.canvasWidth/2)/4,
+				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+				w: globalState.canvasWidth/4, 
+				h: globalState.canvasHeight/8
+			}
 			ctx.drawImage(
 				document.getElementById("backButton"), 
-				globalState.progressButtonArea.x, 
-				globalState.progressButtonArea.y, 
-				globalState.progressButtonArea.w, 
-				globalState.progressButtonArea.h
+				globalState.backButtonArea.x, 
+				globalState.backButtonArea.y, 
+				globalState.backButtonArea.w, 
+				globalState.backButtonArea.h
 			);
 			
 		    break;

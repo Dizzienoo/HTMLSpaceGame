@@ -19,7 +19,6 @@ export function getData(url) {
                     result = (parseFloat(result) + 0.5) * 100;
                     positions.push({hint, originalHint, result, originalResult, level});
                 })
-                console.log(positions);
                 return positions;
             });
             

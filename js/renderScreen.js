@@ -1,5 +1,5 @@
 import { createLines, createPages } from "./text.js";
-import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
 import { resetPlayer } from "./resetPlayer.js";
@@ -36,6 +36,8 @@ export function introScreen(globalState, ctx) {
 	ctx.textAlign = "center"
 	// Draw the continue button
 	drawButton(globalState, ctx);
+	// Draw the back button
+	drawBackButton(globalState, ctx);
 	// Render pages, while pages space will page++ else move to next area
 	let currentPage = globalState.introPages[globalState.currentPage];
 	for (let i = 0; i < currentPage.length; i++) {
@@ -66,8 +68,10 @@ export function tutorialScreen(globalState, ctx) {
 	// Render pages, while pages space will page++ else move to next area
 	let currentPage = globalState.tutorialPages[globalState.currentPage];
 	// globalState.playerSettings.x = globalState.canvasWidth/2;
-	
+	// Draw the Continue Button
 	drawButton(globalState, ctx);
+	// Draw the back button
+	drawBackButton(globalState, ctx);
 	switch(globalState.currentLine) {
 		case 0:
 			drawRocks(globalState, ctx);

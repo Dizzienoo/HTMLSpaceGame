@@ -47,6 +47,7 @@ export const mouseInputs = {
 		globalState.mouseDown = true;
 		let X = e.clientX - globalState.rect.left;
 		let Y = e.clientY - globalState.rect.top;
+		// If the Click is within the Progress button
 		if (
 			// If X is more than left of arrow x and less than its width
 			X > globalState.progressButtonArea.x && X < (globalState.progressButtonArea.w + globalState.progressButtonArea.x) 
@@ -55,6 +56,16 @@ export const mouseInputs = {
 			Y > globalState.progressButtonArea.y && Y < (globalState.progressButtonArea.h + globalState.progressButtonArea.y)
 		) {
 			Progress(globalState);
+		}
+		// If the click is within the Back button
+		if (
+			// If X is more than left of arrow x and less than its width
+			X > globalState.backButtonArea.x && X < (globalState.backButtonArea.w + globalState.backButtonArea.x) 
+			&&
+			// If Y is more than top of arrow base and less than its height
+			Y > globalState.backButtonArea.y && Y < (globalState.backButtonArea.h + globalState.backButtonArea.y)
+		) {
+			GoBack(globalState);
 		}
 		if (globalState.gameState === "GAME" && globalState.trialState === "TRIAL") {
 
@@ -129,7 +140,6 @@ function Progress(globalState) {
 				globalState.currentPage = 0;
 				globalState.currentLine = 0;
 				globalState.gameState = "TUTORIAL";
-	
 			}
 			break;
 			
@@ -226,4 +236,42 @@ function Progress(globalState) {
 			globalState.gameState = "INTRO"
 			break;
 	}
+}
+
+/**
+ * Functionality to allow the back button to work
+ * 
+ * @param {object} globalState 
+ */
+function GoBack(globalState) {
+	switch(globalState.gameState) {
+		case "INTRO":
+			firstPress = false;
+			if (globalState.currentPage < 0) {
+				globalState.currentPage--;
+			}
+			break;
+			
+			case "TUTORIAL": 
+			firstPress = false;
+			if (globalState.currentLine > 0) {
+				globalState.currentLine--;
+			}
+			else if (globalState.currentPage > 0) {
+				globalState.currentPage--;
+				globalState.currentLine = 0;
+			}
+			else if (globalState.currentPage === 0) {
+				globalState.gameState = "INTRO"
+				globalState.currentPage = globalState.gameIntroduction.length -1;
+				globalState.currentLine = 0;
+				globalState.backButtonArea = {
+					x: 0,
+					y: 0,
+					w: 0,
+					h: 0,
+				}
+			}
+			break;
+		}
 }
