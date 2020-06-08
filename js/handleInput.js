@@ -206,7 +206,7 @@ function Progress(globalState) {
 						// distanceXMoved
 						// distanceYMoved
 						// timeToComplete
-						// 	
+						// score
 						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
 					}
 					else {
