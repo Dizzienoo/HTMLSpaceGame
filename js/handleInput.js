@@ -190,6 +190,14 @@ function Progress(globalState) {
 						// Reset the Player
 						// DEBUG: If scores and positions are failing it is probably this reset
 						resetPlayer(globalState);
+						//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
+						// originalHint
+						// originalResult
+						// distanceXMoved
+						// distanceYMoved
+						// timeToComplete
+						// 	
+						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
 					}
 					else {
 						globalState.trialState = "GAME_OVER"

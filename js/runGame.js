@@ -20,7 +20,7 @@ document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)}
 
 function thisTry(globalState, ctx) {
 
-    const testDataURL = "../assets/trialdata_wallisorder.csv"
+    const testDataURL = "../assets/testData.csv"
     getData(testDataURL).then((testData) => {
         globalState.testData = testData;
         clearCanvas(globalState, ctx)

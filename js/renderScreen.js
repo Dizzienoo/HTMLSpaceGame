@@ -121,8 +121,18 @@ export function tutorialScreen(globalState, ctx) {
  * @param {boolean} hint Is this run showing the satelite as a hint or result (default as result)
  */
 function renderJunk(junkLocation, globalState, ctx, hint= false) {
-	// Draw the circle
-	globalState.hintAnimation.x = (globalState.canvasWidth/100 * junkLocation);
+	// Set the hint to fall within the rocks
+	// Find the padding between edge and rock left
+	let paddingL = globalState.rockArea.leftX
+	// Find the padding between rock right and far edge
+	let paddingR = globalState.canvasWidth - globalState.rockArea.rightX
+	// Calculate the hint pos by
+	//		finding active area (canvas width - l and r paddings)
+	let activeArea = globalState.canvasWidth - (paddingL + paddingR); 
+	// 		dividing active area by 100 and multiplying by junk location (then adding left padding on)
+	let adjustedHint = ((activeArea / 100) * junkLocation) + paddingL;
+	// Set the Hint animation Location
+	globalState.hintAnimation.x = adjustedHint;
 	if (globalState.hintAnimation.y >= (globalState.canvasHeight/5)*3.5) {
 		globalState.hintAnimation.y = (globalState.canvasHeight/5)*3.5
 		drawSatellite(globalState, ctx, hint);

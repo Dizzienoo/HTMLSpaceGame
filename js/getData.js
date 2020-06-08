@@ -13,10 +13,13 @@ export function getData(url) {
                 data.split(/\n/).forEach(row => {
                     // 
                     let [hint, result, level] = row.split(",");
-                    hint = parseFloat(hint);
-                    result = parseFloat(result);
-                    positions.push({hint, result, level});
+                    let originalHint = parseFloat(hint)
+                    hint = (parseFloat(hint) + 0.5) * 100;
+                    let originalResult = parseFloat(result)
+                    result = (parseFloat(result) + 0.5) * 100;
+                    positions.push({hint, originalHint, result, originalResult, level});
                 })
+                console.log(positions);
                 return positions;
             });
             

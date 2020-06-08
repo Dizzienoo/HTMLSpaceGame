@@ -24,19 +24,28 @@ export function drawMagnet(globalState, ctx) {
  * @param {*} ctx 
  */
 export function drawRocks(globalState, ctx) {
+	globalState.rockArea = {
+		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
+		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
+		y: globalState.canvasHeight / 5*3.5,
+		w: globalState.canvasWidth / 10,
+		h: globalState.canvasHeight / 10,
+	}
+	// Draw the Rock
 	ctx.drawImage(
-		document.getElementById("rock"),
-		((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
-		globalState.canvasHeight / 5*3.5,
-		globalState.canvasWidth / 10 ,
-		globalState.canvasHeight / 10);
-
+		document.getElementById("rock"), 
+		globalState.rockArea.leftX, 
+		globalState.rockArea.y, 
+		globalState.rockArea.w, 
+		globalState.rockArea.h
+	);
 	ctx.drawImage(
-		document.getElementById("rock"),
-		((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
-		globalState.canvasHeight / 5*3.5,
-		globalState.canvasWidth / 10,
-		globalState.canvasHeight / 10);
+		document.getElementById("rock"), 
+		globalState.rockArea.rightX, 
+		globalState.rockArea.y, 
+		globalState.rockArea.w, 
+		globalState.rockArea.h
+	);
 }
 
 /**
