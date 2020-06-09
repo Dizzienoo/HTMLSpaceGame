@@ -1,5 +1,6 @@
 import { movers } from "./handleMovement.js"
 import { resetPlayer } from "./resetPlayer.js";
+import { calculateScore } from "./calculateScore.js";
 
 export const keyBoardInputs = {
 	keyDown: (e, globalState) => {
@@ -182,6 +183,7 @@ function Progress(globalState) {
 					break;
 
 				case "TRIAL":
+					calculateScore(globalState);
 					globalState.trialState = "RESULTS"
 					break;
 					
@@ -194,12 +196,9 @@ function Progress(globalState) {
 						    globalState.trialState = "LEVEL_COMPLETE";
 					    }
 					    else {
-									globalState.trialNumber ++;
+							globalState.trialNumber ++;
 					        globalState.trialState = "HINT";
-					    }
-						// Reset the Player
-						// DEBUG: If scores and positions are failing it is probably this reset
-						resetPlayer(globalState);
+						}
 						//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
 						// originalHint
 						// originalResult
@@ -208,6 +207,9 @@ function Progress(globalState) {
 						// timeToComplete
 						// score
 						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
+						// Reset the Player
+						// DEBUG: If scores and positions are failing it is probably this reset
+						resetPlayer(globalState);
 					}
 					else {
 						globalState.trialState = "GAME_OVER"

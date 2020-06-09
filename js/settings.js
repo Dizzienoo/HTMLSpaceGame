@@ -125,7 +125,11 @@ export const globalState = new function () {
 	    "this is a new run 3",
 	    "this is a new run 4",
 	    "this is a new run 5",
-    ]
+	]
+	this.trialResults = {
+		success: false,
+		score: 0,
+	}
 }
 
 /**

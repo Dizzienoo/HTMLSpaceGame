@@ -450,7 +450,7 @@ export function drawSimpleResult(globalState, ctx) {
 	let result = "Missed!"
 	let fillStyle = "red"
 	// If the Beam covers the hint
-	if (globalState.hintAnimation.x > globalState.beamLeft && globalState.hintAnimation.x < globalState.beamRight) {
+	if (globalState.trialResults.success) {
 		result = "Caught!"
 		fillStyle = "green"
 	}
@@ -471,7 +471,7 @@ export function drawCurrentScore(globalState, ctx) {
 	ctx.fillStyle = "green";
 	ctx.textAlign = "center";
 	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
-	ctx.fillText(`Score: ${globalState.score}`, (globalState.canvasWidth/4)*1, (globalState.canvasHeight/10)*2);
+	ctx.fillText(`Score: ${globalState.trialResults.score}`, (globalState.canvasWidth/4)*1, (globalState.canvasHeight/10)*2);
 }
 
 /**

@@ -20,4 +20,7 @@ export function resetPlayer(globalState) {
 	globalState.rect = canvas.getBoundingClientRect();
 	// Reset the "time left" timer
 	globalState.trialTimeLeft = globalState.trialTime / 1000;
+	// Reset the trialScore and Success
+	globalState.trialResults.score = 0;
+	globalState.trialResults.success = false;
 }
