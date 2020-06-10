@@ -61,13 +61,11 @@ function detectWalls(globalState) {
 	// Stop the Rover going further than the Left Rock
 	if (globalState.playerSettings.x < globalState.rockArea.leftX + globalState.rockArea.w) {
 		globalState.playerSettings.x = globalState.rockArea.leftX + globalState.rockArea.w
-	// if (globalState.playerSettings.x < ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) + globalState.canvasWidth/10) {
-	// 	globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/15) + globalState.canvasWidth/10
 		globalState.trialResults.movementX -= Math.abs(globalState.playerSettings.dx);
 	}
 	// Stop the Rover going further than the Right Rock
-	if (globalState.playerSettings.x > (((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10)) {
-		globalState.playerSettings.x = ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10
+	if (globalState.playerSettings.x > globalState.rockArea.rightX) {
+		globalState.playerSettings.x = globalState.rockArea.rightX
 		globalState.trialResults.movementX -= Math.abs(globalState.playerSettings.dx)
 	}
   // Top wall
