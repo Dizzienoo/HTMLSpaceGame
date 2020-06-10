@@ -1,5 +1,5 @@
 import { createLines, createPages } from "./text.js";
-import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
 import { resetPlayer } from "./resetPlayer.js";
@@ -88,12 +88,16 @@ export function tutorialScreen(globalState, ctx) {
 		    globalState.hintAnimation.x = globalState.canvasWidth/2
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
 			drawSatellite(globalState, ctx);
+			drawScanners(globalState, ctx);
+			drawScanBeams(globalState, ctx);
 		break;
 
 		case 3:
 	    	globalState.hintAnimation.x = globalState.canvasWidth/2
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
 			drawSatellite(globalState, ctx, true);
+			drawScanners(globalState, ctx);
+			drawScanBeams(globalState, ctx);
 		break;
 
 		case 4:
@@ -171,6 +175,8 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 	// Draw the Hint
 	renderJunk(hint, globalState, ctx, true);
 
+	drawScanners(globalState, ctx);
+	// drawScanBeams(globalState, ctx);
 }
 
 
@@ -213,7 +219,6 @@ export function mainGame(globalState, ctx) {
 	        
 		case "HINT": 
 			renderReadyScreenAndHint(globalState.testData[i].hint, globalState, ctx);
-
 			break;
 
 		case "TRIAL":
@@ -230,6 +235,7 @@ export function mainGame(globalState, ctx) {
 			drawPower(globalState, ctx);		
 			// Handle Moving the lander
 			handleMovement(globalState);
+			drawScanners(globalState, ctx);
 			break;
 		
 		case "RESULTS":
@@ -245,12 +251,12 @@ export function mainGame(globalState, ctx) {
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
 			drawTotalScore(globalState, ctx);
+			drawScanners(globalState, ctx);
 			break;
 			
     case "LEVEL_COMPLETE":
       // Show the level complete info
       renderLevelComplete(globalState, ctx);
-      
       break;
 	}
 }

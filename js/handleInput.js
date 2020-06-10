@@ -150,7 +150,6 @@ function Progress(globalState) {
 			firstPress = false;
 			if (globalState.currentPage < globalState.tutorialPages.length -1) {
 				globalState.currentPage++
-				// y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 			}
 			else if (globalState.currentLine < globalState.gameTutorial.length -1) {
 				globalState.currentLine++

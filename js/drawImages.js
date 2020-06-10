@@ -31,7 +31,7 @@ export function drawRocks(globalState, ctx) {
 		w: globalState.canvasWidth / 10,
 		h: globalState.canvasHeight / 10,
 	}
-	// Draw the Rock
+	// Draw the Rocks
 	ctx.drawImage(
 		document.getElementById("rock"), 
 		globalState.rockArea.leftX, 
@@ -46,6 +46,62 @@ export function drawRocks(globalState, ctx) {
 		globalState.rockArea.w, 
 		globalState.rockArea.h
 	);
+}
+
+export function drawScanners(globalState, ctx) {
+	globalState.scannerArea = {
+		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/40) - globalState.canvasWidth/20,
+		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/20 ,
+		y: globalState.canvasHeight / 5*2.55,
+		w: globalState.canvasWidth / 10,
+		h: globalState.canvasHeight / 5,
+	}
+	// Draw the Scanners
+	ctx.drawImage(
+		document.getElementById("scannerLeft"), 
+		globalState.scannerArea.leftX, 
+		globalState.scannerArea.y, 
+		globalState.scannerArea.w, 
+		globalState.scannerArea.h
+	);
+	ctx.drawImage(
+		document.getElementById("scannerRight"), 
+		globalState.scannerArea.rightX, 
+		globalState.scannerArea.y, 
+		globalState.scannerArea.w, 
+		globalState.scannerArea.h
+	);
+}
+
+export function drawScanBeams(globalState, ctx) {
+	// Set Start Point
+	ctx.moveTo(globalState.scannerArea.leftX + globalState.scannerArea.w, globalState.scannerArea.y); // Scanner Start
+	// Draw a straight line
+	ctx.lineTo(globalState.scannerArea.leftX + ((globalState.scannerArea.w /10)*9) + globalState.canvasWidth/10, 0); // Top Left
+	ctx.lineTo(globalState.canvasWidth/2, 0); // Middle Top
+	
+	ctx.lineTo(globalState.canvasWidth/2, globalState.scannerArea.y); // Bottom Middel
+	
+	// ctx.lineTo(globalState.beamLeft, (globalState.canvasHeight/5)*2.5); // Middle Left
+	ctx.globalAlpha = 0.2;
+	ctx.fillStyle = globalState.playerSettings.beamColor
+	ctx.closePath();
+	ctx.fill();
+	ctx.globalAlpha = 1.0;
+
+	// Set Start Point
+	ctx.moveTo(globalState.scannerArea.rightX, globalState.scannerArea.y); // Scanner Start
+	// Draw a straight line
+	ctx.lineTo(globalState.scannerArea.rightX - globalState.canvasWidth/10, 0); // Top Left
+	ctx.lineTo(globalState.canvasWidth/2, 0); // Middle Top
+
+	ctx.lineTo(globalState.canvasWidth/2, globalState.scannerArea.y); // Bottom Middel
+
+	ctx.globalAlpha = 0.2;
+	ctx.fillStyle = globalState.playerSettings.beamColor
+	ctx.closePath();
+	ctx.fill();
+	ctx.globalAlpha = 1.0;
 }
 
 /**
@@ -111,6 +167,7 @@ function calculateBeamandPower(globalState) {
  * @param {object} ctx The canvas object of the game
  */
 export function drawBeam(globalState, ctx) {
+	console.log("BEAM TIME")
 	ctx.beginPath();
 
 	calculateBeamandPower(globalState);
@@ -125,6 +182,7 @@ export function drawBeam(globalState, ctx) {
 	ctx.lineTo(globalState.beamLeft, (globalState.canvasHeight/5)*2.5); // Middle Left
 	ctx.globalAlpha = 0.3;
 	ctx.fillStyle = globalState.playerSettings.beamColor
+	ctx.closePath();
 	ctx.fill();
 	ctx.globalAlpha = 1.0;
 }
