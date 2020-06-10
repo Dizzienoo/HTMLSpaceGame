@@ -127,8 +127,16 @@ export const globalState = new function () {
 	    "this is a new run 5",
 	]
 	this.trialResults = {
+		// Did the Trial Succees
 		success: false,
+		// What was the score to two decimals
+		actualScore: 0,
+		// What was the Player Visible Score
 		score: 0,
+		// How far did they move X
+		movementX: 0,
+		// How much did they adjust Y
+		movementY: 0,
 	}
 }
 

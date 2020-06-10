@@ -22,5 +22,8 @@ export function resetPlayer(globalState) {
 	globalState.trialTimeLeft = globalState.trialTime / 1000;
 	// Reset the trialScore and Success
 	globalState.trialResults.score = 0;
+	globalState.trialResults.actualScore = 0;
 	globalState.trialResults.success = false;
+	globalState.trialResults.movementX = 0;
+	globalState.trialResults.movementY = 0;
 }

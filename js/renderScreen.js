@@ -127,9 +127,9 @@ export function tutorialScreen(globalState, ctx) {
 function renderJunk(junkLocation, globalState, ctx, hint= false) {
 	// Set the hint to fall within the rocks
 	// Find the padding between edge and rock left
-	let paddingL = globalState.rockArea.leftX
+	let paddingL = globalState.rockArea.leftX + globalState.rockArea.w;
 	// Find the padding between rock right and far edge
-	let paddingR = globalState.canvasWidth - globalState.rockArea.rightX
+	let paddingR = globalState.canvasWidth - globalState.rockArea.rightX;
 	// Calculate the hint pos by
 	//		finding active area (canvas width - l and r paddings)
 	let activeArea = globalState.canvasWidth - (paddingL + paddingR); 

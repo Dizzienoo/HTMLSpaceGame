@@ -1,12 +1,19 @@
 export function calculateScore(globalState) {
-    const resultScreenPos = globalState.testData[globalState.trial].result + globalState.rockArea.leftX
+    const paddingL = globalState.rockArea.leftX
+	// Find the padding between rock right and far edge
+	const paddingR = globalState.canvasWidth - globalState.rockArea.rightX
+	// Calculate the hint pos by
+	// Finding active area (canvas width - l and r paddings)
+	const activeArea = globalState.canvasWidth - (paddingL + paddingR); 
+	// Dividing active area by 100 and multiplying by junk location (then adding left padding on)
+	const resultScreenPos = ((activeArea / 100) * globalState.testData[globalState.trial].result) + paddingL;
     // If the Beam covers the hint
 	if (resultScreenPos > globalState.beamLeft && resultScreenPos < globalState.beamRight) {
         //Set the success to true
         globalState.trialResults.success = true;
         // Set the Score as 100 - power percent
-        console.log(globalState.playerSettings.power);
-        globalState.trialResults.score = 100-((globalState.playerSettings.power /100)* 90)
+        globalState.trialResults.actualScore = Math.round((100-((globalState.playerSettings.power /100)* 90)+ Number.EPSILON)*100)/100;
+        globalState.trialResults.score = Math.round(globalState.trialResults.actualScore);
         // If this is higher than previous high score
         if (globalState.highestScore < globalState.trialResults.score) {
             // Set the new high score

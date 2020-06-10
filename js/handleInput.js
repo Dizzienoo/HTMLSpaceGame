@@ -202,8 +202,8 @@ function Progress(globalState) {
 						//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
 						// originalHint
 						// originalResult
-						// distanceXMoved
-						// distanceYMoved
+						// distanceXMoved - remember to normalize this against screen size
+						// distanceYMoved - ??remember to normalize this against screen size??
 						// timeToComplete
 						// score
 						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
