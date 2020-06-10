@@ -9,7 +9,6 @@ export function handleMovement(globalState) {
 	globalState.playerSettings.x += globalState.playerSettings.dx;
 	// Add the movement speed (as positive number) to total moved
 	globalState.trialResults.movementX += Math.abs(globalState.playerSettings.dx);
-	console.log(globalState.trialResults.movementX)
 	// Adjust the power if it is within range
 	if (globalState.playerSettings.power >= 10 && globalState.playerSettings.power <= 100) {
 		globalState.playerSettings.power += globalState.playerSettings.dy;

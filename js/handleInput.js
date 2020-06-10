@@ -68,8 +68,10 @@ export const mouseInputs = {
 		) {
 			GoBack(globalState);
 		}
-		if (globalState.gameState === "GAME" && globalState.trialState === "TRIAL") {
-
+		if (
+			globalState.gameState === "TUTORIAL" ||
+			(globalState.gameState === "GAME" && globalState.trialState === "TRIAL")
+			) {
 			// If the click is within the Up Arrow
 			if (
 				// If X is more than left of arrow x and less than its width

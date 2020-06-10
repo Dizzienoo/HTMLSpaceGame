@@ -97,11 +97,29 @@ export function tutorialScreen(globalState, ctx) {
 		break;
 
 		case 4:
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
+			// Draw the Magnet
+			drawMagnet(globalState, ctx);
+			// Draw the Beam coming from the Magnet
+			drawBeam(globalState, ctx);
+			// Draw the Arrows
 			drawArrows(globalState, ctx);
+			// Handle Moving the lander
+			handleMovement(globalState);
 		break;
 		
 		case 5:
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
+			// Draw the Magnet
+			drawMagnet(globalState, ctx);
+			// Draw the Beam coming from the Magnet
+			drawBeam(globalState, ctx);
+			// Draw the Arrows
 			drawArrows(globalState, ctx);
+			// Handle Moving the lander
+			handleMovement(globalState);
 	    break;
 		    
 	}
