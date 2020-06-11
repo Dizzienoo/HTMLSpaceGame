@@ -155,3 +155,30 @@ export const initialSettings = {
 	power: 50,
 	level: 0
 }
+// let tyy ={
+// 	originalHint: globalState.testData[globalState.trial].originalHint,
+// 	originalResult: globalState.testData[globalState.trial].originalResult,
+// 	participantPosition: globalState.playerSettings.x,
+// 	participantConfidence: globalState.playerSettings.power,
+// 	success: globalState.trialResults.success,
+// 	trialScore: globalState.trialResults.score,
+// 	actualTrialScore: globalState.trialResults.actualScore,
+// 	level: globalState.testData[globalState.trial].level,
+// 	distanceXMoved: globalState.trialResults.movementX,
+// 	distanceYMoved: globalState.trialResults.movementY,
+// 	// timeToComplete: globalState.testData[globalState.trial].timeToComplete,
+// }
+
+// export function saveScore(trialResults) {
+// 	gorilla.metric(trialResults)
+// 	// gorilla.metric({originalHint: trialResults.originalHint}, "originalHint");
+// 	// gorilla.metric({originalResult: trialResults.originalResult}, "originalResult");
+// 	// gorilla.metric({participantPosition: trialResults.participantPosition}, "participantPosition");
+// 	// gorilla.metric({participantConfidence: trialResults.participantConfidence}, "participantConfidence");
+// 	// gorilla.metric({success: trialResults.success}, "success");
+// 	// gorilla.metric({trialScore: trialResults.trialScore}, "trialScore");
+// 	// gorilla.metric({level: trialResults.level}, "level");
+// 	// gorilla.metric({distanceXMoved: trialResults.distanceXMoved}, "distanceXMoved");
+// 	// gorilla.metric({distanceYMoved: trialResults.distanceYMoved}, "distanceYMoved");
+// 	// gorilla.metric({timeToComplete: trialResults.timeToComplete}, "timeToComplete");
+// }

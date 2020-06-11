@@ -1,4 +1,3 @@
-// import { globalState } from "./settings.js"
 import { renderBackground } from "./drawImages.js"
 import {keyBoardInputs, mouseInputs} from "./handleInput.js"
 import { introScreen, tutorialScreen, mainGame, gameOver } from "./renderScreen.js";
