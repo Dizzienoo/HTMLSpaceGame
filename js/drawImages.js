@@ -167,7 +167,6 @@ function calculateBeamandPower(globalState) {
  * @param {object} ctx The canvas object of the game
  */
 export function drawBeam(globalState, ctx) {
-	console.log("BEAM TIME")
 	ctx.beginPath();
 
 	calculateBeamandPower(globalState);

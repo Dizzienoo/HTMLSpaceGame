@@ -1,7 +1,10 @@
 export function calculateScore(globalState) {
+    // Calculate the Time the trial took to complete
+    globalState.trialResults.trialTime = globalState.trialResults.trialEndTime - globalState.trialResults.trialStartTime
+    // Find the padding between the Rock and the Left edge
     const paddingL = globalState.rockArea.leftX + globalState.rockArea.w
 	// Find the padding between rock right and far edge
-	const paddingR = globalState.canvasWidth - globalState.rockArea.rightX
+    const paddingR = globalState.canvasWidth - globalState.rockArea.rightX
 	// Calculate the hint pos by
 	// Finding active area (canvas width - l and r paddings)
     const activeArea = globalState.canvasWidth - (paddingL + paddingR);
@@ -22,5 +25,4 @@ export function calculateScore(globalState) {
         // Add this score to total score
         globalState.totalScore += globalState.trialResults.score;
     }
-    console.log(globalState.trialResults)
 }

@@ -24,6 +24,11 @@ export function resetPlayer(globalState) {
 	globalState.trialResults.score = 0;
 	globalState.trialResults.actualScore = 0;
 	globalState.trialResults.success = false;
+	// Reset the Distance Moved
 	globalState.trialResults.movementX = 0;
 	globalState.trialResults.movementY = 0;
+	// Reset the Trial Timings
+	globalState.trialResults.trialTime = 0;
+	globalState.trialResults.trialStartTime = 0;
+	globalState.trialResults.trialEndTime = 0;
 }

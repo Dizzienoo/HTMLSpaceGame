@@ -164,7 +164,7 @@ function Progress(globalState) {
 
 		case "GAME":
 			switch(globalState.trialState) {
-				case "INTRO": 
+				case "INTRO":
 				    globalState.trialState = "HINT"
 				
 				break;
@@ -173,6 +173,8 @@ function Progress(globalState) {
 					globalState.trialState = "TRIAL"
 					// Reset the Player (mainly for the Reset the Hint y position)
 					resetPlayer(globalState);
+					// Collect the MS time now for trial time calculations
+					globalState.trialResults.trialStartTime = Date.now();
 					// Set a timeout so if the player takes longer than a certain time in the trial it will automatically progress
 					interval = setInterval(() => {
 						globalState.trialTimeLeft--;
@@ -184,8 +186,14 @@ function Progress(globalState) {
 					break;
 
 				case "TRIAL":
+					// Collect the MS time now for trial time calculations
+					globalState.trialResults.trialEndTime = Date.now();
+					// Calculate the Score of the Trial
 					calculateScore(globalState);
+					// Move the trial to the results state
 					globalState.trialState = "RESULTS"
+					// Clear any remaining timer
+					clearInterval(interval)
 					break;
 					
 				case "RESULTS":
