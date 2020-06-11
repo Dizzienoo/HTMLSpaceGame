@@ -16,7 +16,7 @@ let firstPress = true
  * @param {*} ctx The canvas object of the game
  */
 export function introScreen(globalState, ctx) {
-	resetPlayer(globalState);
+	// resetPlayer(globalState);
 	// Define some Constants for the Intro
 	// Get the maxWidth of the page
 	let maxWidth = (globalState.canvasWidth/10)*9

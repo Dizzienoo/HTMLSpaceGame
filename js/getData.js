@@ -19,6 +19,8 @@ export function getData(url) {
                     result = (parseFloat(result) + 0.5) * 100;
                     positions.push({hint, originalHint, result, originalResult, level});
                 })
+                // Remove the last line as it is empty
+                positions.splice(positions.length -1)
                 return positions;
             });
             

@@ -142,6 +142,7 @@ function Progress(globalState) {
 			else {
 				globalState.currentPage = 0;
 				globalState.currentLine = 0;
+				resetPlayer(globalState);
 				globalState.gameState = "TUTORIAL";
 			}
 			break;

@@ -3,12 +3,24 @@
  * @param {*} globalState The Global State Object
  */
 export function resetPlayer(globalState) {
+  // Find the padding between the Rock and the Left edge
+  const paddingL = (globalState.rockArea && globalState.rockArea.leftX)?
+		globalState.rockArea.leftX : 0 + (globalState.rockArea && globalState.rockArea.w)?
+		globalState.rockArea.w : 0
+	// Find the padding between rock right and far edge
+	const paddingR = globalState.canvasWidth - ((globalState.rockArea && globalState.rockArea.rightX)? 
+	globalState.rockArea.rightX : globalState.canvasWidth)
+	// Calculate the hint pos by
+	// Finding active area (canvas width - l and r paddings)
+	const activeArea = globalState.canvasWidth - (paddingL + paddingR);
 	globalState.maxWidth = (globalState.canvasWidth/20)*19
 	globalState.minWidth = globalState.canvasWidth/20
 	globalState.currentPower = 50;
 	globalState.playerSettings.w = (globalState.canvasWidth)/10;
 	globalState.playerSettings.h = (globalState.canvasHeight)/10;
-	globalState.playerSettings.x = globalState.canvasWidth/2;
+	// Set the Rover position to a random spot within the active area
+	globalState.playerSettings.x = ((((activeArea/100)*95) * Math.random()) + paddingL) + 
+	    (((globalState.rockArea && globalState.rockArea.w)? globalState.rockArea.w : 0)/2);
 	globalState.playerSettings.y = (globalState.canvasHeight/5)*3;
 	globalState.playerSettings.speed = 8;
 	globalState.playerSettings.dx = 0;

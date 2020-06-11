@@ -23,6 +23,8 @@ function thisTry(globalState, ctx) {
     const testDataURL = "../assets/testData.csv"
     getData(testDataURL).then((testData) => {
         globalState.testData = testData;
+        console.log(globalState.testData)
+
         clearCanvas(globalState, ctx)
         runGame(globalState, ctx)
         if (globalState.gameState !== "GAME_OVER")
