@@ -185,7 +185,7 @@ function renderLevelIntro(globalState, ctx) {
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center";
 	ctx.font = `${scaleText(40, globalState)}px Arial`;
-	ctx.fillText(globalState.trialIntros[Number(globalState.level)], (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
+	ctx.fillText(globalState.trialIntros[Number(globalState.level -1)], (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
 }
 
 function renderLevelComplete(globalState, ctx) {

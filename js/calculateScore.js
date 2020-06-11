@@ -25,4 +25,11 @@ export function calculateScore(globalState) {
         // Add this score to total score
         globalState.totalScore += globalState.trialResults.score;
     }
+    // Otherwise if we are on the punishment round
+    else if (Number(globalState.level) === 6) {
+        globalState.trialResults.actualScore = Math.round((0-((globalState.playerSettings.power /100)* 90)+ Number.EPSILON)*100)/100;
+        globalState.trialResults.score = Math.round(globalState.trialResults.actualScore);
+        // Add this score to total score
+        globalState.totalScore += globalState.trialResults.score;
+    }
 }
