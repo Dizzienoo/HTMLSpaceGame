@@ -1,12 +1,12 @@
 export function calculateScore(globalState) {
-    const paddingL = globalState.rockArea.leftX
+    const paddingL = globalState.rockArea.leftX + globalState.rockArea.w
 	// Find the padding between rock right and far edge
 	const paddingR = globalState.canvasWidth - globalState.rockArea.rightX
 	// Calculate the hint pos by
 	// Finding active area (canvas width - l and r paddings)
-	const activeArea = globalState.canvasWidth - (paddingL + paddingR); 
+    const activeArea = globalState.canvasWidth - (paddingL + paddingR);
 	// Dividing active area by 100 and multiplying by junk location (then adding left padding on)
-	const resultScreenPos = ((activeArea / 100) * globalState.testData[globalState.trial].result) + paddingL;
+    const resultScreenPos = ((activeArea / 100) * (globalState.testData[globalState.trial].result)) + paddingL;
     // If the Beam covers the hint
 	if (resultScreenPos > globalState.beamLeft && resultScreenPos < globalState.beamRight) {
         //Set the success to true
