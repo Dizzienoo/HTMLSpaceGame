@@ -89,7 +89,7 @@ export function tutorialScreen(globalState, ctx) {
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
 			drawSatellite(globalState, ctx);
 			drawScanners(globalState, ctx);
-			drawScanBeams(globalState, ctx);
+			// drawScanBeams(globalState, ctx);
 		break;
 
 		case 3:
@@ -97,7 +97,7 @@ export function tutorialScreen(globalState, ctx) {
 		    globalState.hintAnimation.y = globalState.canvasHeight/2
 			drawSatellite(globalState, ctx, true);
 			drawScanners(globalState, ctx);
-			drawScanBeams(globalState, ctx);
+			// drawScanBeams(globalState, ctx);
 		break;
 
 		case 4:
