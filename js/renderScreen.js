@@ -1,5 +1,5 @@
 import { createLines, createPages } from "./text.js";
-import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams, calculateRockPos } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
 import { resetPlayer } from "./resetPlayer.js";
@@ -46,6 +46,8 @@ export function introScreen(globalState, ctx) {
 	}
 }
 
+let hintOnce=false;
+
 /**
  * Render the Tutorial 
  * 
@@ -72,10 +74,11 @@ export function tutorialScreen(globalState, ctx) {
 	drawButton(globalState, ctx);
 	// Draw the back button
 	drawBackButton(globalState, ctx);
+	// Calculate the position of the Rocks for later funcs
 	switch(globalState.currentLine) {
 		case 0:
 			drawRocks(globalState, ctx);
-			// Draw the Magnet fnor the Tutorial
+			// Draw the Magnet for the Tutorial
 			drawMagnet(globalState, ctx);
 		break;
 
@@ -85,19 +88,17 @@ export function tutorialScreen(globalState, ctx) {
 		break;
 
 		case 2:
-		    globalState.hintAnimation.x = globalState.canvasWidth/2
-		    globalState.hintAnimation.y = globalState.canvasHeight/2
-			drawSatellite(globalState, ctx);
+			renderJunk(50, globalState, ctx);
 			drawScanners(globalState, ctx);
-			// drawScanBeams(globalState, ctx);
 		break;
 
 		case 3:
-	    	globalState.hintAnimation.x = globalState.canvasWidth/2
-		    globalState.hintAnimation.y = globalState.canvasHeight/2
-			drawSatellite(globalState, ctx, true);
+			if (globalState.hintAnimation.y === ((globalState.canvasHeight/5)*2.25) && !hintOnce) {
+				globalState.hintAnimation.y = 0;
+				hintOnce = true;
+			}
+			renderJunk(50,globalState, ctx, true);
 			drawScanners(globalState, ctx);
-			// drawScanBeams(globalState, ctx);
 		break;
 
 		case 4:
@@ -159,8 +160,8 @@ function renderJunk(junkLocation, globalState, ctx, hint= false) {
 	let adjustedHint = ((activeArea / 100) * junkLocation) + paddingL;
 	// Set the Hint animation Location
 	globalState.hintAnimation.x = adjustedHint;
-	if (globalState.hintAnimation.y >= (globalState.canvasHeight/5)*3.5) {
-		globalState.hintAnimation.y = (globalState.canvasHeight/5)*3.5
+	if (globalState.hintAnimation.y >= (globalState.canvasHeight/5)*2.25) {
+		globalState.hintAnimation.y = (globalState.canvasHeight/5)*2.25
 		drawSatellite(globalState, ctx, hint);
 	} 
 	else {

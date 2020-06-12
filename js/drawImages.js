@@ -16,6 +16,19 @@ export function drawMagnet(globalState, ctx) {
 		globalState.canvasHeight/7);
 }
 
+/**
+ * Calculate the Positions the rocks will be on the screen
+ */
+export function calculateRockPos(globalState) {
+	globalState.rockArea = {
+		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
+		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
+		y: globalState.canvasHeight / 5*3.5,
+		w: globalState.canvasWidth / 10,
+		h: globalState.canvasHeight / 10,
+	}
+	globalState.rockSet = true;
+}
 
 /**
  * Draws the Rocks that determine the rage of motion of the rover
@@ -24,12 +37,8 @@ export function drawMagnet(globalState, ctx) {
  * @param {*} ctx 
  */
 export function drawRocks(globalState, ctx) {
-	globalState.rockArea = {
-		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
-		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
-		y: globalState.canvasHeight / 5*3.5,
-		w: globalState.canvasWidth / 10,
-		h: globalState.canvasHeight / 10,
+	if (!globalState.rockSet) {
+		calculateRockPos(globalState);
 	}
 	// Draw the Rocks
 	ctx.drawImage(
