@@ -18,9 +18,15 @@ export function resetPlayer(globalState) {
 	globalState.currentPower = 50;
 	globalState.playerSettings.w = (globalState.canvasWidth)/10;
 	globalState.playerSettings.h = (globalState.canvasHeight)/10;
-	// Set the Rover position to a random spot within the active area
-	globalState.playerSettings.x = ((((activeArea/100)*95) * Math.random()) + paddingL) + 
-	    (((globalState.rockArea && globalState.rockArea.w)? globalState.rockArea.w : 0)/2);
+	if (globalState.gameState === "INTRO") {
+		// Set lander to middle
+		globalState.playerSettings.x = globalState.canvasWidth/2		
+	}
+	else {
+		// Set the Rover position to a random spot within the active area
+		globalState.playerSettings.x = ((((activeArea/100)*95) * Math.random()) + paddingL) + 
+			(((globalState.rockArea && globalState.rockArea.w)? globalState.rockArea.w : 0)/2);
+	}
 	globalState.playerSettings.y = (globalState.canvasHeight/5)*3;
 	globalState.playerSettings.speed = 8;
 	globalState.playerSettings.dx = 0;
