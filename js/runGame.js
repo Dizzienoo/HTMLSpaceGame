@@ -1,4 +1,4 @@
-import {runGame, mouseInputs, keyBoardInputs, clearCanvas} from "./script.js";
+import {runGame, mouseInputs, touchInputs, keyBoardInputs, clearCanvas} from "./script.js";
 import {globalState} from "./settings.js"
 import { getData } from "./getData.js";
 
@@ -13,6 +13,14 @@ globalState.canvasWidth = window.innerWidth
 globalState.canvasHeight = window.innerHeight
 globalState.rect = canvas.getBoundingClientRect();
 
+document.addEventListener("touchstart", (e) => {
+    touchInputs.touchDown(e, globalState);
+    e.preventDefault();
+});
+document.addEventListener("touchend", (e) => {
+    touchInputs.touchUp(e, globalState);
+    e.preventDefault();
+});
 document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
 document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
 document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});

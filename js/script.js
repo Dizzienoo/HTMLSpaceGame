@@ -1,9 +1,9 @@
 import { renderBackground } from "./drawImages.js"
-import {keyBoardInputs, mouseInputs} from "./handleInput.js"
+import { keyBoardInputs, mouseInputs, touchInputs } from "./handleInput.js"
 import { introScreen, tutorialScreen, mainGame, gameOver } from "./renderScreen.js";
 import { clearCanvas } from "./utilities.js";
 
-export {mouseInputs, keyBoardInputs, clearCanvas}
+export { mouseInputs, keyBoardInputs, touchInputs, clearCanvas }
 
 export function runGame(globalState, ctx) {
 	// Render the Background
