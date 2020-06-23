@@ -28,7 +28,7 @@ document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)}
 
 function thisTry(globalState, ctx) {
 
-    const testDataURL = "../assets/pilot_finaldata.csv"
+    const testDataURL = "assets/pilot_finaldata.csv"
     getData(testDataURL).then((testData) => {
         globalState.testData = testData;
         clearCanvas(globalState, ctx)
