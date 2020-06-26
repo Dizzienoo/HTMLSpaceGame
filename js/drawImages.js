@@ -22,7 +22,7 @@ export function drawMagnet(globalState, ctx) {
 export function calculateRockPos(globalState) {
 	globalState.rockArea = {
 		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
-		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
+		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1.5)) - globalState.canvasWidth/10 ,
 		y: globalState.canvasHeight / 5*3.6,
 		w: globalState.canvasWidth / 10,
 		h: globalState.canvasHeight / 10,
