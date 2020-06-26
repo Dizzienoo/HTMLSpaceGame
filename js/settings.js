@@ -104,9 +104,9 @@ export const globalState = new function () {
 	// 4 would mean the power size is a quarter of the screen
 	this.powerSize = 8
 	// Time in ms before trial is moved along
-	this.trialTime = 10000;
+	this.trialTime = 5000;
 	// How long left before the trial auto completes (in seconds)
-	this.trialTimeLeft = 10;
+	this.trialTimeLeft = 5;
 	this.gameIntroduction = [
 		`It is your first mission after joining the integalactive space defenders. However, a near miss has left your team marooned on a strange and distant planet in the treacherous Zammer region of sector 13…`,
 	],

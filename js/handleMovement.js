@@ -14,11 +14,11 @@ export function handleMovement(globalState) {
 		globalState.playerSettings.power += globalState.playerSettings.dy;
 		globalState.trialResults.movementY += Math.abs(globalState.playerSettings.dy)
 	}
-	else if (globalState.playerSettings.power < 10) {
+	if (globalState.playerSettings.power <= 10) {
 		globalState.playerSettings.power = 10;
 		globalState.trialResults.movementY -= Math.abs(globalState.playerSettings.dy)
 	}
-	else if (globalState.playerSettings.power > 100) {
+	else if (globalState.playerSettings.power >= 100) {
 		globalState.playerSettings.power = 100;
 		globalState.trialResults.movementY -= Math.abs(globalState.playerSettings.dy)
 	}

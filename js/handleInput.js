@@ -131,13 +131,6 @@ export const mouseInputs = {
 		globalState.mouseDown = true;
 		let X = e.clientX - globalState.rect.left;
 		let Y = e.clientY - globalState.rect.top;
-		console.log(X, Y);
-		console.log(globalState.leftArrowArea.x);
-		console.log(globalState.leftArrowArea.w);
-		console.log(X > globalState.leftArrowArea.x && X < (globalState.leftArrowArea.w + globalState.leftArrowArea.x))
-		console.log(globalState.leftArrowArea.y);
-		console.log(globalState.leftArrowArea.h);
-		console.log(Y > globalState.leftArrowArea.y && Y < (globalState.leftArrowArea.h + globalState.leftArrowArea.y));
 		// If the Click is within the Progress button
 		if (
 			// If X is more than left of arrow x and less than its width
@@ -271,7 +264,7 @@ function Progress(globalState) {
 					// Set a timeout so if the player takes longer than a certain time in the trial it will automatically progress
 					interval = setInterval(() => {
 						globalState.trialTimeLeft--;
-						if (globalState.trialTimeLeft == 0 || globalState.trialTimeLeft < 0) {
+						if (globalState.trialTimeLeft == -1 || globalState.trialTimeLeft < -1) {
 							Progress(globalState);
 							clearInterval(interval);
 						}

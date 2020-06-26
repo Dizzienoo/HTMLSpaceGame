@@ -89,7 +89,7 @@ export function tutorialScreen(globalState, ctx) {
 
 		case 2:
 			renderJunk(50, globalState, ctx);
-			drawScanners(globalState, ctx);
+			// drawScanners(globalState, ctx);
 		break;
 
 		case 3:
@@ -98,7 +98,7 @@ export function tutorialScreen(globalState, ctx) {
 				hintOnce = true;
 			}
 			renderJunk(50,globalState, ctx, true);
-			drawScanners(globalState, ctx);
+			// drawScanners(globalState, ctx);
 		break;
 
 		case 4:
@@ -176,7 +176,7 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 	// Draw the Hint
 	renderJunk(hint, globalState, ctx, true);
 
-	drawScanners(globalState, ctx);
+	// drawScanners(globalState, ctx);
 	// drawScanBeams(globalState, ctx);
 }
 
@@ -238,7 +238,7 @@ export function mainGame(globalState, ctx) {
 			displayTotalScore(globalState, ctx);		
 			// Handle Moving the lander
 			handleMovement(globalState);
-			drawScanners(globalState, ctx);
+			// drawScanners(globalState, ctx);
 			break;
 		
 		case "RESULTS":
@@ -253,8 +253,8 @@ export function mainGame(globalState, ctx) {
 			// Draw their Current Score
 			drawCurrentScore(globalState, ctx);
 			// Draw their Total Score
-			drawTotalScore(globalState, ctx);
-			drawScanners(globalState, ctx);
+			displayTotalScore(globalState, ctx);
+			// drawScanners(globalState, ctx);
 			break;
 			
     case "LEVEL_COMPLETE":

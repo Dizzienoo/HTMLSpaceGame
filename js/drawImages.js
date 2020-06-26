@@ -12,8 +12,8 @@ export function drawMagnet(globalState, ctx) {
 		document.getElementById("rover"), 
 		globalState.playerSettings.x - (globalState.canvasWidth)/20, 
 		globalState.playerSettings.y, 
-		globalState.canvasWidth/7, 
-		globalState.canvasHeight/7);
+		globalState.canvasWidth/12, 
+		globalState.canvasHeight/6);
 }
 
 /**
@@ -23,7 +23,7 @@ export function calculateRockPos(globalState) {
 	globalState.rockArea = {
 		leftX: ((globalState.canvasWidth / globalState.powerSize) + globalState.canvasWidth/10) - globalState.canvasWidth/20,
 		rightX: ((globalState.canvasWidth / globalState.powerSize) * (globalState.powerSize - 1)) - globalState.canvasWidth/10 ,
-		y: globalState.canvasHeight / 5*3.5,
+		y: globalState.canvasHeight / 5*3.6,
 		w: globalState.canvasWidth / 10,
 		h: globalState.canvasHeight / 10,
 	}
@@ -42,14 +42,14 @@ export function drawRocks(globalState, ctx) {
 	}
 	// Draw the Rocks
 	ctx.drawImage(
-		document.getElementById("rock"), 
+		document.getElementById("rockLeft"), 
 		globalState.rockArea.leftX, 
 		globalState.rockArea.y, 
 		globalState.rockArea.w, 
 		globalState.rockArea.h
 	);
 	ctx.drawImage(
-		document.getElementById("rock"), 
+		document.getElementById("rockRight"), 
 		globalState.rockArea.rightX, 
 		globalState.rockArea.y, 
 		globalState.rockArea.w, 
@@ -155,7 +155,7 @@ export function drawTrialHint(globalState, ctx) {
 		ctx.textAlign = "center";
 		ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
 		ctx.fillText(`Level ${globalState.level.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2);
-		ctx.fillText(`Trial ${globalState.trialNumber.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*3); 
+		// ctx.fillText(`Trial ${globalState.trialNumber.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*3); 
 }
 
 /**
@@ -180,9 +180,9 @@ export function drawBeam(globalState, ctx) {
 
 	calculateBeamandPower(globalState);
 	// Set Start Point
-	ctx.moveTo(globalState.beamLeft, globalState.canvasHeight/10); // Top Left
+	ctx.moveTo(globalState.beamLeft, (globalState.canvasHeight/10)*2); // Top Left
 	// Draw a straight line
-	ctx.lineTo(globalState.beamRight, globalState.canvasHeight/10); // Top Right
+	ctx.lineTo(globalState.beamRight, (globalState.canvasHeight/10)*2); // Top Right
 	ctx.lineTo(globalState.beamRight, (globalState.canvasHeight/5)*2.5); // Middle Right
 	
 	ctx.lineTo(globalState.playerSettings.x, globalState.playerSettings.y); // Bottom
@@ -204,11 +204,11 @@ export function drawBeam(globalState, ctx) {
 export function drawPower(globalState, ctx) {
 	// Draw Power box fill
 	ctx.beginPath();
-	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/15, -((globalState.canvasHeight/10)*5)*(globalState.currentPower/100));
+	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/20, -((globalState.canvasHeight/10)*5)*(globalState.currentPower/100));
 	ctx.fill();
 	// Draw Power box outline
 	ctx.beginPath();
-	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/15, -(globalState.canvasHeight/10)*5);
+	ctx.rect((globalState.canvasWidth)/40, (globalState.canvasHeight/10)*7, globalState.canvasWidth/20, -(globalState.canvasHeight/10)*5);
 	ctx.lineWidth = "4";
 	ctx.strokeStyle = "white";
 	ctx.stroke();
@@ -337,9 +337,9 @@ export function drawSatellite(globalState, ctx, hint = false) {
 export function drawButton(globalState, ctx) {
 	// Set the Progress Button area on global settings
 	globalState.progressButtonArea = {
-		x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/4, 
+		x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/5, 
 		y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-		w: globalState.canvasWidth/4, 
+		w: globalState.canvasWidth/5, 
 		h: globalState.canvasHeight/8
 	}
 	switch (globalState.gameState) {
@@ -348,7 +348,7 @@ export function drawButton(globalState, ctx) {
 				globalState.progressButtonArea = {
 					x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
 					y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-					w: globalState.canvasWidth/4, 
+					w: globalState.canvasWidth/5, 
 					h: globalState.canvasHeight/8
 				}
 			}
@@ -362,7 +362,7 @@ export function drawButton(globalState, ctx) {
 			// );
 			// ctx.fill();
 			ctx.drawImage(
-				document.getElementById("startButton"), 
+				document.getElementById("continueButton"), 
 				globalState.progressButtonArea.x, 
 				globalState.progressButtonArea.y, 
 				globalState.progressButtonArea.w, 
@@ -372,15 +372,15 @@ export function drawButton(globalState, ctx) {
 			break;
 
 		case "TUTORIAL":
-			// Set the Go back button
+			// Set the Progress button
 			globalState.progressButtonArea = {
 				x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
 				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-				w: globalState.canvasWidth/4, 
+				w: globalState.canvasWidth/5, 
 				h: globalState.canvasHeight/8
 			}
 			ctx.drawImage(
-				document.getElementById("startButton"), 
+				document.getElementById("continueButton"), 
 				globalState.progressButtonArea.x, 
 				globalState.progressButtonArea.y, 
 				globalState.progressButtonArea.w, 
@@ -390,15 +390,15 @@ export function drawButton(globalState, ctx) {
 			break;
 		case "GAME":
 			globalState.progressButtonArea = {
-				x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/4, 
+				x: (globalState.canvasWidth/2) - (globalState.canvasWidth/2)/5, 
 				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-				w: globalState.canvasWidth/4, 
+				w: globalState.canvasWidth/5, 
 				h: globalState.canvasHeight/8
 			}
 			switch (globalState.trialState) {
 				case "INTRO":
 					ctx.drawImage(
-						document.getElementById("startButton"), 
+						document.getElementById("nextButton"), 
 						globalState.progressButtonArea.x, 
 						globalState.progressButtonArea.y, 
 						globalState.progressButtonArea.w, 
@@ -429,13 +429,22 @@ export function drawButton(globalState, ctx) {
 
 				case "RESULTS":
 					ctx.drawImage(
-						document.getElementById("startButton"), 
+						document.getElementById("nextButton"), 
 						globalState.progressButtonArea.x, 
 						globalState.progressButtonArea.y, 
 						globalState.progressButtonArea.w, 
 						globalState.progressButtonArea.h
 					);
 					break;
+					case "LEVEL_COMPLETE":
+						ctx.drawImage(
+							document.getElementById("continueButton"), 
+							globalState.progressButtonArea.x, 
+							globalState.progressButtonArea.y, 
+							globalState.progressButtonArea.w, 
+							globalState.progressButtonArea.h
+						);
+						break;
 
 			}
 			break;
@@ -460,9 +469,9 @@ export function drawBackButton(globalState, ctx) {
 		case "INTRO":
 			if (globalState.currentPage !== 0) {
 				globalState.backButtonArea = {
-					x: (globalState.canvasWidth/8)*3 - (globalState.canvasWidth/2)/4,
+					x: (globalState.canvasWidth/8)*4 - (globalState.canvasWidth/2)/4,
 					y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-					w: globalState.canvasWidth/4, 
+					w: globalState.canvasWidth/8, 
 					h: globalState.canvasHeight/8
 				}
 				ctx.drawImage(
@@ -477,9 +486,9 @@ export function drawBackButton(globalState, ctx) {
 
 		case "TUTORIAL":
 			globalState.backButtonArea = {
-				x: (globalState.canvasWidth/8)*3 - (globalState.canvasWidth/2)/4,
+				x: (globalState.canvasWidth/8)*4 - (globalState.canvasWidth/2)/4,
 				y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
-				w: globalState.canvasWidth/4, 
+				w: globalState.canvasWidth/8, 
 				h: globalState.canvasHeight/8
 			}
 			ctx.drawImage(
@@ -516,7 +525,6 @@ export function drawSimpleResult(globalState, ctx) {
 	let result = "Missed!"
 	let fillStyle = "red"
 	// If the Beam covers the hint
-	console.log(globalState.trialTimeLeft)
 	if (globalState.trialResults.success) {
 		result = "Caught!"
 		fillStyle = "green"
@@ -529,7 +537,7 @@ export function drawSimpleResult(globalState, ctx) {
 	ctx.fillStyle = fillStyle;
 	ctx.textAlign = "center";
 	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
-	ctx.fillText(result, (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
+	ctx.fillText(result, (globalState.canvasWidth/2), (globalState.canvasHeight/10)*1.5);
 }
 
 /**
@@ -542,7 +550,7 @@ export function drawCurrentScore(globalState, ctx) {
 	ctx.fillStyle = "green";
 	ctx.textAlign = "center";
 	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
-	ctx.fillText(`Score: ${globalState.trialResults.score}`, (globalState.canvasWidth/4)*1, (globalState.canvasHeight/10)*2);
+	ctx.fillText(`Score: ${globalState.trialResults.score}`, (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
 }
 
 /**

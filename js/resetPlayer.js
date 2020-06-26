@@ -27,11 +27,11 @@ export function resetPlayer(globalState) {
 		globalState.playerSettings.x = ((((activeArea/100)*95) * Math.random()) + paddingL) + 
 			(((globalState.rockArea && globalState.rockArea.w)? globalState.rockArea.w : 0)/2);
 	}
-	globalState.playerSettings.y = (globalState.canvasHeight/5)*3;
-	globalState.playerSettings.speed = 8;
+	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.1;
+	globalState.playerSettings.speed = globalState.canvasWidth/60;
 	globalState.playerSettings.dx = 0;
 	globalState.playerSettings.dy = 0;
-	globalState.playerSettings.powerSpeed = 2;
+	globalState.playerSettings.powerSpeed = globalState.canvasWidth/360;
 	globalState.playerSettings.power = 50;
 	globalState.playerSettings.beamColor = "green";
 	globalState.hintAnimation.y = (globalState.canvasHeight/10)*1
