@@ -185,7 +185,6 @@ export const mouseInputs = {
 				// If Y is more than top of arrow base and less than its height
 				Y > globalState.leftArrowArea.y && Y < (globalState.leftArrowArea.h + globalState.leftArrowArea.y)
 			) {
-				console.log("moveL")
 				// Move Left
 				movers.moveLeft(globalState.playerSettings);
 			}
@@ -203,7 +202,6 @@ export const mouseInputs = {
 		}
 	},
 	mouseUp: (e, globalState) => {
-		console.log("MOUSED UP")
 		if (globalState.mouseDown === true) {
 			globalState.mouseDown = false;
 			stopMovement(globalState.playerSettings);

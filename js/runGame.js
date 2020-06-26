@@ -1,6 +1,7 @@
 import {runGame, mouseInputs, touchInputs, keyBoardInputs, clearCanvas} from "./script.js";
 import {globalState} from "./settings.js"
 import { getData } from "./getData.js";
+import { generateNumber } from "./utilities.js";
 
 // Gets the Canvas from the HTML
 const canvas = document.getElementById("canvas");
@@ -29,7 +30,12 @@ document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)}
 
 function thisTry(globalState, ctx) {
 
-    const testDataURL = "assets/testData.csv"
+    // The test data items
+    const testData = [
+        "assets/testData.csv"
+    ]
+    // Pick one of the files to run
+    const testDataURL = testData[generateNumber(0, testData.length -1)];
     getData(testDataURL).then((testData) => {
         globalState.testData = testData;
         clearCanvas(globalState, ctx)
