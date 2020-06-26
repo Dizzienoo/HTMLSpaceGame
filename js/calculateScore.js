@@ -11,7 +11,7 @@ export function calculateScore(globalState) {
 	// Dividing active area by 100 and multiplying by junk location (then adding left padding on)
     const resultScreenPos = ((activeArea / 100) * (globalState.testData[globalState.trial].result)) + paddingL;
     // If the Beam covers the hint
-	if (resultScreenPos > globalState.beamLeft && resultScreenPos < globalState.beamRight) {
+	if (resultScreenPos > globalState.beamLeft && resultScreenPos < globalState.beamRight && globalState.trialTimeLeft > 0) {
         //Set the success to true
         globalState.trialResults.success = true;
         // Set the Score as 100 - power percent

@@ -516,9 +516,14 @@ export function drawSimpleResult(globalState, ctx) {
 	let result = "Missed!"
 	let fillStyle = "red"
 	// If the Beam covers the hint
+	console.log(globalState.trialTimeLeft)
 	if (globalState.trialResults.success) {
 		result = "Caught!"
 		fillStyle = "green"
+	}
+	if (globalState.trialTimeLeft <= 0) {
+		result = "Timed Out!"
+		fillStyle = "red"
 	}
 	// Display the text
 	ctx.fillStyle = fillStyle;
