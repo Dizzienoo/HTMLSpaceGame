@@ -15,7 +15,7 @@ export function calculateScore(globalState) {
         //Set the success to true
         globalState.trialResults.success = true;
         // Set the Score as 100 - power percent
-        globalState.trialResults.actualScore = Math.round((100-((globalState.playerSettings.power /100)* 90)+ Number.EPSILON)*100)/100;
+        globalState.trialResults.actualScore = Math.round((100-((globalState.playerSettings.power /100)* 90)+ Number.EPSILON)*100)/1000;
         globalState.trialResults.score = Math.round(globalState.trialResults.actualScore);
         // If this is higher than previous high score
         if (globalState.highestScore < globalState.trialResults.score) {
