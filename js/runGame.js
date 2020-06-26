@@ -11,6 +11,7 @@ canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 globalState.canvasWidth = window.innerWidth
 globalState.canvasHeight = window.innerHeight
+if (globalState.canvasWidth/2.2 > globalState.canvasHeight) {globalState.canvasWidth = globalState.canvasHeight* 2.2}
 globalState.rect = canvas.getBoundingClientRect();
 
 document.addEventListener("touchstart", (e) => {

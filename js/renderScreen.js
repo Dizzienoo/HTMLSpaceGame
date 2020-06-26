@@ -1,5 +1,5 @@
 import { createLines, createPages } from "./text.js";
-import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams, calculateRockPos } from "./drawImages.js"
+import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams, calculateRockPos, displayTotalScore } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
 import { resetPlayer } from "./resetPlayer.js";
@@ -233,7 +233,9 @@ export function mainGame(globalState, ctx) {
 			// Draw the Arrows
 			drawArrows(globalState, ctx);
 			// Draw the Power Bar
-			drawPower(globalState, ctx);		
+			drawPower(globalState, ctx);
+			// Draw a reminder of their current total score
+			displayTotalScore(globalState, ctx);		
 			// Handle Moving the lander
 			handleMovement(globalState);
 			drawScanners(globalState, ctx);

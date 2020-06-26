@@ -557,3 +557,17 @@ export function drawTotalScore(globalState, ctx) {
 	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
 	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth/4)*3, (globalState.canvasHeight/10)*2);
 }
+
+/**
+ * Shows the total score at the top right of the screen during roung
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
+export function displayTotalScore(globalState, ctx) {
+	// Display the text
+	ctx.fillStyle = "green";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth/10)*8.5, (globalState.canvasHeight/10));
+}
