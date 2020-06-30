@@ -137,7 +137,9 @@ export const globalState = new function () {
 		movementX: 0,
 		// How much did they adjust Y
 		movementY: 0,
-	}
+	},
+	// The area inbetween the two rocks
+	this.activeArea = 0;
 }
 
 /**
