@@ -1,3 +1,5 @@
+import { reverseNumber } from "./utilities.js";
+
 export function calculateScore(globalState) {
     // Calculate the Time the trial took to complete
     globalState.trialResults.trialTime = globalState.trialResults.trialEndTime - globalState.trialResults.trialStartTime
@@ -14,8 +16,9 @@ export function calculateScore(globalState) {
 	if (resultScreenPos > globalState.beamLeft && resultScreenPos < globalState.beamRight && globalState.trialTimeLeft > 0) {
         //Set the success to true
         globalState.trialResults.success = true;
-        // Set the Score as 100 - power percent
-        globalState.trialResults.actualScore = Math.round((100-((((globalState.playerSettings.power < 15)? 0: globalState.playerSettings.power) /100)* 100)+ getEpsilon())*100)/100 || 1
+        // Get the power as a positive number and add on 1 point min
+        globalState.trialResults.actualScore = (reverseNumber(Math.round(globalState.playerSettings.power), 10, 90)+10)
+        // Round down to 1-10
         globalState.trialResults.score = Math.round(globalState.trialResults.actualScore/10);
         // If this is higher than previous high score
         if (globalState.highestScore < globalState.trialResults.score) {
@@ -27,17 +30,9 @@ export function calculateScore(globalState) {
     }
     // Otherwise if we are on the punishment round
     else if (Number(globalState.level) === 6) {
-        // globalState.trialResults.actualScore = Math.round((-100+((((globalState.playerSettings.power < 15)? 0: globalState.playerSettings.power) /100)* 100)+ getEpsilon())*100)/100 || 1
-        globalState.trialResults.actualScore = Math.round((-10-((globalState.playerSettings.power /100)* 90)+ getEpsilon())*100)/100;
+        globalState.trialResults.actualScore = (reverseNumber(Math.round(globalState.playerSettings.power), 10, 90)-100)
         globalState.trialResults.score = Math.round(globalState.trialResults.actualScore/10);
         // Add this score to total score
         globalState.totalScore += globalState.trialResults.score;
     }
 }
-
-function getEpsilon() {
-    var e = 1.0;
-    while ( ( 1.0 + 0.5 * e ) !== 1.0 )
-      e *= 0.5;
-    return e;
-  }
