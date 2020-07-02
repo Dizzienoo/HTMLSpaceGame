@@ -90,6 +90,8 @@ export function tutorialScreen(globalState, ctx) {
 		case 2:
 			renderJunk(50, globalState, ctx);
 			// drawScanners(globalState, ctx);
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
 		break;
 
 		case 3:
@@ -99,6 +101,8 @@ export function tutorialScreen(globalState, ctx) {
 			}
 			renderJunk(50,globalState, ctx, true);
 			// drawScanners(globalState, ctx);
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
 		break;
 
 		case 4:
@@ -220,6 +224,8 @@ export function mainGame(globalState, ctx) {
 	        
 		case "HINT": 
 			renderReadyScreenAndHint(globalState.testData[i].hint, globalState, ctx);
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
 			break;
 
 		case "TRIAL":
@@ -246,6 +252,8 @@ export function mainGame(globalState, ctx) {
 			renderJunk(globalState.testData[i].result, globalState, ctx);
 			// Draw the Magnet
 			drawMagnet(globalState, ctx);
+			// Draw the Edge Rocks
+			drawRocks(globalState, ctx);
 			// Draw the Beam coming from the Magnet
 			drawBeam(globalState, ctx);
 			// Draw Simple Result
