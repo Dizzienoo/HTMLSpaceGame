@@ -291,7 +291,12 @@ export function gameOver(globalState, ctx) {
 	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);
 }
 
-
+/**
+ * Render the please return to Landscape message
+ * 
+ * @param {*} globalState The global state of the game
+ * @param {*} ctx The canvas object of the game
+ */
 export function portraitProtection(globalState, ctx) {
 	// Set the Size and Font of the Text
 	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
