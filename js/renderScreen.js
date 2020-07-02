@@ -290,3 +290,16 @@ export function gameOver(globalState, ctx) {
 	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2);
 	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);
 }
+
+
+export function portraitProtection(globalState, ctx) {
+	// Set the Size and Font of the Text
+	ctx.font = `${scaleText(40, globalState)}px ${globalState.textFont}`;
+	// Set the Text Color
+	ctx.fillStyle = "red";
+	// Center the Text
+	ctx.textAlign = "center";
+	// Draw the "Game Over" Text
+	ctx.fillText("Please set your ", (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	ctx.fillText("device to landscape", (globalState.canvasWidth)/2, (globalState.canvasHeight/8)*3);
+}
