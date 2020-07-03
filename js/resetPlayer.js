@@ -28,7 +28,7 @@ export function resetPlayer(globalState) {
 			(((globalState.rockArea && globalState.rockArea.w)? globalState.rockArea.w : 0)/2);
 	}
 	globalState.playerSettings.y = (globalState.canvasHeight/5)*3.1;
-	globalState.playerSettings.speed = globalState.canvasWidth/60;
+	globalState.playerSettings.speed = globalState.canvasWidth/120;
 	globalState.playerSettings.dx = 0;
 	globalState.playerSettings.dy = 0;
 	globalState.playerSettings.powerSpeed = globalState.canvasWidth/360;

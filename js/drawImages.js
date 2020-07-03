@@ -43,14 +43,14 @@ export function drawRocks(globalState, ctx) {
 	// Draw the Rocks
 	ctx.drawImage(
 		document.getElementById("rockLeft"), 
-		globalState.rockArea.leftX, 
+		globalState.rockArea.leftX - globalState.rockArea.w/10, 
 		globalState.rockArea.y, 
 		globalState.rockArea.w, 
 		globalState.rockArea.h
 	);
 	ctx.drawImage(
 		document.getElementById("rockRight"), 
-		globalState.rockArea.rightX, 
+		globalState.rockArea.rightX - globalState.rockArea.w/15, 
 		globalState.rockArea.y, 
 		globalState.rockArea.w, 
 		globalState.rockArea.h
