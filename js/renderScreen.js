@@ -92,6 +92,8 @@ export function tutorialScreen(globalState, ctx) {
 			// drawScanners(globalState, ctx);
 			// Draw the Edge Rocks
 			drawRocks(globalState, ctx);
+			// Draw the Beam coming from the Magnet
+			drawBeam(globalState, ctx);
 		break;
 
 		case 3:
