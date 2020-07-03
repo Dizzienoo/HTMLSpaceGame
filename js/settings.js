@@ -53,7 +53,7 @@ export const globalState = new function () {
 	this.currentPage = 0;
 	this.currentLine = 0;
 	// Text font is used to set the fot the game uses
-	this.textFont = "Calibri"
+	this.textFont = "ANDROMEDA"
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
 	// The state that the overall game is in

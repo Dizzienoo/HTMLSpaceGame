@@ -23,3 +23,8 @@ body {
 #source {
 	display: none;
 }
+
+@font-face {
+    font-family: 'ANDROMEDA';
+    src: url('assets/ANDROMEDA.ttf');
+}
