@@ -1,3 +1,28 @@
+import { scaleText } from "./scaleText.js";
+
+/**
+ * 
+ * @param {number} textScale The Size of the text on the page (20 is a normal size)
+ * @param {*} globalState 
+ * @param {*} ctx 
+ */
+export function fitToPages(textScale, text, globalState, ctx) {
+	// Get the maxWidth of the page
+	let maxWidth = (globalState.canvasWidth/10)*9
+	// Get the max height of the page
+	let maxLines = (Math.floor((globalState.canvasHeight - (globalState.canvasHeight - (globalState.canvasHeight/10)*9))/ (globalState.canvasHeight/15))-1);
+	// Set the Text Size
+	let textSize = scaleText(textScale, globalState)
+	// Create a function that splits text up into "Lines" based on input variables
+	let lines = createLines(text[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
+	// Create a function that splits lines into pages based on input variables
+	return {
+		builtPages: createPages(lines, maxLines),
+		textSize
+	}
+}
+
+
 /**
  * Converts a block of text into lines that will fit within the desired width
  * 

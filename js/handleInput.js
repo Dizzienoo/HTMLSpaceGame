@@ -249,7 +249,14 @@ function Progress(globalState) {
 		case "GAME":
 			switch(globalState.trialState) {
 				case "INTRO":
-				    globalState.trialState = "HINT"
+					if (globalState.currentPage < globalState.levelPages.length -1) {
+						globalState.currentPage++
+					}
+					else {
+						globalState.currentPage = 0;
+						globalState.currentLine = 0;
+						globalState.trialState = "HINT"
+					}
 				
 				break;
 				

@@ -119,7 +119,7 @@ export const globalState = new function () {
 		`On a computer left and right can be controlled with the left and right keys and up and down with the up and down keys.  Use space to advance or click the screen.`
 	],
 	this.trialIntros = [
-	    "This is a test run",
+	    "This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run END",
 	    "this is a new run 1",
 	    "this is a new run 2",
 	    "this is a new run 3",

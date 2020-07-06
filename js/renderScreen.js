@@ -1,4 +1,4 @@
-import { createLines, createPages } from "./text.js";
+import { createLines, createPages, fitToPages } from "./text.js";
 import { drawBeam, drawMagnet, drawArrows, drawSatellite, drawPower, drawButton, drawSimpleResult, drawCurrentScore, drawTotalScore, drawRocks, drawCountdown, drawTrialHint, drawBackButton, drawScanners, drawScanBeams, calculateRockPos, displayTotalScore } from "./drawImages.js"
 import { handleMovement } from "./handleMovement.js"
 import { scaleText } from "./scaleText.js"
@@ -16,20 +16,10 @@ let firstPress = true
  * @param {*} ctx The canvas object of the game
  */
 export function introScreen(globalState, ctx) {
-	// resetPlayer(globalState);
-	// Define some Constants for the Intro
-	// Get the maxWidth of the page
-	let maxWidth = (globalState.canvasWidth/10)*9
-	// Get the max height of the page
-	let maxLines = Math.floor((globalState.canvasHeight - (globalState.canvasHeight - (globalState.canvasHeight/10)*9))/ (globalState.canvasHeight/15));
-	// Set the Text Size
-	let textSize = scaleText(20, globalState)
-	// Define the Y state
-	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
-	// Create a function that splits text up into "Lines" based on input variables
-	let lines = createLines(globalState.gameIntroduction[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
-	// Create a function that splits lines into pages based on input variables
-	globalState.introPages = createPages(lines, maxLines)
+	// Fit the text to the pages
+	const {builtPages, textSize} = fitToPages(20, globalState.gameIntroduction, globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.introPages = builtPages;
 	// Set the Font and Color
 	ctx.font = `${textSize}px ${globalState.textFont}`;
 	ctx.fillStyle = "white";
@@ -38,8 +28,10 @@ export function introScreen(globalState, ctx) {
 	drawButton(globalState, ctx);
 	// Draw the back button
 	drawBackButton(globalState, ctx);
+	// Define the Y state
+	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
 	// Render pages, while pages space will page++ else move to next area
-	let currentPage = globalState.introPages[globalState.currentPage];
+	let currentPage = builtPages[globalState.currentPage];
 	for (let i = 0; i < currentPage.length; i++) {
 		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
 		y += (globalState.canvasHeight/15)
@@ -55,21 +47,13 @@ let hintOnce=false;
  * @param {*} ctx The canvas object of the game
  */
 export function tutorialScreen(globalState, ctx) {
-	// Get the maxWidth of the page
-	let maxWidth = (globalState.canvasWidth/10)*9
-	// Get the max height of the page
-	let maxLines = Math.floor((globalState.canvasHeight - (globalState.canvasHeight - (globalState.canvasHeight/10)*9))/ (globalState.canvasHeight/15));
-	// Set the Text Size
-	let textSize = scaleText(20, globalState);
 	// Define the Y state
 	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
-	// Create a function that splits text up into "Lines" based on input variables
-	let lines = createLines(globalState.gameTutorial[globalState.currentLine], textSize, globalState.textFont, maxWidth, ctx);
-	// Create a function that splits lines into pages based on input variables
-	globalState.tutorialPages = createPages(lines, maxLines)
+	const {builtPages, textSize} = fitToPages(20, globalState.gameTutorial, globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.tutorialPages = builtPages;
 	// Render pages, while pages space will page++ else move to next area
-	let currentPage = globalState.tutorialPages[globalState.currentPage];
-	// globalState.playerSettings.x = globalState.canvasWidth/2;
+	let currentPage = builtPages[globalState.currentPage];
 	// Draw the Continue Button
 	drawButton(globalState, ctx);
 	// Draw the back button
@@ -189,11 +173,21 @@ function renderReadyScreenAndHint(hint, globalState, ctx) {
 
 
 function renderLevelIntro(globalState, ctx) {
-    	// Display the text
+	// Define the Y state
+	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
+	const {builtPages, textSize} = fitToPages(20, [globalState.trialIntros[Number(globalState.level -1)]], globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.levelPages = builtPages;
+	// Display the text
+	let currentPage = builtPages[globalState.currentPage];
 	ctx.fillStyle = "white";
 	ctx.textAlign = "center";
-	ctx.font = `${scaleText(40, globalState)}px Arial`;
-	ctx.fillText(globalState.trialIntros[Number(globalState.level -1)], (globalState.canvasWidth/2), (globalState.canvasHeight/10)*2);
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	// Render the new pages
+	for (let i = 0; i < currentPage.length; i++) {
+		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
+		y += (globalState.canvasHeight/15)
+	}
 }
 
 function renderLevelComplete(globalState, ctx) {
