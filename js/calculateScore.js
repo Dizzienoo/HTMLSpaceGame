@@ -17,7 +17,12 @@ export function calculateScore(globalState) {
         //Set the success to true
         globalState.trialResults.success = true;
         // Get the power as a positive number and add on 1 point min
-        globalState.trialResults.actualScore = (reverseNumber(Math.round(globalState.playerSettings.power), 10, 90)+10)
+        globalState.trialResults.actualScore = (reverseNumber(Math.round(globalState.playerSettings.power), 10, 90)+10) 
+        // If we are on punishment round
+        if (Number(globalState.level) === 6) {
+            // Double the score
+            globalState.trialResults.actualScore = globalState.trialResults.actualScore * 2
+        }
         // Round down to 1-10
         globalState.trialResults.score = Math.round(globalState.trialResults.actualScore/10);
         // If this is higher than previous high score
