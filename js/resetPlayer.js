@@ -32,7 +32,7 @@ export function resetPlayer(globalState) {
 	globalState.playerSettings.dx = 0;
 	globalState.playerSettings.dy = 0;
 	globalState.playerSettings.powerSpeed = globalState.canvasWidth/360;
-	globalState.playerSettings.power = 50;
+	globalState.playerSettings.power = 10;
 	globalState.playerSettings.beamColor = "green";
 	globalState.hintAnimation.y = (globalState.canvasHeight/10)*1
 	globalState.rect = canvas.getBoundingClientRect();
