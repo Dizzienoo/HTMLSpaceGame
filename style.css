@@ -9,7 +9,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-family: 'VT323', monospace;
 	/* min-height: 100vh; */
 	margin: 0;
 }
@@ -24,7 +24,7 @@ body {
 	display: none;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'ANDROMEDA';
     src: url('assets/ANDROMEDA.ttf');
-}
+} */

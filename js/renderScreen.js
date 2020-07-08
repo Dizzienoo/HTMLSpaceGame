@@ -198,7 +198,12 @@ function renderLevelComplete(globalState, ctx) {
 	// Center the Text
 	ctx.textAlign = "center";
 	// Draw the "Level X Complete" Text
-	ctx.fillText(`Level ${globalState.level.toString()} Complete`, (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	if (globalState.level === 1) {
+		ctx.fillText(`Practice Round Complete`, (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	}
+	else {
+		ctx.fillText(`Level ${(globalState.level -1).toString()} Complete`, (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	}
 	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2);
 	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);    
 }

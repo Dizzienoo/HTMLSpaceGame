@@ -1,6 +1,7 @@
 import { movers } from "./handleMovement.js"
 import { resetPlayer } from "./resetPlayer.js";
 import { calculateScore } from "./calculateScore.js";
+import { generateNumber } from "./utilities.js";
 
 export const keyBoardInputs = {
 	keyDown: (e, globalState) => {
@@ -309,6 +310,7 @@ function Progress(globalState) {
 						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
 						// Reset the Player
 						// DEBUG: If scores and positions are failing it is probably this reset
+						globalState.junkNumber = generateNumber(1,7);
 						resetPlayer(globalState);
 					}
 					else {

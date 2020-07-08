@@ -26,12 +26,41 @@ document.addEventListener("touchend", (e) => {
     touchInputs.touchUp(e, globalState);
     e.preventDefault();
 });
-document.addEventListener("mousedown", (e) => {mouseInputs.mouseDown(e, globalState)});
-document.addEventListener("mouseup", (e) => {mouseInputs.mouseUp(e, globalState)});
+document.addEventListener("mousedown", (e) => {
+    mouseInputs.mouseDown(e, globalState)
+    e.preventDefault();
+});
+document.addEventListener("mouseup", (e) => {
+    mouseInputs.mouseUp(e, globalState)
+    e.preventDefault();
+});
 document.addEventListener("keydown", (e) => {keyBoardInputs.keyDown(e, globalState)});
 document.addEventListener("keyup", (e) => {keyBoardInputs.keyUp(e, globalState)});
 
+export function launchIntoFullscreen(element){
+    if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
 function thisTry(globalState, ctx) {
+    // function isFullscreen(){
+    //     return (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+    // }
+    
+    
+    // if (!isFullscreen()) {
+    //     const button = document.getElementById("button")
+    //     button.hidden = false;
+    //     canvas.hidden = true;
+    // }
+
     // If the Screen Resolution changes, reset it, reset the player and redraw the rocks position
     if (globalState.canvasWidth !== window.innerWidth || globalState.canvasHeight !== window.innerHeight) {
         globalState.canvasWidth = window.innerWidth;

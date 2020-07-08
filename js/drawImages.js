@@ -150,12 +150,16 @@ export function drawScanBeams(globalState, ctx) {
  */
 export function drawTrialHint(globalState, ctx) {
 	// Write out the level number
-		// Display the text
-		ctx.fillStyle = "white";
-		ctx.textAlign = "center";
-		ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
-		ctx.fillText(`Level ${globalState.level.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2);
-		// ctx.fillText(`Trial ${globalState.trialNumber.toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*3); 
+	// Display the text
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	if (globalState.level === 1) {
+		ctx.fillText(`Practice Round`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2);
+	}
+	else {
+		ctx.fillText(`Level ${(globalState.level -1).toString()}`, globalState.canvasWidth/2, (globalState.canvasHeight/10)*2);
+	}
 }
 
 /**
@@ -314,10 +318,10 @@ export function drawSatellite(globalState, ctx, hint = false) {
 	if (hint === true) {
 		// Save the Current Canvas Settings
 		ctx.save();
-		ctx.globalAlpha = 0.3;
+		ctx.globalAlpha = 0.45;
 	}
 	ctx.drawImage(
-		document.getElementById((hint)?"greenJunk": "junk"), 
+		document.getElementById((hint)?`greenJunk${globalState.junkNumber}`: `junk${globalState.junkNumber}`), 
 		globalState.hintAnimation.x - sizeX/2, 
 		globalState.hintAnimation.y - sizeY/2, 
 		sizeX, 

@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Space Salvager</title>
+	<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" />
 	<img src="assets/background_level1.jpg" alt="background_level1" id="background_level1" hidden />
 	<img src="assets/background_level2.jpg" alt="background_level2" id="background_level2" hidden />
@@ -13,12 +14,24 @@
 	<img src="assets/background_level4.jpg" alt="background_level4" id="background_level4" hidden />
 	<img src="assets/background_level5.jpg" alt="background_level5" id="background_level5" hidden />
 	<img src="assets/background_level6.jpg" alt="background_level6" id="background_level6" hidden />
+	<img src="assets/junk1.png" alt="junk1" id="junk1" hidden>
+	<img src="assets/greenJunk1.png" alt="greenJunk1" id="greenJunk1" hidden>
+	<img src="assets/junk2.png" alt="junk2" id="junk2" hidden>
+	<img src="assets/greenJunk2.png" alt="greenJunk2" id="greenJunk2" hidden>
+	<img src="assets/junk3.png" alt="junk3" id="junk3" hidden>
+	<img src="assets/greenJunk3.png" alt="greenJunk3" id="greenJunk3" hidden>
+	<img src="assets/junk4.png" alt="junk4" id="junk4" hidden>
+	<img src="assets/greenJunk4.png" alt="greenJunk4" id="greenJunk4" hidden>
+	<img src="assets/junk5.png" alt="junk5" id="junk5" hidden>
+	<img src="assets/greenJunk5.png" alt="greenJunk5" id="greenJunk5" hidden>
+	<img src="assets/junk6.png" alt="junk6" id="junk6" hidden>
+	<img src="assets/greenJunk6.png" alt="greenJunk6" id="greenJunk6" hidden>
+	<img src="assets/junk7.png" alt="junk7" id="junk7" hidden>
+	<img src="assets/greenJunk7.png" alt="greenJunk7" id="greenJunk7" hidden>
 	<img src="assets/startButton.png" alt="start" id="startButton" hidden />
 	<img src="assets/continueButton.png" alt="continue" id="continueButton" hidden />
 	<img src="assets/nextButton.png" alt="next" id="nextButton" hidden />
 	<img src="assets/rover.png" alt="rover" id="rover" hidden>
-	<img src="assets/junk.png" alt="junk" id="junk" hidden>
-	<img src="assets/greenJunk.png" alt="greenJunk" id="greenJunk" hidden>
 	<img src="assets/arrowDown.png" alt="down arrow" id="arrowDown" hidden>
 	<img src="assets/arrowUp.png" alt="up arrow" id="arrowUp" hidden>
 	<img src="assets/arrowLeft.png" alt="left arrow" id="arrowLeft" hidden>
@@ -28,11 +41,12 @@
 	<img src="assets/scannerLeft.png" alt="scannerLeft" id="scannerLeft" hidden>
 	<img src="assets/scannerRight.png" alt="scannerRight" id="scannerRight" hidden>
 	<img src="assets/backButton.png" alt="backButton" id="backButton" hidden>
+	<script type="module" src="js/runGame.js"></script>
 </head>
 
 <body>
 	<canvas id="canvas"></canvas>
-	<script type="module" src="js/runGame.js"></script>
+	<button id="button" onclick="launchIntoFullscreen(document.documentElement)" hidden>Click</button>
 </body>
 
 </html>

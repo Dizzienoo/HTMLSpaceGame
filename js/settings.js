@@ -53,7 +53,7 @@ export const globalState = new function () {
 	this.currentPage = 0;
 	this.currentLine = 0;
 	// Text font is used to set the fot the game uses
-	this.textFont = "ANDROMEDA"
+	this.textFont = "VT323"
 	this.canvasWidth = 0,
 	this.canvasHeight = 0,
 	// The state that the overall game is in
@@ -100,6 +100,8 @@ export const globalState = new function () {
 		dx: 0,
 		dy: 5
 	},
+	// The Junk we will be displaying (1-7)
+	this.junkNumber = 1,
 	// This variable is used to set the position of the rocks and the size of the power beam
 	// 4 would mean the power size is a quarter of the screen
 	this.powerSize = 15
