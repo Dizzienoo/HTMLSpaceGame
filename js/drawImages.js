@@ -188,7 +188,7 @@ export function drawBeam(globalState, ctx) {
 	ctx.lineTo(globalState.playerSettings.x, globalState.playerSettings.y); // Bottom
 	
 	ctx.lineTo(globalState.beamLeft, (globalState.canvasHeight/5)*2.5); // Middle Left
-	ctx.globalAlpha = 0.3;
+	ctx.globalAlpha = 0.45;
 	ctx.fillStyle = globalState.playerSettings.beamColor
 	ctx.closePath();
 	ctx.fill();
@@ -511,7 +511,7 @@ export function drawBackButton(globalState, ctx) {
  * @param {*} ctx The canvas object of the game
  */
 export function renderBackground (globalState, ctx) {
-	ctx.drawImage(document.getElementById("background"), 0, 0, globalState.canvasWidth, globalState.canvasHeight);
+		ctx.drawImage(document.getElementById(`background_level${globalState.level}`), 0, 0, globalState.canvasWidth, globalState.canvasHeight);
 }
 
 /**
