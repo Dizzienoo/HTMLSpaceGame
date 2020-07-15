@@ -289,8 +289,9 @@ export function gameOver(globalState, ctx) {
 	ctx.textAlign = "center";
 	// Draw the "Game Over" Text
 	ctx.fillText("Game Over", (globalState.canvasWidth)/2, globalState.canvasHeight/4);
+	ctx.fillText("Please Click Next to Finish the Game", (globalState.canvasWidth)/2, globalState.canvasHeight/4*3);
 	ctx.fillText(`Total Score: ${globalState.totalScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2);
-	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*3);
+	ctx.fillText(`Your Highest Score: ${globalState.highestScore}`, (globalState.canvasWidth)/2, (globalState.canvasHeight/4)*2.5);
 }
 
 /**
