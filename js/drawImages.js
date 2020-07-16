@@ -409,7 +409,39 @@ export function drawButton(globalState, ctx) {
 						globalState.progressButtonArea.h
 					);
 					break;
-				
+
+				case "REDO_TUTORIAL":
+					globalState.progressButtonArea = {
+						x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
+						y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+						w: globalState.canvasWidth/5, 
+						h: globalState.canvasHeight/8
+					}
+					ctx.drawImage(
+						document.getElementById("nextButton"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+				break;
+
+				case "RETURN":
+					globalState.progressButtonArea = {
+						x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
+						y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+						w: globalState.canvasWidth/5, 
+						h: globalState.canvasHeight/8
+					}
+					ctx.drawImage(
+						document.getElementById("nextButton"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+				break;
+
 				case "HINT":
 					ctx.drawImage(
 						document.getElementById("startButton"), 
@@ -418,7 +450,6 @@ export function drawButton(globalState, ctx) {
 						globalState.progressButtonArea.w, 
 						globalState.progressButtonArea.h
 					);
-
 					break;
 				
 				case "TRIAL":
@@ -440,15 +471,16 @@ export function drawButton(globalState, ctx) {
 						globalState.progressButtonArea.h
 					);
 					break;
-					case "LEVEL_COMPLETE":
-						ctx.drawImage(
-							document.getElementById("continueButton"), 
-							globalState.progressButtonArea.x, 
-							globalState.progressButtonArea.y, 
-							globalState.progressButtonArea.w, 
-							globalState.progressButtonArea.h
-						);
-						break;
+
+				case "LEVEL_COMPLETE":
+					ctx.drawImage(
+						document.getElementById("continueButton"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+					break;
 
 			}
 			break;
@@ -502,8 +534,25 @@ export function drawBackButton(globalState, ctx) {
 				globalState.backButtonArea.w, 
 				globalState.backButtonArea.h
 			);
-			
-		    break;
+			break;
+
+		case "GAME":
+			if (globalState.trialState === "REDO_TUTORIAL" || globalState.trialState === "RETURN") {
+				globalState.backButtonArea = {
+					x: (globalState.canvasWidth/8)*4 - (globalState.canvasWidth/2)/4,
+					y: (globalState.canvasHeight/8)*7 - (globalState.canvasHeight/4)/4, 
+					w: globalState.canvasWidth/8, 
+					h: globalState.canvasHeight/8
+				}
+				ctx.drawImage(
+					document.getElementById("backButton"), 
+					globalState.backButtonArea.x, 
+					globalState.backButtonArea.y, 
+					globalState.backButtonArea.w, 
+					globalState.backButtonArea.h
+				);
+			}
+	    break;
 	}
 }
 

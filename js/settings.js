@@ -110,24 +110,29 @@ export const globalState = new function () {
 	// How long left before the trial auto completes (in seconds)
 	this.trialTimeLeft = 5;
 	this.gameIntroduction = [
-		`It is your first mission after joining the integalactive space defenders. However, a near miss has left your team marooned on a strange and distant planet in the treacherous Zammer region of sector 13…`,
+		`It is your first mission after joining the Intergalactic Space Defenders. However, a near miss has left your team marooned on a strange and distant planet in the treacherous Zammer region of sector 13…`,
 	],
 	this.gameTutorial = [
-	  `Your captain has given you a mission: Use the electro-magnet to pull in as much space junk as possible, while conserving the most power – this will provide the parts to build the escape ship, and leave enough power to launch the rocket when its ready.`,
-		`Use the electro magnet to find and pull in the space junk. You can increase the power of the electro magnet, which will increase its range. But remember, the more power you use, the less you will have to launch the rocket when it is ready…`,
-		`To help you with your task your captain has give you a scanner that will show you where past space junk has been spotted. Unfortunately the batteries will only last so long – and as its running out it may get more and more unreliable!`,
-		`The scanner will show you an image of some space junk in a location it has been seen in the past. When you are ready, press start.`,
-		`Use the right and left arrows to position to electro-magnet underneath where you think the space junk will be. Then use the up and down arrows to increase and decrease its power.`,
-		`On a computer left and right can be controlled with the left and right keys and up and down with the up and down keys.  Use space to advance or click the screen.`
+	    `Your captain has given you a mission: Use the electromagnet to pull in space junk from old objects like abandoned spacecrafts floating past the planet. However, you must conserve as much power as possible while doing this. This will mean you have the parts to build the escape ship but leave enough power to launch the rocket when it is ready. Once you have enough points the rocket will launch!`,
+	    `Use the electromagnet to find and pull in the space junk. You can increase the power of the electromagnet, which will increase its range. But remember, the more power you use, the less you will have to launch the rocket when it is ready…`,
+	    `Your radar will let you know when there are objects passing by that are likely to break up and drop vital pieces of space junk, which you can catch with your electromagnet. Do not forget, the more power you use, the less points you will receive for catching the space junk!`,
+	    `The radar will show you where the last piece of space junk was spotted falling off passing objects. Use this information to calibrate your electromagnetic ray to catch the next piece that falls off. `,
+		`Use the right and left arrows to position the electromagnet underneath where you think the space junk will be. Then use the up and down arrows to increase and decrease its power. Give it a try now!`,
+		`On a computer left and right can be controlled with the left and right keys and up and down with the up and down keys.  Use space to advance or click the play button.`
 	],
 	this.trialIntros = [
-	    "This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run This is a test run END",
-	    "this is a new run 1",
-	    "this is a new run 2",
-	    "this is a new run 3",
-	    "this is a new run 4",
-	    "this is a new run 5",
-	]
+	    "PRACTICE ROUND: Move the rover and adjust the electromagnets power using the arrows on the screen or keyboard. Press continue or enter on the keyboard when you are confident you will catch the space junk. Press continue or enter to start the next trial.", 
+	    "The radar is showing an abandoned spacecraft passing by, and it's about to break up. Better get to it!",
+	    "The radar is picking up a very large abandoned space cruiser floating by. One of the wings is rapidly disintegrating - but it also looks like the whole thing might break up! Careful - If the whole thing was to break up pieces could fall over a wider area!", 
+	    "Looks like your lucky day! The radar is reporting that a high volume of ancient spacecrafts are about to pass by, all of about the same size. The spacecraft will pass one at a time. Remember - seperate objects may pass overhead in different places and so will drop any space junk in different areas!",
+	    "Incoming! There are now many discarded spacecraft of all sizes passing by, one after another. Now's your chance - collect all the junk you can falling from each ship as it passes. Only one ship will go by at a time.",
+	    "This group of spacecraft is bigger than expected - and some of the bits falling off are now heading straight for us! If you do not catch the junk now, it will damage our equipment and loose us points! But if you do catch it then you will get extra points and get us off this planet as quickly as possible! ",
+	    
+	],
+	this.difficultyWarning = "This game is hard... Be prepared to be crushed",
+	this.restartTutorialMessage = "Do you want to re-read the tutorial again?",
+	this.reReadLevelInfo = "Click Next to progress or Back to go back to the Level description",
+	this.tutorialReDo = false,
 	this.trialResults = {
 		// Did the Trial Succees
 		success: false,

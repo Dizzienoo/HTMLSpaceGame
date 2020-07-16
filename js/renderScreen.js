@@ -117,7 +117,7 @@ export function tutorialScreen(globalState, ctx) {
 			// Handle Moving the lander
 			handleMovement(globalState);
 	    break;
-		    
+
 	}
 	// Set the Font and Color
 	ctx.font = `${textSize}px ${globalState.textFont}`;
@@ -209,6 +209,76 @@ function renderLevelComplete(globalState, ctx) {
 }
 
 /**
+ * Renders the screen that asks if the user wants to see the level instructions again
+ * 
+ * @param {*} globalState 
+ * @param {*} ctx 
+ */
+function renderLevelReturn(globalState, ctx) {
+	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
+	const {builtPages} = fitToPages(20, [globalState.reReadLevelInfo], globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.reReadLevelPages = builtPages;
+	// Display the text
+	let currentPage = builtPages[globalState.currentPage];
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	// Render the new pages
+	for (let i = 0; i < currentPage.length; i++) {
+		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
+		y += (globalState.canvasHeight/15)
+	}
+}
+
+/**
+ * Renders the screen asking the User if they want to restart the Tutorial
+ * 
+ * @param {*} globalState 
+ * @param {*} ctx 
+ */
+function renderTutorialRestart(globalState, ctx) {
+	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
+	const {builtPages} = fitToPages(20, [globalState.restartTutorialMessage], globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.tutorialRestartPages = builtPages;
+	// Display the text
+	let currentPage = builtPages[globalState.currentPage];
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	// Render the new pages
+	for (let i = 0; i < currentPage.length; i++) {
+		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
+		y += (globalState.canvasHeight/15)
+	}
+}
+
+/**
+ * Handles displaying that page that warns the User of the game's difficulty after the tutorial rounds
+ * 
+ * @param {*} globalState 
+ * @param {*} ctx 
+ */
+function renderDifficultyWarning(globalState, ctx) {
+	let y = globalState.canvasHeight - ((globalState.canvasHeight/10)*9)
+	const {builtPages} = fitToPages(20, [globalState.difficultyWarning], globalState, ctx);
+	// Assign the pages to the global state for handle input
+	globalState.difficultyPages = builtPages;
+	// Display the text
+	let currentPage = builtPages[globalState.currentPage];
+	ctx.fillStyle = "white";
+	ctx.textAlign = "center";
+	ctx.font = `${scaleText(20, globalState)}px ${globalState.textFont}`;
+	// Render the new pages
+	for (let i = 0; i < currentPage.length; i++) {
+		ctx.fillText(currentPage[i], globalState.canvasWidth/2, y);
+		y += (globalState.canvasHeight/15)
+	}
+}
+
+
+/**
  * Renders the Main Trials of the Game
  * 
  * @param {*} globalState The global state of the game
@@ -217,13 +287,28 @@ function renderLevelComplete(globalState, ctx) {
 export function mainGame(globalState, ctx) {
 	let i = globalState.trial;
 	drawButton(globalState, ctx);
+	drawBackButton(globalState, ctx);
 	switch(globalState.trialState) {
     case "INTRO":
 			// Show the introduction to the level of trials
       renderLevelIntro(globalState, ctx)
       
-      break;
-	        
+			break;
+		case "REDO_TUTORIAL":
+			// Render the screen to allow the player to return to the tutorial start
+			renderTutorialRestart(globalState, ctx);
+			
+			break;
+		case "WARNING":
+			// Render the screen that shows the difficulty warning 
+			renderDifficultyWarning(globalState, ctx);
+
+			break;
+		case "RETURN": 
+			// Show the screen that allows the user to re-review the instructions for the level
+			renderLevelReturn(globalState, ctx);
+
+			break;
 		case "HINT": 
 			renderReadyScreenAndHint(globalState.testData[i].hint, globalState, ctx);
 			// Draw the Edge Rocks

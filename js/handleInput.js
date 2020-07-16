@@ -256,11 +256,50 @@ function Progress(globalState) {
 					else {
 						globalState.currentPage = 0;
 						globalState.currentLine = 0;
-						globalState.trialState = "HINT"
+						globalState.trialState = "RETURN";
 					}
 				
 				break;
 				
+				case "RETURN":
+					if (globalState.currentPage < globalState.reReadLevelPages.length -1) {
+						globalState.currentPage++
+					}
+					else {
+						globalState.currentPage = 0;
+						globalState.currentLine = 0;
+					// Send the Person on to the normal game
+					globalState.trialState = "HINT";
+					}
+
+				break;
+
+				case "WARNING":
+					if (globalState.currentPage < globalState.difficultyPages.length -1) {
+						globalState.currentPage++
+					}
+					else {
+						globalState.currentPage = 0;
+						globalState.currentLine = 0;
+						// Send the Person on to the redo screen
+						globalState.trialState = "REDO_TUTORIAL";
+					}
+
+				break;
+				
+				case "REDO_TUTORIAL":
+					if (globalState.currentPage < globalState.tutorialRestartPages.length -1) {
+						globalState.currentPage++
+					}
+					else {
+						globalState.currentPage = 0;
+						globalState.currentLine = 0;
+					// Send the Person on to the normal game
+					globalState.trialState = "INTRO";
+					}
+
+				break;
+
 				case "HINT":
 					globalState.trialState = "TRIAL"
 					// Reset the Player (mainly for the Reset the Hint y position)
@@ -319,6 +358,11 @@ function Progress(globalState) {
 						globalState.gameState = "GAME_OVER";
 						globalState.trialState = "GAME_OVER";
 					}
+					else if (globalState.level === 1) {
+						globalState.level = Number(globalState.testData[globalState.trial].level)
+						// Move to the "This game is hard" screen
+						globalState.trialState = "WARNING";
+					}
 					else {
 						globalState.level = Number(globalState.testData[globalState.trial].level)
 						// Reset the Trial
@@ -326,25 +370,13 @@ function Progress(globalState) {
 						// Set the Trial Number back to 1
 						globalState.trialNumber = 1;
 					}
-					//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
-					// originalHint
-					// originalResult
-					// distanceXMoved - remember to normalize this against screen size
-					// distanceYMoved - ??remember to normalize this against screen size??
-					// timeToComplete
-					// score
-					//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
-					// Reset the Player
-					// DEBUG: If scores and positions are failing it is probably this reset
-					globalState.trial ++;
-					globalState.junkNumber = generateNumber(1,7);
-					resetPlayer(globalState);
-					break;
-            
+				break;
+
 				case "GAME_OVER":
 					globalState.gameState = "GAME_OVER";
-			    break;
-			}
+	
+				break;
+				}
 			break;
 		default:
 			globalState.gameState = "INTRO"
@@ -386,6 +418,25 @@ function GoBack(globalState) {
 					h: 0,
 				}
 			}
+			break;
+
+			case "GAME":
+				if (globalState.trialState === "REDO_TUTORIAL") {
+					globalState.level = 1;
+					globalState.trialNumber = 1;
+					globalState.trial = 0;
+					// Score of all trials combined
+					globalState.totalScore = 0,
+					// Highest Score the player got
+					globalState.highestScore = 0,
+					globalState.gameState = "TUTORIAL";
+					globalState.trialState = "INTRO";
+					globalState.tutorialReDo = true;
+				}
+				
+				else if (globalState.trialState === "RETURN") {
+					globalState.trialState = "INTRO"
+				}
 			break;
 		}
 }
