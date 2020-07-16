@@ -287,55 +287,57 @@ function Progress(globalState) {
 					// Clear any remaining timer
 					clearInterval(interval)
 					break;
-					
+						
 				case "RESULTS":
 					clearInterval(interval)
-					globalState.trial ++;
-					if(globalState.trial < globalState.testData.length) {
-					    // If the trial level is different to current level
-					    if (Number(globalState.testData[globalState.trial].level) !== Number(globalState.level)) {
-						    globalState.trialState = "LEVEL_COMPLETE";
-					    }
-					    else {
-							globalState.trialNumber ++;
-					        globalState.trialState = "HINT";
-						}
-						//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
-						// originalHint
-						// originalResult
-						// distanceXMoved - remember to normalize this against screen size
-						// distanceYMoved - ??remember to normalize this against screen size??
-						// timeToComplete
-						// score
-						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
-						// Reset the Player
-						// DEBUG: If scores and positions are failing it is probably this reset
-						globalState.junkNumber = generateNumber(1,7);
-						resetPlayer(globalState);
+					if (globalState.trial + 1 >= globalState.testData.length || 
+							Number(globalState.testData[globalState.trial + 1].level) !== Number(globalState.level)
+						) {
+							globalState.trialState = "LEVEL_COMPLETE";
 					}
 					else {
-						globalState.trialState = "GAME_OVER"
+						globalState.trialNumber ++;
+						globalState.trialState = "HINT";
+					}
+					//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
+					// originalHint
+					// originalResult
+					// distanceXMoved - remember to normalize this against screen size
+					// distanceYMoved - ??remember to normalize this against screen size??
+					// timeToComplete
+					// score
+					//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
+					// Reset the Player
+					// DEBUG: If scores and positions are failing it is probably this reset
+					globalState.trial ++;
+					globalState.junkNumber = generateNumber(1,7);
+					resetPlayer(globalState);
+					break;
+
+				case "LEVEL_COMPLETE":
+					// Set the Level to the new level
+					if (globalState.trial >= globalState.testData.length) {
+						globalState.gameState = "GAME_OVER";
+						globalState.trialState = "GAME_OVER";
+					}
+					else {
+						globalState.level = Number(globalState.testData[globalState.trial].level)
+						// Reset the Trial
+						globalState.trialState = "INTRO";
+						// Set the Trial Number back to 1
+						globalState.trialNumber = 1;
 					}
 					break;
-        case "LEVEL_COMPLETE":
-          // Set the Level to the new level
-	        globalState.level = Number(globalState.testData[globalState.trial].level)
-  	      // Reset the Trial
-          globalState.trialState = "INTRO";
-					// Set the Trial Number back to 1
-					globalState.trialNumber = 1;
-					break;
-            
+				
 				case "GAME_OVER":
 					globalState.gameState = "GAME_OVER";
-
-			    break;
-			}
-
-		case "GAME_OVER":
-
+					
+					break;
+				}
 			break;
-
+			case "GAME_OVER": 
+			
+			break;
 		default:
 			globalState.gameState = "INTRO"
 			break;
