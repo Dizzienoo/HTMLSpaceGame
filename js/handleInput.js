@@ -299,6 +299,33 @@ function Progress(globalState) {
 						globalState.trialNumber ++;
 						globalState.trialState = "HINT";
 					}
+					globalState.trial ++;
+						//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
+						// originalHint
+						// originalResult
+						// distanceXMoved - remember to normalize this against screen size
+						// distanceYMoved - ??remember to normalize this against screen size??
+						// timeToComplete
+						// score
+						//!! SAVE THE PLAYER STATE TO THE GORILLA STATE HERE
+						// Reset the Player
+						// DEBUG: If scores and positions are failing it is probably this reset
+						globalState.junkNumber = generateNumber(1,7);
+						resetPlayer(globalState);
+					break;
+        case "LEVEL_COMPLETE":
+					// Set the Level to the new level
+					if (globalState.trial >= globalState.testData.length) {
+						globalState.gameState = "GAME_OVER";
+						globalState.trialState = "GAME_OVER";
+					}
+					else {
+						globalState.level = Number(globalState.testData[globalState.trial].level)
+						// Reset the Trial
+						globalState.trialState = "INTRO";
+						// Set the Trial Number back to 1
+						globalState.trialNumber = 1;
+					}
 					//!! SAVE THE RESULTS HERE TO THE METRICS SECTION
 					// originalHint
 					// originalResult
@@ -313,30 +340,11 @@ function Progress(globalState) {
 					globalState.junkNumber = generateNumber(1,7);
 					resetPlayer(globalState);
 					break;
-
-				case "LEVEL_COMPLETE":
-					// Set the Level to the new level
-					if (globalState.trial >= globalState.testData.length) {
-						globalState.gameState = "GAME_OVER";
-						globalState.trialState = "GAME_OVER";
-					}
-					else {
-						globalState.level = Number(globalState.testData[globalState.trial].level)
-						// Reset the Trial
-						globalState.trialState = "INTRO";
-						// Set the Trial Number back to 1
-						globalState.trialNumber = 1;
-					}
-					break;
-				
+            
 				case "GAME_OVER":
 					globalState.gameState = "GAME_OVER";
-					
-					break;
-				}
-			break;
-			case "GAME_OVER": 
-			
+			    break;
+			}
 			break;
 		default:
 			globalState.gameState = "INTRO"
