@@ -426,6 +426,16 @@ export function drawButton(globalState, ctx) {
 					);
 				break;
 
+				case "WARNING": 
+					ctx.drawImage(
+						document.getElementById("nextButton"), 
+						globalState.progressButtonArea.x, 
+						globalState.progressButtonArea.y, 
+						globalState.progressButtonArea.w, 
+						globalState.progressButtonArea.h
+					);
+				break;
+
 				case "RETURN":
 					globalState.progressButtonArea = {
 						x: (globalState.canvasWidth/8)*5 - (globalState.canvasWidth/2)/4, 
